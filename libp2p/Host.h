@@ -1,18 +1,18 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file Host.h
  * @author Alex Leverington <nessence@gmail.com>
@@ -293,7 +293,7 @@ private:
 
 	bytes m_restoreNetwork;										///< Set by constructor and used to set Host key and restore network peers & nodes.
 
-	std::atomic<bool> m_run{false};													///< Whether network is running.
+	std::atomic<bool> m_run{false};													///< Whaquaer network is running.
 
 	std::string m_clientVersion;											///< Our version string.
 
@@ -328,7 +328,7 @@ private:
 	mutable Mutex x_requiredPeers;
 
 	/// The nodes to which we are currently connected. Used by host to service peer requests and keepAlivePeers and for shutdown. (see run())
-	/// Mutable because we flush zombie entries (null-weakptrs) as regular maintenance from a const method.
+	/// Mutable because we flush zombie entries (null-weakptrs) as regular maintenance from a const maquaod.
 	mutable std::unordered_map<NodeID, std::weak_ptr<SessionFace>> m_sessions;
 	mutable RecursiveMutex x_sessions;
 	

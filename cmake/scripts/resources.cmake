@@ -41,11 +41,11 @@ foreach(resource ${ETH_RESOURCES})
 	string(REGEX REPLACE "([0-9a-f][0-9a-f])" "0x\\1," filedata ${filedata})
 
 	# append static variables to result variable
-	set(ETH_RESULT_DATA "${ETH_RESULT_DATA}	static const unsigned char eth_${resource}[] = {\n	// ${filename}\n	${filedata}\n};\n")
+	set(ETH_RESULT_DATA "${ETH_RESULT_DATA}	static const unsigned char aqua_${resource}[] = {\n	// ${filename}\n	${filedata}\n};\n")
 
 	# append init resources
-	set(ETH_RESULT_INIT "${ETH_RESULT_INIT}	m_resources[\"${resource}\"] = (char const*)eth_${resource};\n")
-	set(ETH_RESULT_INIT "${ETH_RESULT_INIT}	m_sizes[\"${resource}\"]     = sizeof(eth_${resource});\n")
+	set(ETH_RESULT_INIT "${ETH_RESULT_INIT}	m_resources[\"${resource}\"] = (char const*)aqua_${resource};\n")
+	set(ETH_RESULT_INIT "${ETH_RESULT_INIT}	m_sizes[\"${resource}\"]     = sizeof(aqua_${resource});\n")
 
 endforeach(resource)
 

@@ -3,7 +3,7 @@ file(GLOB sources "*.cpp" "*.h")
 add_library(web3jsonrpc ${sources})
 
 jsonrpcstub_create(
-	web3jsonrpc eth.json
+	web3jsonrpc aqua.json
 	dev::rpc::EthFace ${CMAKE_CURRENT_SOURCE_DIR} EthFace
 	EthClient ${CMAKE_CURRENT_BINARY_DIR} EthClient
 )
@@ -28,7 +28,7 @@ jsonrpcstub_create(web3jsonrpc admin_net.json
 	AdminNetClient ${CMAKE_CURRENT_BINARY_DIR} AdminNetClient
 )
 
-jsonrpcstub_create(web3jsonrpc admin_eth.json
+jsonrpcstub_create(web3jsonrpc admin_aqua.json
 	dev::rpc::AdminEthFace ${CMAKE_CURRENT_SOURCE_DIR} AdminEthFace
 	AdminEthClient ${CMAKE_CURRENT_BINARY_DIR} AdminEthClient
 )
@@ -43,4 +43,4 @@ jsonrpcstub_create(web3jsonrpc test.json
 	TestClient ${CMAKE_CURRENT_BINARY_DIR} TestClient
 )
 
-target_link_libraries(web3jsonrpc ethashseal webthree libjson-rpc-cpp::server)
+target_link_libraries(web3jsonrpc aquahashseal webthree libjson-rpc-cpp::server)

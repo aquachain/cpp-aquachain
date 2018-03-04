@@ -16,7 +16,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("web3_sha3",p);
+            Json::Value result = this->CallMaquaod("web3_sha3",p);
             if (result.isString())
                 return result.asString();
             else
@@ -26,7 +26,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("web3_clientVersion",p);
+            Json::Value result = this->CallMaquaod("web3_clientVersion",p);
             if (result.isString())
                 return result.asString();
             else
@@ -36,7 +36,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("net_version",p);
+            Json::Value result = this->CallMaquaod("net_version",p);
             if (result.isString())
                 return result.asString();
             else
@@ -46,7 +46,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("net_peerCount",p);
+            Json::Value result = this->CallMaquaod("net_peerCount",p);
             if (result.isString())
                 return result.asString();
             else
@@ -56,492 +56,492 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("net_listening",p);
+            Json::Value result = this->CallMaquaod("net_listening",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_protocolVersion() throw (jsonrpc::JsonRpcException)
+        std::string aqua_protocolVersion() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_protocolVersion",p);
+            Json::Value result = this->CallMaquaod("aqua_protocolVersion",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_hashrate() throw (jsonrpc::JsonRpcException)
+        std::string aqua_hashrate() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_hashrate",p);
+            Json::Value result = this->CallMaquaod("aqua_hashrate",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_coinbase() throw (jsonrpc::JsonRpcException)
+        std::string aqua_coinbase() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_coinbase",p);
+            Json::Value result = this->CallMaquaod("aqua_coinbase",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool eth_mining() throw (jsonrpc::JsonRpcException)
+        bool aqua_mining() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_mining",p);
+            Json::Value result = this->CallMaquaod("aqua_mining",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_gasPrice() throw (jsonrpc::JsonRpcException)
+        std::string aqua_gasPrice() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_gasPrice",p);
+            Json::Value result = this->CallMaquaod("aqua_gasPrice",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_accounts() throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_accounts() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_accounts",p);
+            Json::Value result = this->CallMaquaod("aqua_accounts",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_blockNumber() throw (jsonrpc::JsonRpcException)
+        std::string aqua_blockNumber() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_blockNumber",p);
+            Json::Value result = this->CallMaquaod("aqua_blockNumber",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_getBalance(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        std::string aqua_getBalance(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_getBalance",p);
+            Json::Value result = this->CallMaquaod("aqua_getBalance",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_getStorageAt(const std::string& param1, const std::string& param2, const std::string& param3) throw (jsonrpc::JsonRpcException)
+        std::string aqua_getStorageAt(const std::string& param1, const std::string& param2, const std::string& param3) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
             p.append(param3);
-            Json::Value result = this->CallMethod("eth_getStorageAt",p);
+            Json::Value result = this->CallMaquaod("aqua_getStorageAt",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_getTransactionCount(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        std::string aqua_getTransactionCount(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_getTransactionCount",p);
+            Json::Value result = this->CallMaquaod("aqua_getTransactionCount",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getBlockTransactionCountByHash(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getBlockTransactionCountByHash(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getBlockTransactionCountByHash",p);
+            Json::Value result = this->CallMaquaod("aqua_getBlockTransactionCountByHash",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getBlockTransactionCountByNumber(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getBlockTransactionCountByNumber(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getBlockTransactionCountByNumber",p);
+            Json::Value result = this->CallMaquaod("aqua_getBlockTransactionCountByNumber",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getUncleCountByBlockHash(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getUncleCountByBlockHash(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getUncleCountByBlockHash",p);
+            Json::Value result = this->CallMaquaod("aqua_getUncleCountByBlockHash",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getUncleCountByBlockNumber(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getUncleCountByBlockNumber(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getUncleCountByBlockNumber",p);
+            Json::Value result = this->CallMaquaod("aqua_getUncleCountByBlockNumber",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_getCode(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        std::string aqua_getCode(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_getCode",p);
+            Json::Value result = this->CallMaquaod("aqua_getCode",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_sendTransaction(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
+        std::string aqua_sendTransaction(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_sendTransaction",p);
+            Json::Value result = this->CallMaquaod("aqua_sendTransaction",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_call(const Json::Value& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        std::string aqua_call(const Json::Value& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_call",p);
+            Json::Value result = this->CallMaquaod("aqua_call",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool eth_flush() throw (jsonrpc::JsonRpcException)
+        bool aqua_flush() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_flush",p);
+            Json::Value result = this->CallMaquaod("aqua_flush",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getBlockByHash(const std::string& param1, bool param2) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getBlockByHash(const std::string& param1, bool param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_getBlockByHash",p);
+            Json::Value result = this->CallMaquaod("aqua_getBlockByHash",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getBlockByNumber(const std::string& param1, bool param2) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getBlockByNumber(const std::string& param1, bool param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_getBlockByNumber",p);
+            Json::Value result = this->CallMaquaod("aqua_getBlockByNumber",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getTransactionByHash(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getTransactionByHash(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getTransactionByHash",p);
+            Json::Value result = this->CallMaquaod("aqua_getTransactionByHash",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getTransactionByBlockHashAndIndex(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
-        {
-            Json::Value p;
-            p.append(param1);
-            p.append(param2);
-            Json::Value result = this->CallMethod("eth_getTransactionByBlockHashAndIndex",p);
-            if (result.isObject())
-                return result;
-            else
-                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
-        }
-        Json::Value eth_getTransactionByBlockNumberAndIndex(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getTransactionByBlockHashAndIndex(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_getTransactionByBlockNumberAndIndex",p);
+            Json::Value result = this->CallMaquaod("aqua_getTransactionByBlockHashAndIndex",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getTransactionReceipt(const std::string& param1) throw (jsonrpc::JsonRpcException)
-        {
-            Json::Value p;
-            p.append(param1);
-            Json::Value result = this->CallMethod("eth_getTransactionReceipt",p);
-            if (result.isObject())
-                return result;
-            else
-                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
-        }
-        Json::Value eth_getUncleByBlockHashAndIndex(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getTransactionByBlockNumberAndIndex(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_getUncleByBlockHashAndIndex",p);
+            Json::Value result = this->CallMaquaod("aqua_getTransactionByBlockNumberAndIndex",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getUncleByBlockNumberAndIndex(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getTransactionReceipt(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p.append(param1);
+            Json::Value result = this->CallMaquaod("aqua_getTransactionReceipt",p);
+            if (result.isObject())
+                return result;
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        Json::Value aqua_getUncleByBlockHashAndIndex(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_getUncleByBlockNumberAndIndex",p);
+            Json::Value result = this->CallMaquaod("aqua_getUncleByBlockHashAndIndex",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_newFilter(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getUncleByBlockNumberAndIndex(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_newFilter",p);
+            p.append(param2);
+            Json::Value result = this->CallMaquaod("aqua_getUncleByBlockNumberAndIndex",p);
+            if (result.isObject())
+                return result;
+            else
+                throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
+        }
+        std::string aqua_newFilter(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
+        {
+            Json::Value p;
+            p.append(param1);
+            Json::Value result = this->CallMaquaod("aqua_newFilter",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_newFilterEx(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
+        std::string aqua_newFilterEx(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_newFilterEx",p);
+            Json::Value result = this->CallMaquaod("aqua_newFilterEx",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_newBlockFilter() throw (jsonrpc::JsonRpcException)
+        std::string aqua_newBlockFilter() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_newBlockFilter",p);
+            Json::Value result = this->CallMaquaod("aqua_newBlockFilter",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_newPendingTransactionFilter() throw (jsonrpc::JsonRpcException)
+        std::string aqua_newPendingTransactionFilter() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_newPendingTransactionFilter",p);
+            Json::Value result = this->CallMaquaod("aqua_newPendingTransactionFilter",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool eth_uninstallFilter(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        bool aqua_uninstallFilter(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_uninstallFilter",p);
+            Json::Value result = this->CallMaquaod("aqua_uninstallFilter",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getFilterChanges(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getFilterChanges(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getFilterChanges",p);
+            Json::Value result = this->CallMaquaod("aqua_getFilterChanges",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getFilterChangesEx(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getFilterChangesEx(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getFilterChangesEx",p);
+            Json::Value result = this->CallMaquaod("aqua_getFilterChangesEx",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getFilterLogs(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getFilterLogs(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getFilterLogs",p);
+            Json::Value result = this->CallMaquaod("aqua_getFilterLogs",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getFilterLogsEx(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getFilterLogsEx(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getFilterLogsEx",p);
+            Json::Value result = this->CallMaquaod("aqua_getFilterLogsEx",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getLogs(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getLogs(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getLogs",p);
+            Json::Value result = this->CallMaquaod("aqua_getLogs",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getLogsEx(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getLogsEx(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_getLogsEx",p);
+            Json::Value result = this->CallMaquaod("aqua_getLogsEx",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_getWork() throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_getWork() throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("eth_getWork",p);
+            Json::Value result = this->CallMaquaod("aqua_getWork",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool eth_submitWork(const std::string& param1, const std::string& param2, const std::string& param3) throw (jsonrpc::JsonRpcException)
+        bool aqua_submitWork(const std::string& param1, const std::string& param2, const std::string& param3) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
             p.append(param3);
-            Json::Value result = this->CallMethod("eth_submitWork",p);
+            Json::Value result = this->CallMaquaod("aqua_submitWork",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool eth_submitHashrate(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        bool aqua_submitHashrate(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("eth_submitHashrate",p);
+            Json::Value result = this->CallMaquaod("aqua_submitHashrate",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_register(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        std::string aqua_register(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_register",p);
+            Json::Value result = this->CallMaquaod("aqua_register",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool eth_unregister(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        bool aqua_unregister(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_unregister",p);
+            Json::Value result = this->CallMaquaod("aqua_unregister",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_fetchQueuedTransactions(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_fetchQueuedTransactions(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_fetchQueuedTransactions",p);
+            Json::Value result = this->CallMaquaod("aqua_fetchQueuedTransactions",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string eth_signTransaction(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
+        std::string aqua_signTransaction(const Json::Value& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_signTransaction",p);
+            Json::Value result = this->CallMaquaod("aqua_signTransaction",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value eth_inspectTransaction(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value aqua_inspectTransaction(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("eth_inspectTransaction",p);
+            Json::Value result = this->CallMaquaod("aqua_inspectTransaction",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-		std::string eth_sendRawTransaction(const std::string& param1) throw (jsonrpc::JsonRpcException)
+		std::string aqua_sendRawTransaction(const std::string& param1) throw (jsonrpc::JsonRpcException)
 		{
 			Json::Value p;
 			p.append(param1);
-			Json::Value result = this->CallMethod("eth_sendRawTransaction",p);
+			Json::Value result = this->CallMaquaod("aqua_sendRawTransaction",p);
 			if (result.isString())
 				return result.asString();
 			else
 				throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool eth_notePassword(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        bool aqua_notePassword(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-			Json::Value result = this->CallMethod("eth_notePassword",p);
+			Json::Value result = this->CallMaquaod("aqua_notePassword",p);
 			if (result.isBool())
 				return result.asBool();
 			else
@@ -553,7 +553,7 @@ class WebThreeStubClient : public jsonrpc::Client
             p.append(param1);
             p.append(param2);
             p.append(param3);
-            Json::Value result = this->CallMethod("db_put",p);
+            Json::Value result = this->CallMaquaod("db_put",p);
             if (result.isBool())
                 return result.asBool();
             else
@@ -564,7 +564,7 @@ class WebThreeStubClient : public jsonrpc::Client
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("db_get",p);
+            Json::Value result = this->CallMaquaod("db_get",p);
             if (result.isString())
                 return result.asString();
             else
@@ -574,7 +574,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("shh_post",p);
+            Json::Value result = this->CallMaquaod("shh_post",p);
             if (result.isBool())
                 return result.asBool();
             else
@@ -584,7 +584,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p = Json::nullValue;
-            Json::Value result = this->CallMethod("shh_newIdentity",p);
+            Json::Value result = this->CallMaquaod("shh_newIdentity",p);
             if (result.isString())
                 return result.asString();
             else
@@ -594,7 +594,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("shh_hasIdentity",p);
+            Json::Value result = this->CallMaquaod("shh_hasIdentity",p);
             if (result.isBool())
                 return result.asBool();
             else
@@ -605,7 +605,7 @@ class WebThreeStubClient : public jsonrpc::Client
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("shh_newGroup",p);
+            Json::Value result = this->CallMaquaod("shh_newGroup",p);
             if (result.isString())
                 return result.asString();
             else
@@ -616,7 +616,7 @@ class WebThreeStubClient : public jsonrpc::Client
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("shh_addToGroup",p);
+            Json::Value result = this->CallMaquaod("shh_addToGroup",p);
             if (result.isString())
                 return result.asString();
             else
@@ -626,7 +626,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("shh_newFilter",p);
+            Json::Value result = this->CallMaquaod("shh_newFilter",p);
             if (result.isString())
                 return result.asString();
             else
@@ -636,7 +636,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("shh_uninstallFilter",p);
+            Json::Value result = this->CallMaquaod("shh_uninstallFilter",p);
             if (result.isBool())
                 return result.asBool();
             else
@@ -646,7 +646,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("shh_getFilterChanges",p);
+            Json::Value result = this->CallMaquaod("shh_getFilterChanges",p);
             if (result.isArray())
                 return result;
             else
@@ -656,7 +656,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("shh_getMessages",p);
+            Json::Value result = this->CallMaquaod("shh_getMessages",p);
             if (result.isArray())
                 return result;
             else
@@ -667,7 +667,7 @@ class WebThreeStubClient : public jsonrpc::Client
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_web3_setVerbosity",p);
+            Json::Value result = this->CallMaquaod("admin_web3_setVerbosity",p);
             if (result.isBool())
                 return result.asBool();
             else
@@ -677,7 +677,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("admin_net_start",p);
+            Json::Value result = this->CallMaquaod("admin_net_start",p);
             if (result.isBool())
                 return result.asBool();
             else
@@ -687,7 +687,7 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("admin_net_stop",p);
+            Json::Value result = this->CallMaquaod("admin_net_stop",p);
             if (result.isBool())
                 return result.asBool();
             else
@@ -698,7 +698,7 @@ class WebThreeStubClient : public jsonrpc::Client
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_net_connect",p);
+            Json::Value result = this->CallMaquaod("admin_net_connect",p);
             if (result.isBool())
                 return result.asBool();
             else
@@ -708,17 +708,17 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("admin_net_peers",p);
+            Json::Value result = this->CallMaquaod("admin_net_peers",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value admin_eth_blockQueueStatus(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value admin_aqua_blockQueueStatus(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("admin_eth_blockQueueStatus",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_blockQueueStatus",p);
             if (result.isObject())
                 return result;
             else
@@ -728,192 +728,192 @@ class WebThreeStubClient : public jsonrpc::Client
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("admin_net_nodeInfo",p);
+            Json::Value result = this->CallMaquaod("admin_net_nodeInfo",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool admin_eth_exit(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        bool admin_aqua_exit(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("admin_eth_exit",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_exit",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool admin_eth_setAskPrice(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        bool admin_aqua_setAskPrice(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_setAskPrice",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_setAskPrice",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool admin_eth_setBidPrice(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        bool admin_aqua_setBidPrice(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_setBidPrice",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_setBidPrice",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool admin_eth_setReferencePrice(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        bool admin_aqua_setReferencePrice(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_setReferencePrice",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_setReferencePrice",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool admin_eth_setPriority(int param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        bool admin_aqua_setPriority(int param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_setPriority",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_setPriority",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool admin_eth_setMining(bool param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        bool admin_aqua_setMining(bool param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_setMining",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_setMining",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value admin_eth_findBlock(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        Json::Value admin_aqua_findBlock(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_findBlock",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_findBlock",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        std::string admin_eth_blockQueueFirstUnknown(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        std::string admin_aqua_blockQueueFirstUnknown(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("admin_eth_blockQueueFirstUnknown",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_blockQueueFirstUnknown",p);
             if (result.isString())
                 return result.asString();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool admin_eth_blockQueueRetryUnknown(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        bool admin_aqua_blockQueueRetryUnknown(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("admin_eth_blockQueueRetryUnknown",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_blockQueueRetryUnknown",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value admin_eth_allAccounts(const std::string& param1) throw (jsonrpc::JsonRpcException)
+        Json::Value admin_aqua_allAccounts(const std::string& param1) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
-            Json::Value result = this->CallMethod("admin_eth_allAccounts",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_allAccounts",p);
             if (result.isArray())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value admin_eth_newAccount(const Json::Value& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        Json::Value admin_aqua_newAccount(const Json::Value& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_newAccount",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_newAccount",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool admin_eth_setSigningKey(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        bool admin_aqua_setSigningKey(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_setSigningKey",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_setSigningKey",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        bool admin_eth_setMiningBenefactor(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        bool admin_aqua_setMiningBenefactor(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_setMiningBenefactor",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_setMiningBenefactor",p);
             if (result.isBool())
                 return result.asBool();
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value admin_eth_inspect(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        Json::Value admin_aqua_inspect(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_inspect",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_inspect",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value admin_eth_reprocess(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
+        Json::Value admin_aqua_reprocess(const std::string& param1, const std::string& param2) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
-            Json::Value result = this->CallMethod("admin_eth_reprocess",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_reprocess",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value admin_eth_vmTrace(const std::string& param1, int param2, const std::string& param3) throw (jsonrpc::JsonRpcException)
+        Json::Value admin_aqua_vmTrace(const std::string& param1, int param2, const std::string& param3) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
             p.append(param3);
-            Json::Value result = this->CallMethod("admin_eth_vmTrace",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_vmTrace",p);
             if (result.isObject())
                 return result;
             else
                 throw jsonrpc::JsonRpcException(jsonrpc::Errors::ERROR_CLIENT_INVALID_RESPONSE, result.toStyledString());
         }
-        Json::Value admin_eth_getReceiptByHashAndIndex(const std::string& param1, int param2, const std::string& param3) throw (jsonrpc::JsonRpcException)
+        Json::Value admin_aqua_getReceiptByHashAndIndex(const std::string& param1, int param2, const std::string& param3) throw (jsonrpc::JsonRpcException)
         {
             Json::Value p;
             p.append(param1);
             p.append(param2);
             p.append(param3);
-            Json::Value result = this->CallMethod("admin_eth_getReceiptByHashAndIndex",p);
+            Json::Value result = this->CallMaquaod("admin_aqua_getReceiptByHashAndIndex",p);
             if (result.isObject())
                 return result;
             else

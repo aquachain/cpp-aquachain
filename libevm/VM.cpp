@@ -1,28 +1,28 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file VM.cpp
  */
 
-#include <libethereum/ExtVM.h>
+#include <libaquachain/ExtVM.h>
 #include "VMConfig.h"
 #include "VM.h"
 using namespace std;
 using namespace dev;
-using namespace dev::eth;
+using namespace dev::aqua;
 
 uint64_t VM::memNeed(u256 _offset, u256 _size)
 {
@@ -287,7 +287,7 @@ void VM::interpretCases()
 			// After EIP158 zero-value suicides do not have to pay account creation gas.
 			if (m_ext->balance(m_ext->myAddress) > 0 || m_schedule->zeroValueTransferChargesNewAccountGas())
 				// After EIP150 hard fork charge additional cost of sending
-				// ethers to non-existing account.
+				// aquaers to non-existing account.
 				if (m_schedule->suicideChargesNewAccountGas() && !m_ext->exists(dest))
 					m_runGas += m_schedule->callNewAccountGas;
 

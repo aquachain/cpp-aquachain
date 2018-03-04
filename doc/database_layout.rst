@@ -1,7 +1,7 @@
 Database Layout
 ===============
 
-cpp-ethereum uses three databases, all of them are essentially just
+cpp-aquachain uses three databases, all of them are essentially just
 key-value storages (LevelDB or RocksDB is used depending on build
 settings). Their physical disk locations are as follows:
 
@@ -13,7 +13,7 @@ settings). Their physical disk locations are as follows:
 
 where
 
-``{ETH_DATABASE_DIR}`` - base cpp-ethereum data directory
+``{ETH_DATABASE_DIR}`` - base cpp-aquachain data directory
 ``{GENESIS_HASH}`` - hex representation of first 4 bytes of genesis
 block hash (``d4e56740`` for main net, ``41941023`` for Ropsten)
 ``{DATABASE_VERSION}`` - encoded current version of the database layout
@@ -33,7 +33,7 @@ Every record is:
 
 Low-level access to both Blocks and Extras databases is encapsulated in
 `BlockChain
-class <https://github.com/ethereum/cpp-ethereum/blob/develop/libethereum/BlockChain.h>`__.
+class <https://github.com/aquachain/cpp-aquachain/blob/develop/libaquachain/BlockChain.h>`__.
 
 Extras
 ------
@@ -69,7 +69,7 @@ concatenation.
 
    where ``chunkId = index * 255 + level``. See comment to
    `BlockChain::blocksBlooms()
-   method <https://github.com/ethereum/cpp-ethereum/blob/db7278413edf701901d2a054b32a31c2722708d5/libethereum/BlockChain.h#L193-L206>`__
+   maquaod <https://github.com/aquachain/cpp-aquachain/blob/db7278413edf701901d2a054b32a31c2722708d5/libaquachain/BlockChain.h#L193-L206>`__
    for details.
 
 -  Additional records, one instance of each:
@@ -82,9 +82,9 @@ concatenation.
 State
 -----
 
-The data representing the full Ethereum state (i.e. all the accounts).
+The data representing the full Aquachain state (i.e. all the accounts).
 The State data forms a `Merkle Patricia
-Trie <https://github.com/ethereum/wiki/wiki/Patricia-Tree>`__ and the
+Trie <https://github.com/aquachain/wiki/wiki/Patricia-Tree>`__ and the
 database stores the nodes of this trie.
 
 -  Nodes of the trie for the mapping ``sha3(address) => accountData``,
@@ -99,11 +99,11 @@ database stores the nodes of this trie.
    ``hash + 255 => preimage`` (``+`` is concatenation).
 
 For the code managing the state see `State
-class <https://github.com/ethereum/cpp-ethereum/blob/develop/libethereum/State.h>`__
+class <https://github.com/aquachain/cpp-aquachain/blob/develop/libaquachain/State.h>`__
 (also note free function ``commit`` there). Merkle Patricia Trie
 implemenation is in
-`TrieDB.h <https://github.com/ethereum/cpp-ethereum/blob/develop/libdevcore/TrieDB.h>`__.
+`TrieDB.h <https://github.com/aquachain/cpp-aquachain/blob/develop/libdevcore/TrieDB.h>`__.
 For lower-level code accessing the database itself see
-`OverlayDB <https://github.com/ethereum/cpp-ethereum/blob/develop/libdevcore/OverlayDB.h>`__
+`OverlayDB <https://github.com/aquachain/cpp-aquachain/blob/develop/libdevcore/OverlayDB.h>`__
 and
-`MemoryDB <https://github.com/ethereum/cpp-ethereum/blob/develop/libdevcore/MemoryDB.h>`__.
+`MemoryDB <https://github.com/aquachain/cpp-aquachain/blob/develop/libdevcore/MemoryDB.h>`__.

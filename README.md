@@ -1,32 +1,32 @@
-# cpp-ethereum - Ethereum C++ client
+# cpp-aquachain - Aquachain C++ client
 
-This repository contains [cpp-ethereum](http://cpp-ethereum.org), the [Ethereum](https://ethereum.org) C++ client.
+This repository contains [cpp-aquachain](http://cpp-aquachain.org), the [Aquachain](https://aquachain.org) C++ client.
 
-It is the third most popular of the Ethereum clients, behind [geth](https://github.com/ethereum/go-ethereum) (the [go](https://golang.org)
-client) and [Parity](https://github.com/ethcore/parity) (the [rust](https://www.rust-lang.org/) client).  The code is exceptionally
-[portable](http://cpp-ethereum.org/portability.html) and has been used successfully on a very broad range
+It is the third most popular of the Aquachain clients, behind [gaqua](https://github.com/aquachain/go-aquachain) (the [go](https://golang.org)
+client) and [Parity](https://github.com/aquacore/parity) (the [rust](https://www.rust-lang.org/) client).  The code is exceptionally
+[portable](http://cpp-aquachain.org/portability.html) and has been used successfully on a very broad range
 of operating systems and hardware.
 
 
 ## Contact
 
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/ethereum/cpp-ethereum)
-[![GitHub Issues](https://img.shields.io/github/issues-raw/badges/shields.svg)](https://github.com/ethereum/cpp-ethereum/issues)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/aquachain/cpp-aquachain)
+[![GitHub Issues](https://img.shields.io/github/issues-raw/badges/shields.svg)](https://github.com/aquachain/cpp-aquachain/issues)
 
-- Chat in [cpp-ethereum channel on Gitter](https://gitter.im/ethereum/cpp-ethereum).
+- Chat in [cpp-aquachain channel on Gitter](https://gitter.im/aquachain/cpp-aquachain).
 - Report bugs, issues or feature requests using [GitHub issues](issues/new).
 
 
 ## Getting Started
 
-The Ethereum Documentation site hosts the **[cpp-ethereum homepage](http://cpp-ethereum.org)**, which
+The Aquachain Documentation site hosts the **[cpp-aquachain homepage](http://cpp-aquachain.org)**, which
 has a Quick Start section.
 
 
 Operating system | Status
 ---------------- | ----------
-Ubuntu and macOS | [![TravisCI](https://img.shields.io/travis/ethereum/cpp-ethereum/develop.svg)](https://travis-ci.org/ethereum/cpp-ethereum)
-Windows          | [![AppVeyor](https://img.shields.io/appveyor/ci/ethereum/cpp-ethereum/develop.svg)](https://ci.appveyor.com/project/ethereum/cpp-ethereum)
+Ubuntu and macOS | [![TravisCI](https://img.shields.io/travis/aquachain/cpp-aquachain/develop.svg)](https://travis-ci.org/aquachain/cpp-aquachain)
+Windows          | [![AppVeyor](https://img.shields.io/appveyor/ci/aquachain/cpp-aquachain/develop.svg)](https://ci.appveyor.com/project/aquachain/cpp-aquachain)
 
 
 ## Building from source
@@ -36,8 +36,8 @@ Windows          | [![AppVeyor](https://img.shields.io/appveyor/ci/ethereum/cpp-
 Git and GitHub is used to maintain the source code. Clone the repository by:
 
 ```shell
-git clone --recursive https://github.com/ethereum/cpp-ethereum.git
-cd cpp-ethereum
+git clone --recursive https://github.com/aquachain/cpp-aquachain.git
+cd cpp-aquachain
 ```
 
 The `--recursive` option is important. It orders git to clone additional 
@@ -57,7 +57,7 @@ distribution  of the latest version available on the
 The CMake package available in your operating system can also be installed
 and used if it meets the minimum version requirement.
 
-> **Alternative method**
+> **Alternative maquaod**
 >
 > The repository contains the
 [scripts/install_cmake.sh](scripts/install_cmake.sh) script that downloads 
@@ -111,7 +111,7 @@ cmake --build .        # Build all default targets.
 On **Windows** Visual Studio 2015 is required. You should generate Visual Studio 
 solution file (.sln) for 64-bit architecture by adding 
 `-G "Visual Studio 14 2015 Win64"` argument to the CMake configure command.
-After configuration is completed the `cpp-ethereum.sln` can be found in the
+After configuration is completed the `cpp-aquachain.sln` can be found in the
 `build` directory.
 
 ```shell
@@ -120,19 +120,19 @@ cmake .. -G "Visual Studio 14 2015 Win64"
 
 ## Contributing
 
-[![Contributors](https://img.shields.io/github/contributors/ethereum/cpp-ethereum.svg)](https://github.com/ethereum/cpp-ethereum/graphs/contributors)
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/ethereum/cpp-ethereum)
-[![up-for-grabs](https://img.shields.io/github/issues-raw/ethereum/cpp-ethereum/up-for-grabs.svg)](https://github.com/ethereum/cpp-ethereum/labels/up-for-grabs)
+[![Contributors](https://img.shields.io/github/contributors/aquachain/cpp-aquachain.svg)](https://github.com/aquachain/cpp-aquachain/graphs/contributors)
+[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/aquachain/cpp-aquachain)
+[![up-for-grabs](https://img.shields.io/github/issues-raw/aquachain/cpp-aquachain/up-for-grabs.svg)](https://github.com/aquachain/cpp-aquachain/labels/up-for-grabs)
 
 The current codebase is the work of many, many hands, with nearly 100
-[individual contributors](https://github.com/ethereum/cpp-ethereum/graphs/contributors) over the course of its development.
+[individual contributors](https://github.com/aquachain/cpp-aquachain/graphs/contributors) over the course of its development.
 
 Our day-to-day development chat happens on the
-[cpp-ethereum](https://gitter.im/ethereum/cpp-ethereum) Gitter channel.
+[cpp-aquachain](https://gitter.im/aquachain/cpp-aquachain) Gitter channel.
 
 All contributions are welcome! We try to keep a list of tasks that are suitable
 for newcomers under the tag 
-[up-for-grabs](https://github.com/ethereum/cpp-ethereum/labels/up-for-grabs).
+[up-for-grabs](https://github.com/aquachain/cpp-aquachain/labels/up-for-grabs).
 If you have any questions, please just ask.
 
 Please read [CONTRIBUTING](CONTRIBUTING.md) and [CODING_STYLE](CODING_STYLE.md) 
@@ -143,22 +143,22 @@ All development goes in develop branch.
 
 ## Mining
 
-This project is **not suitable for Ethereum mining**. The support for GPU mining 
-has been dropped some time ago including the ethminer tool. Use the ethminer tool from https://github.com/ethereum-mining/ethminer.
+This project is **not suitable for Aquachain mining**. The support for GPU mining 
+has been dropped some time ago including the aquaminer tool. Use the aquaminer tool from https://github.com/aquachain-mining/aquaminer.
 
 ## Testing
 
-To run the tests, make sure you clone https://github.com/ethereum/tests and point the environment variable
+To run the tests, make sure you clone https://github.com/aquachain/tests and point the environment variable
 `ETHEREUM_TEST_PATH` to that path.
 
 ## Documentation
 
 - [Internal documentation for developers](doc/index.rst).
-- [Outdated documentation for end users](http://www.ethdocs.org/en/latest/ethereum-clients/cpp-ethereum/).
+- [Outdated documentation for end users](http://www.aquadocs.org/en/latest/aquachain-clients/cpp-aquachain/).
 
 
 ## License
 
-[![License](https://img.shields.io/github/license/ethereum/cpp-ethereum.svg)](LICENSE)
+[![License](https://img.shields.io/github/license/aquachain/cpp-aquachain.svg)](LICENSE)
 
 All contributions are made under the [GNU General Public License v3](https://www.gnu.org/licenses/gpl-3.0.en.html). See [LICENSE](LICENSE).

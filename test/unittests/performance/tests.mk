@@ -1,11 +1,11 @@
 #
 # this makefile can be use to build and run the entire suite 
 #
-#     make -f tests.mk SOLC=solc ETHVM=ethvm EVM=evm PARITY=parity-evm all
+#     make -f tests.mk SOLC=solc ETHVM=aquavm EVM=evm PARITY=parity-evm all
 #
 # or build and run only a single test on a single VM
 #
-#     make -f tests.mk SOLC=solc ETHVM=ethvm pop.ran
+#     make -f tests.mk SOLC=solc ETHVM=aquavm pop.ran
 #
 # or build but not run the entire suite 
 #
@@ -15,7 +15,7 @@
 
 # the programs don't need to be at global scope
 #
-#     make -f tests.mk SOLC=solc ETHVM=../../../build/ethvm/ethvm all
+#     make -f tests.mk SOLC=solc ETHVM=../../../build/aquavm/aquavm all
 
 # define a path to these programs on make command line to pick one or more of them to run
 # the default is to do nothing
@@ -25,7 +25,7 @@ ifdef SOLC
 	SOLC_ASM_= $(SOLC) --assemble $*.asm | grep '^[0-9a-f]\+$\' > $*.bin
 endif
 ifdef ETHVM
-	ETHVM_ = $(call STATS,ethvm) $(ETHVM) $*.bin test; touch $*.ran
+	ETHVM_ = $(call STATS,aquavm) $(ETHVM) $*.bin test; touch $*.ran
 endif
 ifdef EVM
 	EVM_ = $(call STATS,evm) $(EVM) --codefile $*.bin run; touch $*.ran

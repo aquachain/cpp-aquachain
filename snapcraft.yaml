@@ -1,19 +1,19 @@
-name: cpp-ethereum
+name: cpp-aquachain
 version: master
 summary: blockchain app platform
-description: Ethereum C++ project
+description: Aquachain C++ project
 
 grade: devel
 confinement: devmode
 
 apps:
-  eth:
-    command: eth
-  ethvm:
-    command: ethvm
+  aqua:
+    command: aqua
+  aquavm:
+    command: aquavm
 
 parts:
-  cpp-ethereum:
+  cpp-aquachain:
     source: .
     source-type: git
     plugin: cmake

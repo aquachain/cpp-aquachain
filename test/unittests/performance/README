@@ -4,7 +4,7 @@ exercise larger units, like kernels for random numnber generation and message en
 
 Running the tests can be handled indiviually at the command line, or with tests.mk.
 
-	make -f tests.mk [SOLC=solc] [ETHVM=ethvm] [EVM=evm] [PARITY=parity-evm] \
+	make -f tests.mk [SOLC=solc] [ETHVM=aquavm] [EVM=evm] [PARITY=parity-evm] \
 	                 [all | ops | programs | mul64 | <test>.bin | <test>.ran]
 
 Runs only the programs for which a path is provided on the command line to make the given
@@ -36,12 +36,12 @@ and the test harness removed.
 An example of a complete run follows.
 
 	# compile, assemble, and run all the tests and log their output
-	$ make -f tests.mk SOLC=solc ETHVM=ethvm EVM=evm PARITY=parity-evm all >& times.log
+	$ make -f tests.mk SOLC=solc ETHVM=aquavm EVM=evm PARITY=parity-evm all >& times.log
 
 	# scrape log to a CSV file of gas and seconds per test run for each client
 	$ python log2csv.py < times.log > times.csv
 	$ cat times.csv
-	(sec/run), gas, ethvm, evm, parity-evm
+	(sec/run), gas, aquavm, evm, parity-evm
 	nop, 378535997, 4.88, 19.41, 14.62
 	pop, 781189181, 5.38, 23.92, 19.85
 	add64, 915406909, 7.98, 35.11, 21.49
@@ -65,7 +65,7 @@ An example of a complete run follows.
 
 	# calculate nanoseconds per test
 	$ python csv2nano.py < times.csv
-	(ns/test), gas, ethvm, evm, parity-evm
+	(ns/test), gas, aquavm, evm, parity-evm
 	nop, 3, 36, 145, 109
 	pop, 6, 40, 178, 148
 	add64, 7, 59, 262, 160
@@ -89,7 +89,7 @@ An example of a complete run follows.
 
 	# calculate nanoseconds per unit of gas
 	$ python csv2gas.py < times.csv
-	(ns/gas), ethvm, evm, parity-evm
+	(ns/gas), aquavm, evm, parity-evm
 	nop, 13, 51, 39
 	pop, 7, 31, 25
 	add64, 9, 38, 23
@@ -113,7 +113,7 @@ An example of a complete run follows.
 
 	# estimate nanoseconds per opcode
 	$ python csv2ops.py < times.csv
-	(ns/OP), ethvm, evm, parity-evm
+	(ns/OP), aquavm, evm, parity-evm
 	add64, 21, 101, 32
 	add128, 37, 82, 33
 	add256, 45, 97, 34

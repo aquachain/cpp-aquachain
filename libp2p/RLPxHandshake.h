@@ -1,18 +1,18 @@
 /*
- This file is part of cpp-ethereum.
+ This file is part of cpp-aquachain.
  
- cpp-ethereum is free software: you can redistribute it and/or modify
+ cpp-aquachain is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
  (at your option) any later version.
  
- cpp-ethereum is distributed in the hope that it will be useful,
+ cpp-aquachain is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
  
  You should have received a copy of the GNU General Public License
- along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+ along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
  */
 /** @file RLPXHandshake.h
  * @author Alex Leverington <nessence@gmail.com>
@@ -39,7 +39,7 @@ static const unsigned c_rlpxVersion = 4;
 
 /**
  * @brief Setup inbound or outbound connection for communication over RLPXFrameCoder.
- * RLPx Spec: https://github.com/ethereum/devp2p/blob/master/rlpx.md#encrypted-handshake
+ * RLPx Spec: https://github.com/aquachain/devp2p/blob/master/rlpx.md#encrypted-handshake
  *
  * @todo Implement StartSession transition via lambda which is passed to constructor.
  *

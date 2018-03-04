@@ -5,7 +5,7 @@
 VERSION=1 # eg 1.0rc2
 NUMBER=1 # jenkins build number
 
-# Detect whether we are running on a Yosemite or El Capitan machine, and generate
+# Detect whaquaer we are running on a Yosemite or El Capitan machine, and generate
 # an appropriately named ZIP file for the Homebrew receipt to point at.
 if echo `sw_vers` | grep "10.11"; then
     OSX_VERSION=el_capitan
@@ -31,11 +31,11 @@ while [ "$1" != "" ]; do
 done
 
 # prepare template directory
-rm -rf cpp-ethereum
-mkdir cpp-ethereum
-mkdir cpp-ethereum/$VERSION
+rm -rf cpp-aquachain
+mkdir cpp-aquachain
+mkdir cpp-aquachain/$VERSION
 p="../webthree-helpers/homebrew/"
-cp ${p}homebrew.mxcl.cpp-ethereum.plist ${p}INSTALL_RECEIPT.json ../web-helpers/LICENSE cpp-ethereum/$VERSION
+cp ${p}homebrew.mxcl.cpp-aquachain.plist ${p}INSTALL_RECEIPT.json ../web-helpers/LICENSE cpp-aquachain/$VERSION
 
 # build umbrella project and move install directory to destination
 #
@@ -44,28 +44,28 @@ cp ${p}homebrew.mxcl.cpp-ethereum.plist ${p}INSTALL_RECEIPT.json ../web-helpers/
 # on some previous build/install steps having happened by the time
 # we run this script? Probably.
 mkdir -p install
-cp -rf install/* cpp-ethereum/$VERSION
+cp -rf install/* cpp-aquachain/$VERSION
 
 # tar everything
-NAME="cpp-ethereum-${VERSION}.${OSX_VERSION}.bottle.${NUMBER}.tar.gz"
-tar -zcvf $NAME cpp-ethereum
+NAME="cpp-aquachain-${VERSION}.${OSX_VERSION}.bottle.${NUMBER}.tar.gz"
+tar -zcvf $NAME cpp-aquachain
 
 # get variables
 HASH=`git rev-parse HEAD`
 SIGNATURE=`openssl sha1 ${NAME} | cut -d " " -f 2`
 
-# Pull the current cpp-ethereum.rb file from Github.  We used to use a template file.
-curl https://raw.githubusercontent.com/ethereum/homebrew-ethereum/master/cpp-ethereum.rb > cpp-ethereum.rb.in
+# Pull the current cpp-aquachain.rb file from Github.  We used to use a template file.
+curl https://raw.githubusercontent.com/aquachain/homebrew-aquachain/master/cpp-aquachain.rb > cpp-aquachain.rb.in
 
 # prepare receipt
 if [ ${OSX_VERSION} == yosemite ]; then
     sed -e s/revision\ \=\>\ \'[[:xdigit:]][[:xdigit:]]*\'/revision\ \=\>\ \'${HASH}\'/g \
         -e s/version\ \'.*\'/version\ \'${VERSION}\'/g \
         -e s/sha1\ \'[[:xdigit:]][[:xdigit:]]*\'\ \=\>\ \:\yosemite/sha1\ \'${SIGNATURE}\'\ \=\>\ \:yosemite/g \
-        -e s/revision[[:space:]][[:digit:]][[:digit:]]*/revision\ ${NUMBER}/g < cpp-ethereum.rb.in > "cpp-ethereum.rb"
+        -e s/revision[[:space:]][[:digit:]][[:digit:]]*/revision\ ${NUMBER}/g < cpp-aquachain.rb.in > "cpp-aquachain.rb"
 else
     sed -e s/revision\ \=\>\ \'[[:xdigit:]][[:xdigit:]]*\'/revision\ \=\>\ \'${HASH}\'/g \
         -e s/version\ \'.*\'/version\ \'${VERSION}\'/g \
         -e s/sha1\ \'[[:xdigit:]][[:xdigit:]]*\'\ \=\>\ \:\el\_capitan/sha1\ \'${SIGNATURE}\'\ \=\>\ \:el\_capitan/g \
-        -e s/revision[[:space:]][[:digit:]][[:digit:]]*/revision\ ${NUMBER}/g < cpp-ethereum.rb.in > "cpp-ethereum.rb"
+        -e s/revision[[:space:]][[:digit:]][[:digit:]]*/revision\ ${NUMBER}/g < cpp-aquachain.rb.in > "cpp-aquachain.rb"
 fi

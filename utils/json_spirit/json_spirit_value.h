@@ -25,8 +25,8 @@ namespace json_spirit
 {
     enum Value_type{ obj_type, array_type, str_type, bool_type, int_type, real_type, null_type };
 
-    template< class Config >    // Config determines whether the value uses std::string or std::wstring and
-                                // whether JSON Objects are represented as vectors or maps
+    template< class Config >    // Config determines whaquaer the value uses std::string or std::wstring and
+                                // whaquaer JSON Objects are represented as vectors or maps
     class Value_impl
     {
     public:

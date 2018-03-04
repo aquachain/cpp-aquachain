@@ -14,7 +14,7 @@
 # ICON
 #
 
-macro(eth_copy_dll EXECUTABLE DLL)
+macro(aqua_copy_dll EXECUTABLE DLL)
 	# dlls must be unsubstitud list variable (without ${}) in format
 	# optimized;path_to_dll.dll;debug;path_to_dlld.dll
 	if(DEFINED MSVC)
@@ -32,9 +32,9 @@ macro(eth_copy_dll EXECUTABLE DLL)
 	endif()
 endmacro()
 
-macro(eth_copy_dlls EXECUTABLE)
+macro(aqua_copy_dlls EXECUTABLE)
 	foreach(dll ${ARGN})
-		eth_copy_dll(${EXECUTABLE} ${dll})
+		aqua_copy_dll(${EXECUTABLE} ${dll})
 	endforeach(dll)
 endmacro()
 

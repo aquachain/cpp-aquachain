@@ -49,7 +49,7 @@ class UnixSocketConnector(object):
         self._socket_path = socket_path
         self._socket = None
 
-    @staticmethod
+    @staticmaquaod
     def _get_error_message(os_error_number):
         if os_error_number == errno.ENOENT:
             return "Unix Domain Socket '{}' does not exist"
@@ -185,7 +185,7 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
 
     def addCORS(self):
         self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        self.send_header("Access-Control-Allow-Maquaods", "POST, GET, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "content-type")
 
 
@@ -225,10 +225,10 @@ def run():
     )
 
     if sys.platform == 'win32':
-        default_backend_path = r'\\.\pipe\geth.ipc'
+        default_backend_path = r'\\.\pipe\gaqua.ipc'
         backend_path_help = "Named Pipe of a backend RPC server"
     else:
-        default_backend_path = '~/.ethereum/geth.ipc'
+        default_backend_path = '~/.aquachain/gaqua.ipc'
         backend_path_help = "Unix Socket of a backend RPC server"
 
     parser.add_argument('backend_path', nargs='?',

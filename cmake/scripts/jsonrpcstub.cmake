@@ -14,7 +14,7 @@
 # -DETH_SERVER_NAME=AbstractWebThreeStubServer -DETH_CLIENT_NAME=WebThreeStubClient -DETH_JSON_RPC_STUB=/usr/local/bin/jsonrpcstub
 
 # setup names, and allow different filename from classname for namespaced classes.
-# For an example call look at libethereum/CMakeLists.txt for eth::dev::Sentinel
+# For an example call look at libaquachain/CMakeLists.txt for aqua::dev::Sentinel
 if (ETH_SERVER_FILENAME)
 	set(SERVER_TMPFILE "${ETH_SERVER_DIR}/${ETH_SERVER_FILENAME}.h.tmp")
 	set(SERVER_TMPFILE2 "${ETH_SERVER_DIR}/${ETH_SERVER_FILENAME}.h.tmp2")

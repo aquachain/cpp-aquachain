@@ -1,4 +1,4 @@
-// Copyright 2018 cpp-ethereum Authors.
+// Copyright 2018 cpp-aquachain Authors.
 // Licensed under the GNU General Public License v3. See the LICENSE file.
 
 #include "EVMC.h"
@@ -9,7 +9,7 @@
 
 namespace dev
 {
-namespace eth
+namespace aqua
 {
 EVM::EVM(evm_instance* _instance) noexcept : m_instance(_instance)
 {

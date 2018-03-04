@@ -14,12 +14,12 @@ namespace dev {
             public:
                 DebugFace()
                 {
-                    this->bindAndAddMethod(jsonrpc::Procedure("debug_traceTransaction", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::DebugFace::debug_traceTransactionI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("debug_storageRangeAt", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_INTEGER,"param3",jsonrpc::JSON_STRING,"param4",jsonrpc::JSON_STRING,"param5",jsonrpc::JSON_INTEGER, NULL), &dev::rpc::DebugFace::debug_storageRangeAtI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("debug_preimage", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::DebugFace::debug_preimageI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("debug_traceBlockByNumber", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_INTEGER,"param2",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::DebugFace::debug_traceBlockByNumberI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("debug_traceBlockByHash", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::DebugFace::debug_traceBlockByHashI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("debug_traceCall", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_OBJECT,"param2",jsonrpc::JSON_STRING,"param3",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::DebugFace::debug_traceCallI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("debug_traceTransaction", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::DebugFace::debug_traceTransactionI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("debug_storageRangeAt", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_INTEGER,"param3",jsonrpc::JSON_STRING,"param4",jsonrpc::JSON_STRING,"param5",jsonrpc::JSON_INTEGER, NULL), &dev::rpc::DebugFace::debug_storageRangeAtI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("debug_preimage", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::DebugFace::debug_preimageI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("debug_traceBlockByNumber", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_INTEGER,"param2",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::DebugFace::debug_traceBlockByNumberI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("debug_traceBlockByHash", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::DebugFace::debug_traceBlockByHashI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("debug_traceCall", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_OBJECT, "param1",jsonrpc::JSON_OBJECT,"param2",jsonrpc::JSON_STRING,"param3",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::DebugFace::debug_traceCallI);
                 }
 
                 inline virtual void debug_traceTransactionI(const Json::Value &request, Json::Value &response)

@@ -1,21 +1,21 @@
 /*
-  This file is part of ethash.
+  This file is part of aquahash.
 
-  ethash is free software: you can redistribute it and/or modify
+  aquahash is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  ethash is distributed in the hope that it will be useful,
+  aquahash is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with ethash.  If not, see <http://www.gnu.org/licenses/>.
+  along with aquahash.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file io_posix.c
- * @author Lefteris Karapetsas <lefteris@ethdev.com>
+ * @author Lefteris Karapetsas <lefteris@aquadev.com>
  * @date 2015
  */
 
@@ -29,33 +29,33 @@
 #include <stdlib.h>
 #include <pwd.h>
 
-FILE* ethash_fopen(char const* file_name, char const* mode)
+FILE* aquahash_fopen(char const* file_name, char const* mode)
 {
 	return fopen(file_name, mode);
 }
 
-int ethash_fseek(FILE* f, size_t offset, int origin)
+int aquahash_fseek(FILE* f, size_t offset, int origin)
 {
 	return fseeko(f, offset, origin);
 }
 
-char* ethash_strncat(char* dest, size_t dest_size, char const* src, size_t count)
+char* aquahash_strncat(char* dest, size_t dest_size, char const* src, size_t count)
 {
 	return strlen(dest) + count + 1 <= dest_size ? strncat(dest, src, count) : NULL;
 }
 
-bool ethash_mkdir(char const* dirname)
+bool aquahash_mkdir(char const* dirname)
 {
 	int rc = mkdir(dirname, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	return rc != -1 || errno == EEXIST;
 }
 
-int ethash_fileno(FILE *f)
+int aquahash_fileno(FILE *f)
 {
 	return fileno(f);
 }
 
-char* ethash_io_create_filename(
+char* aquahash_io_create_filename(
 	char const* dirname,
 	char const* filename,
 	size_t filename_length
@@ -72,15 +72,15 @@ char* ethash_io_create_filename(
 	}
 
 	name[0] = '\0';
-	ethash_strncat(name, dest_size, dirname, dirlen);
+	aquahash_strncat(name, dest_size, dirname, dirlen);
 	if (dirname[dirlen] != '/') {
-		ethash_strncat(name, dest_size, "/", 1);
+		aquahash_strncat(name, dest_size, "/", 1);
 	}
-	ethash_strncat(name, dest_size, filename, filename_length);
+	aquahash_strncat(name, dest_size, filename, filename_length);
 	return name;
 }
 
-bool ethash_file_size(FILE* f, size_t* ret_size)
+bool aquahash_file_size(FILE* f, size_t* ret_size)
 {
 	struct stat st;
 	int fd;
@@ -91,9 +91,9 @@ bool ethash_file_size(FILE* f, size_t* ret_size)
 	return true;
 }
 
-bool ethash_get_default_dirname(char* strbuf, size_t buffsize)
+bool aquahash_get_default_dirname(char* strbuf, size_t buffsize)
 {
-	static const char dir_suffix[] = ".ethash/";
+	static const char dir_suffix[] = ".aquahash/";
 	strbuf[0] = '\0';
 	char* home_dir = getenv("HOME");
 	if (!home_dir || strlen(home_dir) == 0)
@@ -106,13 +106,13 @@ bool ethash_get_default_dirname(char* strbuf, size_t buffsize)
 	}
 	
 	size_t len = strlen(home_dir);
-	if (!ethash_strncat(strbuf, buffsize, home_dir, len)) {
+	if (!aquahash_strncat(strbuf, buffsize, home_dir, len)) {
 		return false;
 	}
 	if (home_dir[len] != '/') {
-		if (!ethash_strncat(strbuf, buffsize, "/", 1)) {
+		if (!aquahash_strncat(strbuf, buffsize, "/", 1)) {
 			return false;
 		}
 	}
-	return ethash_strncat(strbuf, buffsize, dir_suffix, sizeof(dir_suffix));
+	return aquahash_strncat(strbuf, buffsize, dir_suffix, sizeof(dir_suffix));
 }

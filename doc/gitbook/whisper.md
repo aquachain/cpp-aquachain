@@ -2,7 +2,7 @@
 
 Whisper is a hybrid DHT/point-to-point communications system. It allows for transient publication and subscription of messages using a novel topic-based routing system. It gives exceptional levels of privacy, and can be configured to provide a privacy/efficiency tradeoff per application.
 
-Here follows a few gotchas in the present whisper API on the `eth` interactive console. It will be updated shortly.
+Here follows a few gotchas in the present whisper API on the `aqua` interactive console. It will be updated shortly.
 
 Points to note:
 - All API for whisper is contained in the `web3.shh` object. Type it in the interactive console to get a list of all functions and variables provided.

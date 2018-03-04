@@ -1,30 +1,30 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
  */
 /** @file BlockChainLoader.h
- * @author Marek Kotewicz <marek@ethdev.com>
+ * @author Marek Kotewicz <marek@aquadev.com>
  * @date 2015
  */
 
 #pragma once
 #include <json/json.h>
 #include <libdevcore/TransientDirectory.h>
-#include <libethereum/BlockChain.h>
-#include <libethereum/Block.h>
-#include <libethashseal/GenesisInfo.h>
+#include <libaquachain/BlockChain.h>
+#include <libaquachain/Block.h>
+#include <libaquahashseal/GenesisInfo.h>
 
 namespace dev
 {
@@ -38,15 +38,15 @@ namespace test
 class BlockChainLoader
 {
 public:
-	explicit BlockChainLoader(Json::Value const& _json, eth::Network _sealEngineNetwork = eth::Network::TransitionnetTest);
-	eth::BlockChain const& bc() const { return *m_bc; }
-	eth::State const& state() const { return m_block.state(); }	// TODO remove?
-	eth::Block const& block() const { return m_block; }
+	explicit BlockChainLoader(Json::Value const& _json, aqua::Network _sealEngineNetwork = aqua::Network::TransitionnetTest);
+	aqua::BlockChain const& bc() const { return *m_bc; }
+	aqua::State const& state() const { return m_block.state(); }	// TODO remove?
+	aqua::Block const& block() const { return m_block; }
 
 private:
 	TransientDirectory m_dir;
-	std::unique_ptr<eth::BlockChain> m_bc;
-	eth::Block m_block;
+	std::unique_ptr<aqua::BlockChain> m_bc;
+	aqua::Block m_block;
 };
 
 }

@@ -1,48 +1,48 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file jsonrpc.cpp
- * @author Marek Kotewicz <marek@ethdev.com>
+ * @author Marek Kotewicz <marek@aquadev.com>
  * @date 2014
  */
 
 //FIXME:
 // @debris disabled as tests fail with:
 // unknown location(0): fatal error in "jsonrpc_setMining": std::exception: Exception -32003 : Client connector error: : libcurl error: 28
-// /home/gav/Eth/cpp-ethereum/test/jsonrpc.cpp(169): last checkpoint
+// /home/gav/Eth/cpp-aquachain/test/jsonrpc.cpp(169): last checkpoint
 #if ETH_JSONRPC && 0
 
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
 #include <libdevcore/Log.h>
 #include <libdevcore/CommonIO.h>
-#include <libethcore/CommonJS.h>
+#include <libaquacore/CommonJS.h>
 #include <libwebthree/WebThree.h>
 #include <libweb3jsonrpc/WebThreeStubServer.h>
 #include <jsonrpccpp/server/connectors/httpserver.h>
 #include <set>
 #include "../JsonSpiritHeaders.h"
-#include <test/tools/libtesteth/TestOutputHelper.h>
+#include <test/tools/libtestaqua/TestOutputHelper.h>
 #include "WebThreeStubClient.h"
 
 BOOST_FIXTURE_TEST_SUITE(jsonrpc, TestOutputHelper)
 
 using namespace std;
 using namespace dev;
-using namespace dev::eth;
+using namespace dev::aqua;
 namespace js = json_spirit;
 
 WebThreeDirect* web3;
@@ -59,10 +59,10 @@ struct Setup
 		setup = true;
 
 		dev::p2p::NetworkPreferences nprefs(30303, std::string(), false);
-		web3 = new WebThreeDirect("eth tests", "", true, {"eth", "shh"}, nprefs);
+		web3 = new WebThreeDirect("aqua tests", "", true, {"aqua", "shh"}, nprefs);
 		
 		web3->setIdealPeerCount(5);
-		web3->ethereum()->setForceMining(true);
+		web3->aquachain()->setForceMining(true);
 		auto server = new jsonrpc::HttpServer(8080);
 		jsonrpcServer = unique_ptr<WebThreeStubServer>(new WebThreeStubServer(*server, *web3, {}));
 		jsonrpcServer->setIdentities({});
@@ -83,15 +83,15 @@ BOOST_FIXTURE_TEST_SUITE(environment, Setup)
 BOOST_AUTO_TEST_CASE(jsonrpc_defaultBlock)
 {
 	cnote << "Testing jsonrpc defaultBlock...";
-	int defaultBlock = jsonrpcClient->eth_defaultBlock();
-	BOOST_CHECK_EQUAL(defaultBlock, web3->ethereum()->getDefault());
+	int defaultBlock = jsonrpcClient->aqua_defaultBlock();
+	BOOST_CHECK_EQUAL(defaultBlock, web3->aquachain()->getDefault());
 }
 
 BOOST_AUTO_TEST_CASE(jsonrpc_gasPrice)
 {
 	cnote << "Testing jsonrpc gasPrice...";
-	string gasPrice = jsonrpcClient->eth_gasPrice();
-	BOOST_CHECK_EQUAL(gasPrice, toJS(10 * dev::eth::szabo));
+	string gasPrice = jsonrpcClient->aqua_gasPrice();
+	BOOST_CHECK_EQUAL(gasPrice, toJS(10 * dev::aqua::szabo));
 }
 
 BOOST_AUTO_TEST_CASE(jsonrpc_isListening)
@@ -99,11 +99,11 @@ BOOST_AUTO_TEST_CASE(jsonrpc_isListening)
 	cnote << "Testing jsonrpc isListening...";
 
 	web3->startNetwork();
-	bool listeningOn = jsonrpcClient->eth_listening();
+	bool listeningOn = jsonrpcClient->aqua_listening();
 	BOOST_CHECK_EQUAL(listeningOn, web3->isNetworkStarted());
 	
 	web3->stopNetwork();
-	bool listeningOff = jsonrpcClient->eth_listening();
+	bool listeningOff = jsonrpcClient->aqua_listening();
 	BOOST_CHECK_EQUAL(listeningOff, web3->isNetworkStarted());
 }
 
@@ -111,13 +111,13 @@ BOOST_AUTO_TEST_CASE(jsonrpc_isMining)
 {
 	cnote << "Testing jsonrpc isMining...";
 
-	web3->ethereum()->startSealing();
-	bool miningOn = jsonrpcClient->eth_mining();
-	BOOST_CHECK_EQUAL(miningOn, web3->ethereum()->isMining());
+	web3->aquachain()->startSealing();
+	bool miningOn = jsonrpcClient->aqua_mining();
+	BOOST_CHECK_EQUAL(miningOn, web3->aquachain()->isMining());
 
-	web3->ethereum()->stopSealing();
-	bool miningOff = jsonrpcClient->eth_mining();
-	BOOST_CHECK_EQUAL(miningOff, web3->ethereum()->isMining());
+	web3->aquachain()->stopSealing();
+	bool miningOff = jsonrpcClient->aqua_mining();
+	BOOST_CHECK_EQUAL(miningOff, web3->aquachain()->isMining());
 }
 
 BOOST_AUTO_TEST_CASE(jsonrpc_accounts)
@@ -125,7 +125,7 @@ BOOST_AUTO_TEST_CASE(jsonrpc_accounts)
 	cnote << "Testing jsonrpc accounts...";
 	std::vector <dev::KeyPair> keys = {KeyPair::create(), KeyPair::create()};
 	jsonrpcServer->setAccounts(keys);
-	Json::Value k = jsonrpcClient->eth_accounts();
+	Json::Value k = jsonrpcClient->aqua_accounts();
 	jsonrpcServer->setAccounts({});
 	BOOST_CHECK_EQUAL(k.isArray(), true);
 	BOOST_CHECK_EQUAL(k.size(),  keys.size());
@@ -142,18 +142,18 @@ BOOST_AUTO_TEST_CASE(jsonrpc_accounts)
 BOOST_AUTO_TEST_CASE(jsonrpc_number)
 {
 	cnote << "Testing jsonrpc number2...";
-	int number = jsonrpcClient->eth_number();
-	BOOST_CHECK_EQUAL(number, web3->ethereum()->number() + 1);
-	dev::eth::mine(*(web3->ethereum()), 1);
-	int numberAfter = jsonrpcClient->eth_number();
+	int number = jsonrpcClient->aqua_number();
+	BOOST_CHECK_EQUAL(number, web3->aquachain()->number() + 1);
+	dev::aqua::mine(*(web3->aquachain()), 1);
+	int numberAfter = jsonrpcClient->aqua_number();
 	BOOST_CHECK_EQUAL(number + 1, numberAfter);
-	BOOST_CHECK_EQUAL(numberAfter, web3->ethereum()->number() + 1);
+	BOOST_CHECK_EQUAL(numberAfter, web3->aquachain()->number() + 1);
 }
 
 BOOST_AUTO_TEST_CASE(jsonrpc_peerCount)
 {
 	cnote << "Testing jsonrpc peerCount...";
-	int peerCount = jsonrpcClient->eth_peerCount();
+	int peerCount = jsonrpcClient->aqua_peerCount();
 	BOOST_CHECK_EQUAL(web3->peerCount(), peerCount);
 }
 
@@ -161,10 +161,10 @@ BOOST_AUTO_TEST_CASE(jsonrpc_setListening)
 {
 	cnote << "Testing jsonrpc setListening...";
 
-	jsonrpcClient->eth_setListening(true);
+	jsonrpcClient->aqua_setListening(true);
 	BOOST_CHECK_EQUAL(web3->isNetworkStarted(), true);
 	
-	jsonrpcClient->eth_setListening(false);
+	jsonrpcClient->aqua_setListening(false);
 	BOOST_CHECK_EQUAL(web3->isNetworkStarted(), false);
 }
 
@@ -172,11 +172,11 @@ BOOST_AUTO_TEST_CASE(jsonrpc_setMining)
 {
 	cnote << "Testing jsonrpc setMining...";
 
-	jsonrpcClient->eth_setMining(true);
-	BOOST_CHECK_EQUAL(web3->ethereum()->isMining(), true);
+	jsonrpcClient->aqua_setMining(true);
+	BOOST_CHECK_EQUAL(web3->aquachain()->isMining(), true);
 
-	jsonrpcClient->eth_setMining(false);
-	BOOST_CHECK_EQUAL(web3->ethereum()->isMining(), false);
+	jsonrpcClient->aqua_setMining(false);
+	BOOST_CHECK_EQUAL(web3->aquachain()->isMining(), false);
 }
 
 BOOST_AUTO_TEST_CASE(jsonrpc_stateAt)
@@ -184,44 +184,44 @@ BOOST_AUTO_TEST_CASE(jsonrpc_stateAt)
 	cnote << "Testing jsonrpc stateAt...";
 	dev::KeyPair key = KeyPair::create();
 	auto address = key.address();
-	string stateAt = jsonrpcClient->eth_stateAt(toJS(address), "0");
-	BOOST_CHECK_EQUAL(toJS(web3->ethereum()->stateAt(address, jsToU256("0"), 0)), stateAt);
+	string stateAt = jsonrpcClient->aqua_stateAt(toJS(address), "0");
+	BOOST_CHECK_EQUAL(toJS(web3->aquachain()->stateAt(address, jsToU256("0"), 0)), stateAt);
 }
 
 BOOST_AUTO_TEST_CASE(jsonrpc_transact)
 {
 	cnote << "Testing jsonrpc transact...";
-	string coinbase = jsonrpcClient->eth_coinbase();
-	BOOST_CHECK_EQUAL(jsToAddress(coinbase), web3->ethereum()->author());
+	string coinbase = jsonrpcClient->aqua_coinbase();
+	BOOST_CHECK_EQUAL(jsToAddress(coinbase), web3->aquachain()->author());
 	
 	dev::KeyPair key = KeyPair::create();
 	auto address = key.address();
 	auto receiver = KeyPair::create();
-	web3->ethereum()->setAuthor(address);
+	web3->aquachain()->setAuthor(address);
 
-	coinbase = jsonrpcClient->eth_coinbase();
-	BOOST_CHECK_EQUAL(jsToAddress(coinbase), web3->ethereum()->author());
+	coinbase = jsonrpcClient->aqua_coinbase();
+	BOOST_CHECK_EQUAL(jsToAddress(coinbase), web3->aquachain()->author());
 	BOOST_CHECK_EQUAL(jsToAddress(coinbase), address);
 	
 	jsonrpcServer->setAccounts({key});
-	auto balance = web3->ethereum()->balanceAt(address, 0);
-	string balanceString = jsonrpcClient->eth_balanceAt(toJS(address));
-	double countAt = jsonrpcClient->eth_countAt(toJS(address));
+	auto balance = web3->aquachain()->balanceAt(address, 0);
+	string balanceString = jsonrpcClient->aqua_balanceAt(toJS(address));
+	double countAt = jsonrpcClient->aqua_countAt(toJS(address));
 	
-	BOOST_CHECK_EQUAL(countAt, (double)(uint64_t)web3->ethereum()->countAt(address));
+	BOOST_CHECK_EQUAL(countAt, (double)(uint64_t)web3->aquachain()->countAt(address));
 	BOOST_CHECK_EQUAL(countAt, 0);
 	BOOST_CHECK_EQUAL(toJS(balance), balanceString);
 	BOOST_CHECK_EQUAL(jsToDecimal(balanceString), "0");
 	
-	dev::eth::mine(*(web3->ethereum()), 1);
-	balance = web3->ethereum()->balanceAt(address, 0);
-	balanceString = jsonrpcClient->eth_balanceAt(toJS(address));
+	dev::aqua::mine(*(web3->aquachain()), 1);
+	balance = web3->aquachain()->balanceAt(address, 0);
+	balanceString = jsonrpcClient->aqua_balanceAt(toJS(address));
 	
 	BOOST_CHECK_EQUAL(toJS(balance), balanceString);
 	BOOST_CHECK_EQUAL(jsToDecimal(balanceString), "1500000000000000000");
 	
 	auto txAmount = balance / 2u;
-	auto gasPrice = 10 * dev::eth::szabo;
+	auto gasPrice = 10 * dev::aqua::szabo;
 	auto gas = EVMSchedule().txGas;
 	
 	Json::Value t;
@@ -232,15 +232,15 @@ BOOST_AUTO_TEST_CASE(jsonrpc_transact)
 	t["gas"] = toJS(gas);
 	t["gasPrice"] = toJS(gasPrice);
 	
-	jsonrpcClient->eth_transact(t);
+	jsonrpcClient->aqua_transact(t);
 	jsonrpcServer->setAccounts({});
-	dev::eth::mine(*(web3->ethereum()), 1);
+	dev::aqua::mine(*(web3->aquachain()), 1);
 	
-	countAt = jsonrpcClient->eth_countAt(toJS(address));
-	auto balance2 = web3->ethereum()->balanceAt(receiver.address());
-	string balanceString2 = jsonrpcClient->eth_balanceAt(toJS(receiver.address()));
+	countAt = jsonrpcClient->aqua_countAt(toJS(address));
+	auto balance2 = web3->aquachain()->balanceAt(receiver.address());
+	string balanceString2 = jsonrpcClient->aqua_balanceAt(toJS(receiver.address()));
 	
-	BOOST_CHECK_EQUAL(countAt, (double)(uint64_t)web3->ethereum()->countAt(address));
+	BOOST_CHECK_EQUAL(countAt, (double)(uint64_t)web3->aquachain()->countAt(address));
 	BOOST_CHECK_EQUAL(countAt, 1);
 	BOOST_CHECK_EQUAL(toJS(balance2), balanceString2);
 	BOOST_CHECK_EQUAL(jsToDecimal(balanceString2), "750000000000000000");
@@ -252,26 +252,26 @@ BOOST_AUTO_TEST_CASE(simple_contract)
 {
 	cnote << "Testing jsonrpc contract...";
 	KeyPair kp = KeyPair::create();
-	web3->ethereum()->setAuthor(kp.address());
+	web3->aquachain()->setAuthor(kp.address());
 	jsonrpcServer->setAccounts({kp});
 
-	dev::eth::mine(*(web3->ethereum()), 1);
+	dev::aqua::mine(*(web3->aquachain()), 1);
 	
 	char const* sourceCode = "contract test {\n"
 	"  function f(uint a) returns(uint d) { return a * 7; }\n"
 	"}\n";
 
-	string compiled = jsonrpcClient->eth_solidity(sourceCode);
+	string compiled = jsonrpcClient->aqua_solidity(sourceCode);
 
 	Json::Value create;
 	create["code"] = compiled;
-	string contractAddress = jsonrpcClient->eth_transact(create);
-	dev::eth::mine(*(web3->ethereum()), 1);
+	string contractAddress = jsonrpcClient->aqua_transact(create);
+	dev::aqua::mine(*(web3->aquachain()), 1);
 	
 	Json::Value call;
 	call["to"] = contractAddress;
 	call["data"] = "0x00000000000000000000000000000000000000000000000000000000000000001";
-	string result = jsonrpcClient->eth_call(call);
+	string result = jsonrpcClient->aqua_call(call);
 	BOOST_CHECK_EQUAL(result, "0x0000000000000000000000000000000000000000000000000000000000000007");
 }
 
@@ -279,10 +279,10 @@ BOOST_AUTO_TEST_CASE(contract_storage)
 {
 	cnote << "Testing jsonrpc contract storage...";
 	KeyPair kp = KeyPair::create();
-	web3->ethereum()->setAuthor(kp.address());
+	web3->aquachain()->setAuthor(kp.address());
 	jsonrpcServer->setAccounts({kp});
 
-	dev::eth::mine(*(web3->ethereum()), 1);
+	dev::aqua::mine(*(web3->aquachain()), 1);
 	
 	char const* sourceCode = R"(
 		contract test {
@@ -294,20 +294,20 @@ BOOST_AUTO_TEST_CASE(contract_storage)
 		}
 	)";
 	
-	string compiled = jsonrpcClient->eth_solidity(sourceCode);
+	string compiled = jsonrpcClient->aqua_solidity(sourceCode);
 	
 	Json::Value create;
 	create["code"] = compiled;
-	string contractAddress = jsonrpcClient->eth_transact(create);
-	dev::eth::mine(*(web3->ethereum()), 1);
+	string contractAddress = jsonrpcClient->aqua_transact(create);
+	dev::aqua::mine(*(web3->aquachain()), 1);
 	
 	Json::Value transact;
 	transact["to"] = contractAddress;
 	transact["data"] = "0x00000000000000000000000000000000000000000000000000000000000000003";
-	jsonrpcClient->eth_transact(transact);
-	dev::eth::mine(*(web3->ethereum()), 1);
+	jsonrpcClient->aqua_transact(transact);
+	dev::aqua::mine(*(web3->aquachain()), 1);
 	
-	Json::Value storage = jsonrpcClient->eth_storageAt(contractAddress);
+	Json::Value storage = jsonrpcClient->aqua_storageAt(contractAddress);
 	BOOST_CHECK_EQUAL(storage.getMemberNames().size(), 1);
 	// bracers are required, cause msvc couldnt handle this macro in for statement
 	for (auto name: storage.getMemberNames())

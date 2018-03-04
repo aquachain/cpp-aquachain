@@ -1,10 +1,10 @@
 [submodule "evmjit"]
 	path = evmjit
-	url = https://github.com/ethereum/evmjit
+	url = https://github.com/aquachain/evmjit
 	branch = develop
 [submodule "test/tests"]
 	path = test/jsontests
-	url = https://github.com/ethereum/tests.git
+	url = https://github.com/aquachain/tests.git
 [submodule "hera"]
 	path = hera
 	url = https://github.com/ewasm/hera

@@ -1,12 +1,12 @@
 #------------------------------------------------------------------------------
 # EthCompilerSettings.cmake
 #
-# CMake file for cpp-ethereum project which specifies our compiler settings
+# CMake file for cpp-aquachain project which specifies our compiler settings
 # for each supported platform and build configuration.
 #
-# The documentation for cpp-ethereum is hosted at http://cpp-ethereum.org
+# The documentation for cpp-aquachain is hosted at http://cpp-aquachain.org
 #
-# Copyright (c) 2014-2016 cpp-ethereum contributors.
+# Copyright (c) 2014-2016 cpp-aquachain contributors.
 #------------------------------------------------------------------------------
 
 # Clang seeks to be command-line compatible with GCC as much as possible, so
@@ -16,12 +16,12 @@
 
 include(EthCheckCXXCompilerFlag)
 
-eth_add_cxx_compiler_flag_if_supported(-fstack-protector-strong have_stack_protector_strong_support)
+aqua_add_cxx_compiler_flag_if_supported(-fstack-protector-strong have_stack_protector_strong_support)
 if(NOT have_stack_protector_strong_support)
-	eth_add_cxx_compiler_flag_if_supported(-fstack-protector)
+	aqua_add_cxx_compiler_flag_if_supported(-fstack-protector)
 endif()
 
-eth_add_cxx_compiler_flag_if_supported(-Wimplicit-fallthrough)
+aqua_add_cxx_compiler_flag_if_supported(-Wimplicit-fallthrough)
 
 if (("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU") OR ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang"))
 	# Enables all the warnings about constructions that some users consider questionable,

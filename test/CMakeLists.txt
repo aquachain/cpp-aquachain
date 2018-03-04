@@ -29,7 +29,7 @@ foreach(file ${sources})
 					list(APPEND allSuites ${TestSuite})
 					separate_arguments(TESTETH_ARGS)
 					set(TestEthArgs -t ${TestSuitePathFixed} -- ${TESTETH_ARGS})
-					add_test(NAME ${TestSuitePathFixed} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/test COMMAND testeth ${TestEthArgs})
+					add_test(NAME ${TestSuitePathFixed} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/test COMMAND testaqua ${TestEthArgs})
 				endif()
 			endif()
 		elseif(test MATCHES "^CASE .*")
@@ -39,7 +39,7 @@ foreach(file ${sources})
 					string(SUBSTRING ${TestSuitePath} 1 -1 TestSuitePathFixed)
 					separate_arguments(TESTETH_ARGS)
 					set(TestEthArgs -t ${TestSuitePathFixed}/${TestCase} -- ${TESTETH_ARGS})
-					add_test(NAME ${TestSuitePathFixed}/${TestCase} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/test COMMAND testeth ${TestEthArgs})
+					add_test(NAME ${TestSuitePathFixed}/${TestCase} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/test COMMAND testaqua ${TestEthArgs})
 				endif()
 			endif()
 		elseif (";${test_raw};" MATCHES "BOOST_AUTO_TEST_SUITE_END()")
@@ -53,26 +53,26 @@ endforeach(file)
 hunter_add_package(yaml-cpp)
 find_package(yaml-cpp CONFIG REQUIRED)
 
-add_executable(testeth ${sources})
-target_include_directories(testeth PRIVATE ${UTILS_INCLUDE_DIR})
-target_link_libraries(testeth PRIVATE ethereum ethashseal web3jsonrpc devcrypto devcore cryptopp-static yaml-cpp::yaml-cpp binaryen::binaryen)
+add_executable(testaqua ${sources})
+target_include_directories(testaqua PRIVATE ${UTILS_INCLUDE_DIR})
+target_link_libraries(testaqua PRIVATE aquachain aquahashseal web3jsonrpc devcrypto devcore cryptopp-static yaml-cpp::yaml-cpp binaryen::binaryen)
 
 enable_testing()
 set(CTEST_OUTPUT_ON_FAILURE TRUE)
 
 include(EthUtils)
 
-eth_add_test(ClientBase
-	ARGS --eth_testfile=BlockTests/bcJS_API_Test --eth_threads=1
-	ARGS --eth_testfile=BlockTests/bcJS_API_Test --eth_threads=3
-	ARGS --eth_testfile=BlockTests/bcJS_API_Test --eth_threads=10
-	ARGS --eth_testfile=BlockTests/bcValidBlockTest --eth_threads=1
-	ARGS --eth_testfile=BlockTests/bcValidBlockTest --eth_threads=3
-	ARGS --eth_testfile=BlockTests/bcValidBlockTest --eth_threads=10
+aqua_add_test(ClientBase
+	ARGS --aqua_testfile=BlockTests/bcJS_API_Test --aqua_threads=1
+	ARGS --aqua_testfile=BlockTests/bcJS_API_Test --aqua_threads=3
+	ARGS --aqua_testfile=BlockTests/bcJS_API_Test --aqua_threads=10
+	ARGS --aqua_testfile=BlockTests/bcValidBlockTest --aqua_threads=1
+	ARGS --aqua_testfile=BlockTests/bcValidBlockTest --aqua_threads=3
+	ARGS --aqua_testfile=BlockTests/bcValidBlockTest --aqua_threads=10
 )
 
 #Does not work
-#eth_add_test(JsonRpc
-#	ARGS --eth_testfile=BlockTests/bcJS_API_Test
-#	ARGS --eth_testfile=BlockTests/bcValidBlockTest
+#aqua_add_test(JsonRpc
+#	ARGS --aqua_testfile=BlockTests/bcJS_API_Test
+#	ARGS --aqua_testfile=BlockTests/bcValidBlockTest
 #)

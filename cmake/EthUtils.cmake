@@ -22,7 +22,7 @@ macro(replace_if_different SOURCE DST)
 	endif()
 endmacro()
 
-macro(eth_add_test NAME) 
+macro(aqua_add_test NAME) 
 
 	# parse arguments here
 	set(commands)
@@ -48,23 +48,23 @@ macro(eth_add_test NAME)
 		list(GET commands ${index} test_arguments)
 
 		set(run_test "--run_test=${NAME}")
-		add_test(NAME "${NAME}.${index}" COMMAND testeth ${run_test} ${test_arguments})
+		add_test(NAME "${NAME}.${index}" COMMAND testaqua ${run_test} ${test_arguments})
 		
 		math(EXPR index "${index} + 1")
 	endwhile(index LESS count)
 
 	# add target to run them
 	add_custom_target("test.${NAME}"
-		DEPENDS testeth
+		DEPENDS testaqua
 		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 		COMMAND ${CMAKE_COMMAND} -DETH_TEST_NAME="${NAME}" -DCTEST_COMMAND="${CTEST_COMMAND}" -P "${ETH_SCRIPTS_DIR}/runtest.cmake"
 	)
 
 endmacro()
 
-# In Windows split repositories build we need to be checking whether or not
+# In Windows split repositories build we need to be checking whaquaer or not
 # Debug/Release or both versions were built for the config phase to run smoothly
-macro(eth_check_library_link L)
+macro(aqua_check_library_link L)
 	if (${${L}_LIBRARY} AND ${${L}_LIBRARY} EQUAL "${L}_LIBRARY-NOTFOUND")
 		unset(${${L}_LIBRARY})
 	endif()

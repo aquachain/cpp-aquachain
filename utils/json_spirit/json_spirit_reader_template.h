@@ -187,7 +187,7 @@ namespace json_spirit
         return get_str( tmp.begin(), tmp.end() );
     }
 
-    // this class's methods get called by the spirit parse resulting
+    // this class's maquaods get called by the spirit parse resulting
     // in the creation of a JSON object or array
     //
     // NB Iter_type could be a std::string iterator, wstring iterator, a position iterator or a multipass iterator
@@ -419,7 +419,7 @@ namespace json_spirit
 
                 typedef typename Value_type::String_type::value_type Char_type;
 
-                // first we convert the semantic action class methods to functors with the 
+                // first we convert the semantic action class maquaods to functors with the 
                 // parameter signature expected by spirit
 
                 typedef boost::function< void( Char_type )            > Char_action;

@@ -1,25 +1,25 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /// @file
 /// Unit tests for boost libraries.
 
 #include <boost/test/unit_test.hpp>
 #include <libdevcore/Common.h>
-#include <test/tools/libtesteth/TestHelper.h>
+#include <test/tools/libtestaqua/TestHelper.h>
 
 using namespace dev;
 using namespace dev::test;
@@ -28,7 +28,7 @@ using namespace boost::multiprecision;
 
 BOOST_FIXTURE_TEST_SUITE(boostTests, TestOutputHelperFixture)
 
-// test that reproduces issue https://github.com/ethereum/cpp-ethereum/issues/1977
+// test that reproduces issue https://github.com/aquachain/cpp-aquachain/issues/1977
 BOOST_AUTO_TEST_CASE(u256_overflow_test)
 {
 	dev::u256 a = 14;

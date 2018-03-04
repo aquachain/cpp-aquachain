@@ -50,24 +50,24 @@ defaults:
 
         # If the DAG file does not exist, we have to run a single test with mining
         # to create it before we can run tests in parallel.
-        if [ ! -f ~/.ethash/full-R23-0000000000000000 ]; then
-          test/testeth -t BlockChainSuite/updateStats
+        if [ ! -f ~/.aquahash/full-R23-0000000000000000 ]; then
+          test/testaqua -t BlockChainSuite/updateStats
         fi
 
         ctest --output-on-failure -j $TEST_PARALLEL_JOBS
 
-  store-eth: &store-eth
+  store-aqua: &store-aqua
     store_artifacts:
-      path: ~/build/eth/eth
-      destination: eth
+      path: ~/build/aqua/aqua
+      destination: aqua
     store_artifacts:
-      path: ~/build/test/testeth
-      destination: testeth
+      path: ~/build/test/testaqua
+      destination: testaqua
 
-  store-testeth: &store-testeth
+  store-testaqua: &store-testaqua
     store_artifacts:
-      path: ~/build/test/testeth
-      destination: testeth
+      path: ~/build/test/testaqua
+      destination: testaqua
 
   store-randomcode-seed: &store-randomcode-seed
     store_artifacts:
@@ -86,17 +86,17 @@ defaults:
       name: "Restore dependencies cache"
       key: *deps-cache-key
 
-  save-ethash-dag: &save-ethash-dag
+  save-aquahash-dag: &save-aquahash-dag
     cache-save:
       name: "Save Ethash DAG file"
-      key: &ethash-dag-key ethash-dag0-{{arch}}
+      key: &aquahash-dag-key aquahash-dag0-{{arch}}
       paths:
-        - ~/.ethash/full-R23-0000000000000000
+        - ~/.aquahash/full-R23-0000000000000000
 
-  restore-ethash-dag: &restore-ethash-dag
+  restore-aquahash-dag: &restore-aquahash-dag
     cache-restore:
       name: "Restore Ethash DAG file"
-      key: *ethash-dag-key
+      key: *aquahash-dag-key
 
   upload-coverage-data: &upload-coverage-data
     run:
@@ -115,11 +115,11 @@ defaults:
     - *upload-hunter-cache
     - *build
     - *save-deps-cache
-    - *store-eth
-    - *store-testeth
-    - *restore-ethash-dag
+    - *store-aqua
+    - *store-testaqua
+    - *restore-aquahash-dag
     - *test
-    - *save-ethash-dag
+    - *save-aquahash-dag
     - *upload-coverage-data
 
 
@@ -135,7 +135,7 @@ jobs:
       - BUILD_PARALLEL_JOBS: 8
       - TEST_PARALLEL_JOBS: 8
     docker:
-      - image: ethereum/cpp-build-env
+      - image: aquachain/cpp-build-env
     steps: *linux-steps
 
   Linux-GCC6-Debug:
@@ -151,7 +151,7 @@ jobs:
       # - CMAKE_OPTIONS: -DSANITIZE=address
       # - ASAN_OPTIONS: detect_leaks=0
     docker:
-      - image: ethereum/cpp-build-env
+      - image: aquachain/cpp-build-env
     steps: *linux-steps
 
   macOS-XCode9:
@@ -178,12 +178,12 @@ jobs:
       - *upload-hunter-cache
       - *build
       - *save-deps-cache
-      - *store-eth
-      - *store-testeth
-      - *restore-ethash-dag
+      - *store-aqua
+      - *store-testaqua
+      - *restore-aquahash-dag
       - *test
       - *store-randomcode-seed
-      - *save-ethash-dag
+      - *save-aquahash-dag
       - *upload-coverage-data
 
 # TODO: Run GCC6 build only in develop branch.
@@ -191,7 +191,7 @@ jobs:
 # TODO: Separate builds from testing jobs.
 workflows:
   version: 2
-  cpp-ethereum:
+  cpp-aquachain:
     jobs:
       - macOS-XCode9
       - Linux-Clang5

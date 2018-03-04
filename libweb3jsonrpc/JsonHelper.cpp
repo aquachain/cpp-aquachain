@@ -1,18 +1,18 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file JsonHelper.cpp
  * @authors:
@@ -22,14 +22,14 @@
 
 #include "JsonHelper.h"
 
-#include <libethcore/SealEngine.h>
-#include <libethereum/Client.h>
+#include <libaquacore/SealEngine.h>
+#include <libaquachain/Client.h>
 #include <libwebthree/WebThree.h>
-#include <libethcore/CommonJS.h>
+#include <libaquacore/CommonJS.h>
 #include <jsonrpccpp/common/exception.h>
 using namespace std;
 using namespace dev;
-using namespace eth;
+using namespace aqua;
 
 namespace dev
 {
@@ -80,13 +80,13 @@ Json::Value toJson(p2p::PeerSessionInfo const& _p)
 }
 
 // ////////////////////////////////////////////////////////////////////////////////
-// eth
+// aqua
 // ////////////////////////////////////////////////////////////////////////////////
 
-namespace eth
+namespace aqua
 {
 
-Json::Value toJson(dev::eth::BlockHeader const& _bi, SealEngineFace* _sealer)
+Json::Value toJson(dev::aqua::BlockHeader const& _bi, SealEngineFace* _sealer)
 {
 	Json::Value res;
 	if (_bi)
@@ -114,7 +114,7 @@ Json::Value toJson(dev::eth::BlockHeader const& _bi, SealEngineFace* _sealer)
 	return res;
 }
 
-Json::Value toJson(dev::eth::Transaction const& _t, std::pair<h256, unsigned> _location, BlockNumber _blockNumber)
+Json::Value toJson(dev::aqua::Transaction const& _t, std::pair<h256, unsigned> _location, BlockNumber _blockNumber)
 {
 	Json::Value res;
 	if (_t)
@@ -134,7 +134,7 @@ Json::Value toJson(dev::eth::Transaction const& _t, std::pair<h256, unsigned> _l
 	return res;
 }
 
-Json::Value toJson(dev::eth::BlockHeader const& _bi, BlockDetails const& _bd, UncleHashes const& _us, Transactions const& _ts, SealEngineFace* _face)
+Json::Value toJson(dev::aqua::BlockHeader const& _bi, BlockDetails const& _bd, UncleHashes const& _us, Transactions const& _ts, SealEngineFace* _face)
 {
 	Json::Value res = toJson(_bi, _face);
 	if (_bi)
@@ -150,7 +150,7 @@ Json::Value toJson(dev::eth::BlockHeader const& _bi, BlockDetails const& _bd, Un
 	return res;
 }
 
-Json::Value toJson(dev::eth::BlockHeader const& _bi, BlockDetails const& _bd, UncleHashes const& _us, TransactionHashes const& _ts, SealEngineFace* _face)
+Json::Value toJson(dev::aqua::BlockHeader const& _bi, BlockDetails const& _bd, UncleHashes const& _us, TransactionHashes const& _ts, SealEngineFace* _face)
 {
 	Json::Value res = toJson(_bi, _face);
 	if (_bi)
@@ -166,7 +166,7 @@ Json::Value toJson(dev::eth::BlockHeader const& _bi, BlockDetails const& _bd, Un
 	return res;
 }
 
-Json::Value toJson(dev::eth::TransactionSkeleton const& _t)
+Json::Value toJson(dev::aqua::TransactionSkeleton const& _t)
 {
 	Json::Value res;
 	res["to"] = _t.creation ? Json::Value() : toJS(_t.to);
@@ -178,7 +178,7 @@ Json::Value toJson(dev::eth::TransactionSkeleton const& _t)
 	return res;
 }
 
-Json::Value toJson(dev::eth::TransactionReceipt const& _t)
+Json::Value toJson(dev::aqua::TransactionReceipt const& _t)
 {
 	Json::Value res;
 	if (_t.hasStatusCode())
@@ -191,7 +191,7 @@ Json::Value toJson(dev::eth::TransactionReceipt const& _t)
 	return res;
 }
 
-Json::Value toJson(dev::eth::LocalisedTransactionReceipt const& _t)
+Json::Value toJson(dev::aqua::LocalisedTransactionReceipt const& _t)
 {
 	Json::Value res;
 	res["transactionHash"] = toJS(_t.hash());
@@ -205,7 +205,7 @@ Json::Value toJson(dev::eth::LocalisedTransactionReceipt const& _t)
 	return res;
 }
 
-Json::Value toJson(dev::eth::Transaction const& _t)
+Json::Value toJson(dev::aqua::Transaction const& _t)
 {
 	Json::Value res;
 	res["to"] = _t.isCreation() ? Json::Value() : toJS(_t.to());
@@ -223,7 +223,7 @@ Json::Value toJson(dev::eth::Transaction const& _t)
 	return res;
 }
 
-Json::Value toJson(dev::eth::LocalisedTransaction const& _t)
+Json::Value toJson(dev::aqua::LocalisedTransaction const& _t)
 {
 	Json::Value res;
 	if (_t)
@@ -243,7 +243,7 @@ Json::Value toJson(dev::eth::LocalisedTransaction const& _t)
 	return res;
 }
 
-Json::Value toJson(dev::eth::LocalisedLogEntry const& _e)
+Json::Value toJson(dev::aqua::LocalisedLogEntry const& _e)
 {
 	Json::Value res;
 
@@ -251,7 +251,7 @@ Json::Value toJson(dev::eth::LocalisedLogEntry const& _e)
 		res = toJS(_e.special);
 	else
 	{
-		res = toJson(static_cast<dev::eth::LogEntry const&>(_e));
+		res = toJson(static_cast<dev::aqua::LogEntry const&>(_e));
 		res["polarity"] = _e.polarity == BlockPolarity::Live ? true : false;
 		if (_e.mined)
 		{
@@ -275,7 +275,7 @@ Json::Value toJson(dev::eth::LocalisedLogEntry const& _e)
 	return res;
 }
 
-Json::Value toJson(dev::eth::LogEntry const& _e)
+Json::Value toJson(dev::aqua::LogEntry const& _e)
 {
 	Json::Value res;
 	res["data"] = toJS(_e.data);
@@ -286,7 +286,7 @@ Json::Value toJson(dev::eth::LogEntry const& _e)
 	return res;
 }
 
-Json::Value toJson(std::unordered_map<h256, dev::eth::LocalisedLogEntries> const& _entriesByBlock, vector<h256> const& _order)
+Json::Value toJson(std::unordered_map<h256, dev::aqua::LocalisedLogEntries> const& _entriesByBlock, vector<h256> const& _order)
 {
 	Json::Value res(Json::arrayValue);
 	for (auto const& i: _order)
@@ -333,7 +333,7 @@ Json::Value toJsonByBlock(LocalisedLogEntries const& _entries)
 	vector<h256> order;
 	unordered_map <h256, LocalisedLogEntries> entriesByBlock;
 
-	for (dev::eth::LocalisedLogEntry const& e: _entries)
+	for (dev::aqua::LocalisedLogEntry const& e: _entries)
 	{
 		if (e.isSpecial) // skip special log
 			continue;
@@ -372,7 +372,7 @@ TransactionSkeleton toTransactionSkeleton(Json::Value const& _json)
 	if (!_json["gasPrice"].empty())
 		ret.gasPrice = jsToU256(_json["gasPrice"].asString());
 
-	if (!_json["data"].empty())							// ethereum.js has preconstructed the data array
+	if (!_json["data"].empty())							// aquachain.js has preconstructed the data array
 		ret.data = jsToBytes(_json["data"].asString(), OnFailed::Throw);
 
 	if (!_json["code"].empty())
@@ -383,9 +383,9 @@ TransactionSkeleton toTransactionSkeleton(Json::Value const& _json)
 	return ret;
 }
 
-dev::eth::LogFilter toLogFilter(Json::Value const& _json)
+dev::aqua::LogFilter toLogFilter(Json::Value const& _json)
 {
-	dev::eth::LogFilter filter;
+	dev::aqua::LogFilter filter;
 	if (!_json.isObject() || _json.empty())
 		return filter;
 
@@ -418,9 +418,9 @@ dev::eth::LogFilter toLogFilter(Json::Value const& _json)
 }
 
 // TODO: this should be removed once we decide to remove backward compatibility with old log filters
-dev::eth::LogFilter toLogFilter(Json::Value const& _json, Interface const& _client)	// commented to avoid warning. Uncomment once in use @ PoC-7.
+dev::aqua::LogFilter toLogFilter(Json::Value const& _json, Interface const& _client)	// commented to avoid warning. Uncomment once in use @ PoC-7.
 {
-	dev::eth::LogFilter filter;
+	dev::aqua::LogFilter filter;
 	if (!_json.isObject() || _json.empty())
 		return filter;
 

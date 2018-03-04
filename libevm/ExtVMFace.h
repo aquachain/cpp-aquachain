@@ -1,28 +1,28 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
 
 #include "Instruction.h"
 
-#include <libethcore/BlockHeader.h>
-#include <libethcore/ChainOperationParams.h>
-#include <libethcore/Common.h>
-#include <libethcore/LogEntry.h>
+#include <libaquacore/BlockHeader.h>
+#include <libaquacore/ChainOperationParams.h>
+#include <libaquacore/Common.h>
+#include <libaquacore/LogEntry.h>
 #include <libdevcore/Common.h>
 #include <libdevcore/CommonData.h>
 #include <libdevcore/SHA3.h>
@@ -34,7 +34,7 @@
 
 namespace dev
 {
-namespace eth
+namespace aqua
 {
 
 /// Reference to a slice of buffer that also owns the buffer.
@@ -145,7 +145,7 @@ public:
 		m_lastHashes(_lh),
 		m_gasUsed(_gasUsed)
 	{}
-	// Constructor with custom gasLimit - used in some synthetic scenarios like eth_estimateGas	RPC method
+	// Constructor with custom gasLimit - used in some synthetic scenarios like aqua_estimateGas	RPC maquaod
 	EnvInfo(BlockHeader const& _current, LastBlockHashesFace const& _lh, u256 const& _gasUsed, u256 const& _gasLimit):
 		EnvInfo(_current, _lh, _gasUsed)
 	{

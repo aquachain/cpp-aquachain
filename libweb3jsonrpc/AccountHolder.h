@@ -1,23 +1,23 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file AccountHolder.h
  * @authors:
- *   Christian R <c@ethdev.com>
- *   Lefteris Karapetsas <lefteris@ethdev.com>
+ *   Christian R <c@aquadev.com>
+ *   Lefteris Karapetsas <lefteris@aquadev.com>
  * @date 2015
  */
 
@@ -28,12 +28,12 @@
 #include <vector>
 #include <map>
 #include <chrono>
-#include <libethcore/CommonJS.h>
-#include <libethereum/Transaction.h>
+#include <libaquacore/CommonJS.h>
+#include <libaquachain/Transaction.h>
 
 namespace dev
 {
-namespace eth
+namespace aqua
 {
 
 class KeyManager;
@@ -69,7 +69,7 @@ public:
 	virtual AddressHash realAccounts() const = 0;
 	// use m_web3's submitTransaction
 	// or use AccountHolder::queueTransaction(_t) to accept
-	virtual TransactionNotification authenticate(dev::eth::TransactionSkeleton const& _t) = 0;
+	virtual TransactionNotification authenticate(dev::aqua::TransactionSkeleton const& _t) = 0;
 
 	Addresses allAccounts() const;
 	bool isRealAccount(Address const& _account) const { return realAccounts().count(_account) > 0; }
@@ -90,16 +90,16 @@ public:
 
 	int addProxyAccount(Address const& _account);
 	bool removeProxyAccount(unsigned _id);
-	void queueTransaction(eth::TransactionSkeleton const& _transaction);
+	void queueTransaction(aqua::TransactionSkeleton const& _transaction);
 
-	std::vector<eth::TransactionSkeleton> const& queuedTransactions(int _id) const;
+	std::vector<aqua::TransactionSkeleton> const& queuedTransactions(int _id) const;
 	void clearQueue(int _id);
 
 protected:
 	std::function<Interface*()> m_client;
 
 private:
-	using TransactionQueue = std::vector<eth::TransactionSkeleton>;
+	using TransactionQueue = std::vector<aqua::TransactionSkeleton>;
 
 	std::unordered_map<Address, int> m_proxyAccounts;
 	std::unordered_map<int, std::pair<Address, TransactionQueue>> m_transactionQueues;
@@ -116,7 +116,7 @@ public:
 	{}
 
 	AddressHash realAccounts() const override;
-	TransactionNotification authenticate(dev::eth::TransactionSkeleton const& _t) override;
+	TransactionNotification authenticate(dev::aqua::TransactionSkeleton const& _t) override;
 
 	virtual bool unlockAccount(Address const& _account, std::string const& _password, unsigned _duration) override;
 
@@ -152,7 +152,7 @@ public:
 
 	// use m_web3's submitTransaction
 	// or use AccountHolder::queueTransaction(_t) to accept
-	TransactionNotification authenticate(dev::eth::TransactionSkeleton const& _t) override;
+	TransactionNotification authenticate(dev::aqua::TransactionSkeleton const& _t) override;
 
 private:
 	std::unordered_map<dev::Address, dev::Secret> m_accounts;

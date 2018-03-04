@@ -1,18 +1,18 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file Network.cpp
  * @author Alex Leverington <nessence@gmail.com>
@@ -53,14 +53,14 @@ std::set<bi::address> Network::getInterfaceAddresses()
 		BOOST_THROW_EXCEPTION(NoNetworking());
 
 	char ac[80];
-	if (gethostname(ac, sizeof(ac)) == SOCKET_ERROR)
+	if (gaquaostname(ac, sizeof(ac)) == SOCKET_ERROR)
 	{
 		clog(NetWarn) << "Error " << WSAGetLastError() << " when getting local host name.";
 		WSACleanup();
 		BOOST_THROW_EXCEPTION(NoNetworking());
 	}
 
-	struct hostent* phe = gethostbyname(ac);
+	struct hostent* phe = gaquaostbyname(ac);
 	if (phe == 0)
 	{
 		clog(NetWarn) << "Bad host lookup.";

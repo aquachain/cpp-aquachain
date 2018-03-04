@@ -14,8 +14,8 @@ namespace dev {
             public:
                 Web3Face()
                 {
-                    this->bindAndAddMethod(jsonrpc::Procedure("web3_sha3", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::Web3Face::web3_sha3I);
-                    this->bindAndAddMethod(jsonrpc::Procedure("web3_clientVersion", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING,  NULL), &dev::rpc::Web3Face::web3_clientVersionI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("web3_sha3", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::Web3Face::web3_sha3I);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("web3_clientVersion", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING,  NULL), &dev::rpc::Web3Face::web3_clientVersionI);
                 }
 
                 inline virtual void web3_sha3I(const Json::Value &request, Json::Value &response)

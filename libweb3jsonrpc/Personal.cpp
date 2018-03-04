@@ -1,22 +1,22 @@
 #include <jsonrpccpp/common/exception.h>
-#include <libethcore/KeyManager.h>
+#include <libaquacore/KeyManager.h>
 #include <libweb3jsonrpc/AccountHolder.h>
-#include <libethcore/CommonJS.h>
+#include <libaquacore/CommonJS.h>
 #include <libweb3jsonrpc/JsonHelper.h>
-#include <libethereum/Client.h>
+#include <libaquachain/Client.h>
 
 #include "Personal.h"
 
 using namespace std;
 using namespace dev;
 using namespace dev::rpc;
-using namespace dev::eth;
+using namespace dev::aqua;
 using namespace jsonrpc;
 
-Personal::Personal(KeyManager& _keyManager, AccountHolder& _accountHolder, eth::Interface& _eth):
+Personal::Personal(KeyManager& _keyManager, AccountHolder& _accountHolder, aqua::Interface& _aqua):
 	m_keyManager(_keyManager),
 	m_accountHolder(_accountHolder),
-	m_eth(_eth)
+	m_aqua(_aqua)
 {
 }
 
@@ -42,7 +42,7 @@ string Personal::personal_sendTransaction(Json::Value const& _transaction, strin
 	if (Secret s = m_keyManager.secret(t.from, [&](){ return _password; }, false))
 	{
 		// return the tx hash
-		return toJS(m_eth.submitTransaction(t, s).first);
+		return toJS(m_aqua.submitTransaction(t, s).first);
 	}
 	BOOST_THROW_EXCEPTION(JsonRpcException("Invalid password or account."));
 }

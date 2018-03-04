@@ -1,36 +1,36 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file AccountHolder.cpp
  * @authors:
- *   Christian R <c@ethdev.com>
- *   Lefteris Karapetsas <lefteris@ethdev.com>
+ *   Christian R <c@aquadev.com>
+ *   Lefteris Karapetsas <lefteris@aquadev.com>
  * @date 2015
  */
 
 #include "AccountHolder.h"
 #include <random>
 #include <libdevcore/Guards.h>
-#include <libethereum/Client.h>
-#include <libethcore/KeyManager.h>
+#include <libaquachain/Client.h>
+#include <libaquacore/KeyManager.h>
 
 
 using namespace std;
 using namespace dev;
-using namespace dev::eth;
+using namespace dev::aqua;
 
 vector<TransactionSkeleton> g_emptyQueue;
 static std::mt19937 g_randomNumberGenerator(utcTime());
@@ -105,7 +105,7 @@ AddressHash SimpleAccountHolder::realAccounts() const
 	return m_keyManager.accountsHash();
 }
 
-TransactionNotification SimpleAccountHolder::authenticate(dev::eth::TransactionSkeleton const& _t)
+TransactionNotification SimpleAccountHolder::authenticate(dev::aqua::TransactionSkeleton const& _t)
 {
 	TransactionNotification ret;
 	bool locked = true;
@@ -172,7 +172,7 @@ bool SimpleAccountHolder::unlockAccount(Address const& _account, string const& _
 	return true;
 }
 
-TransactionNotification FixedAccountHolder::authenticate(dev::eth::TransactionSkeleton const& _t)
+TransactionNotification FixedAccountHolder::authenticate(dev::aqua::TransactionSkeleton const& _t)
 {
 	TransactionNotification ret;
 	if (isRealAccount(_t.from))

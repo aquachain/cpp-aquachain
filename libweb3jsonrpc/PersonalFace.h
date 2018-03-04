@@ -14,11 +14,11 @@ namespace dev {
             public:
                 PersonalFace()
                 {
-                    this->bindAndAddMethod(jsonrpc::Procedure("personal_newAccount", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::PersonalFace::personal_newAccountI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("personal_unlockAccount", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_BOOLEAN, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_STRING,"param3",jsonrpc::JSON_INTEGER, NULL), &dev::rpc::PersonalFace::personal_unlockAccountI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("personal_signAndSendTransaction", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_OBJECT,"param2",jsonrpc::JSON_STRING, NULL), &dev::rpc::PersonalFace::personal_signAndSendTransactionI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("personal_sendTransaction", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_OBJECT,"param2",jsonrpc::JSON_STRING, NULL), &dev::rpc::PersonalFace::personal_sendTransactionI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("personal_listAccounts", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_ARRAY,  NULL), &dev::rpc::PersonalFace::personal_listAccountsI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("personal_newAccount", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::PersonalFace::personal_newAccountI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("personal_unlockAccount", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_BOOLEAN, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_STRING,"param3",jsonrpc::JSON_INTEGER, NULL), &dev::rpc::PersonalFace::personal_unlockAccountI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("personal_signAndSendTransaction", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_OBJECT,"param2",jsonrpc::JSON_STRING, NULL), &dev::rpc::PersonalFace::personal_signAndSendTransactionI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("personal_sendTransaction", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_OBJECT,"param2",jsonrpc::JSON_STRING, NULL), &dev::rpc::PersonalFace::personal_sendTransactionI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("personal_listAccounts", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_ARRAY,  NULL), &dev::rpc::PersonalFace::personal_listAccountsI);
                 }
 
                 inline virtual void personal_newAccountI(const Json::Value &request, Json::Value &response)

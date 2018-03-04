@@ -1,18 +1,18 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file fuzzHelper.cpp
  * @author Dimitry Khokhlov <winsvega@mail.ru>
@@ -23,60 +23,60 @@
 #include <boost/filesystem/path.hpp>
 #include <libevm/Instruction.h>
 #include <test/tools/fuzzTesting/fuzzHelper.h>
-#include <test/tools/libtesteth/TestOutputHelper.h>
+#include <test/tools/libtestaqua/TestOutputHelper.h>
 #include <test/tools/jsontests/StateTests.h>
 #include <json_spirit/json_spirit.h>
 
 using namespace dev;
 using namespace std;
-const static std::array<eth::Instruction, 47> invalidOpcodes {{
-	eth::Instruction::INVALID,
-	eth::Instruction::PUSHC,
-	eth::Instruction::JUMPC,
-	eth::Instruction::JUMPCI,
-	eth::Instruction::JUMPTO,
-	eth::Instruction::JUMPIF,
-	eth::Instruction::JUMPSUB,
-	eth::Instruction::JUMPV,
-	eth::Instruction::JUMPSUBV,
-	eth::Instruction::BEGINSUB,
-	eth::Instruction::BEGINDATA,
-	eth::Instruction::RETURNSUB,
-	eth::Instruction::PUTLOCAL,
-	eth::Instruction::GETLOCAL,
-	eth::Instruction::XADD,
-	eth::Instruction::XMUL,
-	eth::Instruction::XSUB,
-	eth::Instruction::XDIV,
-	eth::Instruction::XSDIV,
-	eth::Instruction::XMOD,
-	eth::Instruction::XSMOD,
-	eth::Instruction::XLT,
-	eth::Instruction::XGT,
-	eth::Instruction::XSLT,
-	eth::Instruction::XSGT,
-	eth::Instruction::XEQ,
-	eth::Instruction::XISZERO,
-	eth::Instruction::XAND,
-	eth::Instruction::XOR,
-	eth::Instruction::XXOR,
-	eth::Instruction::XNOT,
-	eth::Instruction::XSHL,
-	eth::Instruction::XSHR,
-	eth::Instruction::XSAR,
-	eth::Instruction::XROL,
-	eth::Instruction::XROR,
-	eth::Instruction::XPUSH,
-	eth::Instruction::XMLOAD,
-	eth::Instruction::XMSTORE,
-	eth::Instruction::XSLOAD,
-	eth::Instruction::XSSTORE,
-	eth::Instruction::XVTOWIDE,
-	eth::Instruction::XWIDETOV,
-	eth::Instruction::XPUT,
-	eth::Instruction::XGET,
-	eth::Instruction::XSWIZZLE,
-	eth::Instruction::XSHUFFLE
+const static std::array<aqua::Instruction, 47> invalidOpcodes {{
+	aqua::Instruction::INVALID,
+	aqua::Instruction::PUSHC,
+	aqua::Instruction::JUMPC,
+	aqua::Instruction::JUMPCI,
+	aqua::Instruction::JUMPTO,
+	aqua::Instruction::JUMPIF,
+	aqua::Instruction::JUMPSUB,
+	aqua::Instruction::JUMPV,
+	aqua::Instruction::JUMPSUBV,
+	aqua::Instruction::BEGINSUB,
+	aqua::Instruction::BEGINDATA,
+	aqua::Instruction::RETURNSUB,
+	aqua::Instruction::PUTLOCAL,
+	aqua::Instruction::GETLOCAL,
+	aqua::Instruction::XADD,
+	aqua::Instruction::XMUL,
+	aqua::Instruction::XSUB,
+	aqua::Instruction::XDIV,
+	aqua::Instruction::XSDIV,
+	aqua::Instruction::XMOD,
+	aqua::Instruction::XSMOD,
+	aqua::Instruction::XLT,
+	aqua::Instruction::XGT,
+	aqua::Instruction::XSLT,
+	aqua::Instruction::XSGT,
+	aqua::Instruction::XEQ,
+	aqua::Instruction::XISZERO,
+	aqua::Instruction::XAND,
+	aqua::Instruction::XOR,
+	aqua::Instruction::XXOR,
+	aqua::Instruction::XNOT,
+	aqua::Instruction::XSHL,
+	aqua::Instruction::XSHR,
+	aqua::Instruction::XSAR,
+	aqua::Instruction::XROL,
+	aqua::Instruction::XROR,
+	aqua::Instruction::XPUSH,
+	aqua::Instruction::XMLOAD,
+	aqua::Instruction::XMSTORE,
+	aqua::Instruction::XSLOAD,
+	aqua::Instruction::XSSTORE,
+	aqua::Instruction::XVTOWIDE,
+	aqua::Instruction::XWIDETOV,
+	aqua::Instruction::XPUT,
+	aqua::Instruction::XGET,
+	aqua::Instruction::XSWIZZLE,
+	aqua::Instruction::XSHUFFLE
 }};
 
 namespace dev
@@ -243,9 +243,9 @@ std::string RandomCodeBase::rndByteSequence(int _length, SizeStrictness _sizeTyp
 
 bool isOpcodeDefined(uint8_t _opcode)
 {
-	eth::Instruction inst = (eth::Instruction) _opcode;
-	eth::InstructionInfo info = eth::instructionInfo(inst);
-	return (info.gasPriceTier != dev::eth::Tier::Invalid && !info.name.empty()
+	aqua::Instruction inst = (aqua::Instruction) _opcode;
+	aqua::InstructionInfo info = aqua::instructionInfo(inst);
+	return (info.gasPriceTier != dev::aqua::Tier::Invalid && !info.name.empty()
 		&& std::find(invalidOpcodes.begin(), invalidOpcodes.end(), inst) == invalidOpcodes.end());
 }
 
@@ -278,8 +278,8 @@ std::string RandomCodeBase::generate(int _maxOpNumber, RandomCodeOptions const& 
 		else
 		{
 			opcode = makeOpcodeDefined(opcode);
-			eth::Instruction inst = (eth::Instruction) opcode;
-			eth::InstructionInfo info = eth::instructionInfo(inst);
+			aqua::Instruction inst = (aqua::Instruction) opcode;
+			aqua::InstructionInfo info = aqua::instructionInfo(inst);
 			if (info.name.find("PUSH") != std::string::npos)
 			{
 				code += toCompactHex(opcode);
@@ -318,9 +318,9 @@ std::string RandomCodeBase::getPushCode(unsigned _value)
 	return getPushCode(hexString);
 }
 
-std::string RandomCodeBase::fillArguments(eth::Instruction _opcode, RandomCodeOptions const& _options)
+std::string RandomCodeBase::fillArguments(aqua::Instruction _opcode, RandomCodeOptions const& _options)
 {
-	eth::InstructionInfo info = eth::instructionInfo(_opcode);
+	aqua::InstructionInfo info = aqua::instructionInfo(_opcode);
 
 	std::string code;
 	int rand = randomPercent();
@@ -328,23 +328,23 @@ std::string RandomCodeBase::fillArguments(eth::Instruction _opcode, RandomCodeOp
 	if (rand < _options.smartCodeProbability)  // Smart.
 	{
 		//PUSH1 ... PUSH32
-		if (eth::Instruction::PUSH1 <= _opcode && _opcode <= eth::Instruction::PUSH32)
+		if (aqua::Instruction::PUSH1 <= _opcode && _opcode <= aqua::Instruction::PUSH32)
 		{
-			code += rndByteSequence(int(_opcode) - int(eth::Instruction::PUSH1) + 1);
+			code += rndByteSequence(int(_opcode) - int(aqua::Instruction::PUSH1) + 1);
 			return code;
 		}
 
 		//SWAP1 ... SWAP16 || DUP1 ... DUP16
-		bool isSWAP = (eth::Instruction::SWAP1 <= _opcode && _opcode <= eth::Instruction::SWAP16);
-		bool isDUP = (eth::Instruction::DUP1 <= _opcode && _opcode <= eth::Instruction::DUP16);
+		bool isSWAP = (aqua::Instruction::SWAP1 <= _opcode && _opcode <= aqua::Instruction::SWAP16);
+		bool isDUP = (aqua::Instruction::DUP1 <= _opcode && _opcode <= aqua::Instruction::DUP16);
 
 		if (isSWAP || isDUP)
 		{
 			int times = 0;
 			if (isSWAP)
-				times = int(_opcode) - int(eth::Instruction::SWAP1) + 2;
+				times = int(_opcode) - int(aqua::Instruction::SWAP1) + 2;
 			else
-				times = int(_opcode) - int(eth::Instruction::DUP1) + 1;
+				times = int(_opcode) - int(aqua::Instruction::DUP1) + 1;
 
 			for (int i = 0; i < times; i ++)
 				code += getPushCode(rndByteSequence(randomLength32()));
@@ -354,33 +354,33 @@ std::string RandomCodeBase::fillArguments(eth::Instruction _opcode, RandomCodeOp
 
 		switch (_opcode)
 		{
-		case eth::Instruction::MSTORE:
+		case aqua::Instruction::MSTORE:
 			code += getPushCode(rndByteSequence(randomLength32()));	//code
 			code += getPushCode(randomSmallMemoryLength());					//index
 			return code;
-		// case eth::Instruction::RETURNDATASIZE:  // returndatasize takes no args
-		case eth::Instruction::RETURNDATACOPY:  //(REVERT memlen1 memlen2)
+		// case aqua::Instruction::RETURNDATASIZE:  // returndatasize takes no args
+		case aqua::Instruction::RETURNDATACOPY:  //(REVERT memlen1 memlen2)
 			code += getPushCode(randomSmallMemoryLength());	// memory position
 			code += getPushCode(randomSmallMemoryLength());	// returndata position
 			code += getPushCode(randomSmallMemoryLength());	// size/num of bytes to copy
 			return code;
-		case eth::Instruction::EXTCODECOPY:
+		case aqua::Instruction::EXTCODECOPY:
 			code += getPushCode(randomMemoryLength());	//memstart2
 			code += getPushCode(randomMemoryLength());	//memlen1
 			code += getPushCode(randomMemoryLength());	//memstart1
 			code += getPushCode(toString(_options.getRandomAddress()));//address
 			return code;
-		case eth::Instruction::EXTCODESIZE:
+		case aqua::Instruction::EXTCODESIZE:
 			code += getPushCode(toString(_options.getRandomAddress()));//address
 			return code;
-		case eth::Instruction::CREATE:
+		case aqua::Instruction::CREATE:
 			//(CREATE value mem1 mem2)
 			code += getPushCode(randomSmallMemoryLength());	//memlen1
 			code += getPushCode(randomSmallMemoryLength());	//memlen1
 			code += getPushCode((unsigned)randomUniInt());	//value
 			return code;
-		case eth::Instruction::CALL:
-		case eth::Instruction::CALLCODE:
+		case aqua::Instruction::CALL:
+		case aqua::Instruction::CALLCODE:
 			//(CALL gaslimit address value memstart1 memlen1 memstart2 memlen2)
 			//(CALLCODE gaslimit address value memstart1 memlen1 memstart2 memlen2)
 			code += getPushCode(randomSmallMemoryLength());	//memlen2
@@ -391,8 +391,8 @@ std::string RandomCodeBase::fillArguments(eth::Instruction _opcode, RandomCodeOp
 			code += getPushCode(toString(_options.getRandomAddress(RandomCodeOptions::AddressType::PrecompiledOrState)));//address
 			code += getPushCode((unsigned)randomUniInt());	//gaslimit
 			return code;
-		case eth::Instruction::STATICCALL:
-		case eth::Instruction::DELEGATECALL:
+		case aqua::Instruction::STATICCALL:
+		case aqua::Instruction::DELEGATECALL:
 			//(CALL gaslimit address value memstart1 memlen1 memstart2 memlen2)
 			//(CALLCODE gaslimit address value memstart1 memlen1 memstart2 memlen2)
 			code += getPushCode(randomSmallMemoryLength());	//memlen2
@@ -402,11 +402,11 @@ std::string RandomCodeBase::fillArguments(eth::Instruction _opcode, RandomCodeOp
 			code += getPushCode(toString(_options.getRandomAddress(RandomCodeOptions::AddressType::PrecompiledOrState)));//address
 			code += getPushCode((unsigned)randomUniInt());	//gaslimit
 			return code;
-		case eth::Instruction::SUICIDE: //(SUICIDE address)
+		case aqua::Instruction::SUICIDE: //(SUICIDE address)
 			code += getPushCode(toString(_options.getRandomAddress()));
 			return code;
-		case eth::Instruction::RETURN:  //(RETURN memlen1 memlen2)
-		case eth::Instruction::REVERT:  //(REVERT memlen1 memlen2)
+		case aqua::Instruction::RETURN:  //(RETURN memlen1 memlen2)
+		case aqua::Instruction::REVERT:  //(REVERT memlen1 memlen2)
 			code += getPushCode(randomSmallMemoryLength());	//memlen1
 			code += getPushCode(randomSmallMemoryLength());	//memlen1
 			return code;
@@ -440,31 +440,31 @@ RandomCodeOptions::RandomCodeOptions() :
 		mapWeights.insert(std::pair<uint8_t, int>(i, 40));
 
 	//Probability of instructions
-	setWeight(eth::Instruction::STOP, 1);
-	for (uint8_t i = static_cast<uint8_t>(eth::Instruction::PUSH1); i <= static_cast<uint8_t>(eth::Instruction::PUSH32); i++)
-		setWeight((eth::Instruction) i, 1);
-	for (uint8_t i = static_cast<uint8_t>(eth::Instruction::SWAP1); i <= static_cast<uint8_t>(eth::Instruction::SWAP16); i++)
-		setWeight((eth::Instruction) i, 10);
-	for (uint8_t i = static_cast<uint8_t>(eth::Instruction::DUP1); i <= static_cast<uint8_t>(eth::Instruction::DUP16); i++)
-		setWeight((eth::Instruction) i, 10);
+	setWeight(aqua::Instruction::STOP, 1);
+	for (uint8_t i = static_cast<uint8_t>(aqua::Instruction::PUSH1); i <= static_cast<uint8_t>(aqua::Instruction::PUSH32); i++)
+		setWeight((aqua::Instruction) i, 1);
+	for (uint8_t i = static_cast<uint8_t>(aqua::Instruction::SWAP1); i <= static_cast<uint8_t>(aqua::Instruction::SWAP16); i++)
+		setWeight((aqua::Instruction) i, 10);
+	for (uint8_t i = static_cast<uint8_t>(aqua::Instruction::DUP1); i <= static_cast<uint8_t>(aqua::Instruction::DUP16); i++)
+		setWeight((aqua::Instruction) i, 10);
 
-	setWeight(eth::Instruction::SIGNEXTEND, 100);
-	setWeight(eth::Instruction::ORIGIN, 200);
-	setWeight(eth::Instruction::ADDRESS, 200);
-	setWeight(eth::Instruction::SLOAD, 200);
-	setWeight(eth::Instruction::MLOAD, 200);
-	setWeight(eth::Instruction::MSTORE, 400);
-	setWeight(eth::Instruction::MSTORE8, 400);
-	setWeight(eth::Instruction::SSTORE, 170);
-	setWeight(eth::Instruction::CALL, 350);
-	setWeight(eth::Instruction::CALLCODE, 170);
-	setWeight(eth::Instruction::DELEGATECALL, 300);
-	setWeight(eth::Instruction::STATICCALL, 300);
-	setWeight(eth::Instruction::CREATE, 350);
+	setWeight(aqua::Instruction::SIGNEXTEND, 100);
+	setWeight(aqua::Instruction::ORIGIN, 200);
+	setWeight(aqua::Instruction::ADDRESS, 200);
+	setWeight(aqua::Instruction::SLOAD, 200);
+	setWeight(aqua::Instruction::MLOAD, 200);
+	setWeight(aqua::Instruction::MSTORE, 400);
+	setWeight(aqua::Instruction::MSTORE8, 400);
+	setWeight(aqua::Instruction::SSTORE, 170);
+	setWeight(aqua::Instruction::CALL, 350);
+	setWeight(aqua::Instruction::CALLCODE, 170);
+	setWeight(aqua::Instruction::DELEGATECALL, 300);
+	setWeight(aqua::Instruction::STATICCALL, 300);
+	setWeight(aqua::Instruction::CREATE, 350);
 
-	setWeight(eth::Instruction::RETURNDATASIZE, 500);
-	setWeight(eth::Instruction::RETURNDATACOPY, 500);
-	setWeight(eth::Instruction::REVERT, 500);
+	setWeight(aqua::Instruction::RETURNDATASIZE, 500);
+	setWeight(aqua::Instruction::RETURNDATACOPY, 500);
+	setWeight(aqua::Instruction::REVERT, 500);
 
 	//some smart addresses for calls
 	addAddress(Address("0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b"), AddressType::SendingAccount);
@@ -526,7 +526,7 @@ void RandomCodeOptions::loadFromFile(boost::filesystem::path const& _jsonFileNam
 	sendingAddressProbability = getProbability(probObj.at("sendingAddressProbability"));
 }
 
-void RandomCodeOptions::setWeight(eth::Instruction _opCode, int _weight)
+void RandomCodeOptions::setWeight(aqua::Instruction _opCode, int _weight)
 {
 	mapWeights.at((uint8_t)_opCode) = _weight;
 }

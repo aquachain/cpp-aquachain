@@ -1,33 +1,33 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file Eth.cpp
  * @authors:
  *   Gav Wood <i@gavwood.com>
- *   Marek Kotewicz <marek@ethdev.com>
+ *   Marek Kotewicz <marek@aquadev.com>
  * @date 2014
  */
 
 #include <csignal>
 #include <jsonrpccpp/common/exception.h>
 #include <libdevcore/CommonData.h>
-#include <libethereum/Client.h>
-#include <libethashseal/EthashClient.h>
+#include <libaquachain/Client.h>
+#include <libaquahashseal/EthashClient.h>
 #include <libwebthree/WebThree.h>
-#include <libethcore/CommonJS.h>
+#include <libaquacore/CommonJS.h>
 #include <libweb3jsonrpc/JsonHelper.h>
 #include "Eth.h"
 #include "AccountHolder.h"
@@ -35,27 +35,27 @@
 using namespace std;
 using namespace jsonrpc;
 using namespace dev;
-using namespace eth;
+using namespace aqua;
 using namespace shh;
 using namespace dev::rpc;
 
-Eth::Eth(eth::Interface& _eth, eth::AccountHolder& _ethAccounts):
-	m_eth(_eth),
-	m_ethAccounts(_ethAccounts)
+Eth::Eth(aqua::Interface& _aqua, aqua::AccountHolder& _aquaAccounts):
+	m_aqua(_aqua),
+	m_aquaAccounts(_aquaAccounts)
 {
 }
 
-string Eth::eth_protocolVersion()
+string Eth::aqua_protocolVersion()
 {
-	return toJS(eth::c_protocolVersion);
+	return toJS(aqua::c_protocolVersion);
 }
 
-string Eth::eth_coinbase()
+string Eth::aqua_coinbase()
 {
 	return toJS(client()->author());
 }
 
-string Eth::eth_hashrate()
+string Eth::aqua_hashrate()
 {
 	try
 	{
@@ -67,7 +67,7 @@ string Eth::eth_hashrate()
 	}
 }
 
-bool Eth::eth_mining()
+bool Eth::aqua_mining()
 {
 	try
 	{
@@ -79,23 +79,23 @@ bool Eth::eth_mining()
 	}
 }
 
-string Eth::eth_gasPrice()
+string Eth::aqua_gasPrice()
 {
 	return toJS(client()->gasBidPrice());
 }
 
-Json::Value Eth::eth_accounts()
+Json::Value Eth::aqua_accounts()
 {
-	return toJson(m_ethAccounts.allAccounts());
+	return toJson(m_aquaAccounts.allAccounts());
 }
 
-string Eth::eth_blockNumber()
+string Eth::aqua_blockNumber()
 {
 	return toJS(client()->number());
 }
 
 
-string Eth::eth_getBalance(string const& _address, string const& _blockNumber)
+string Eth::aqua_getBalance(string const& _address, string const& _blockNumber)
 {
 	try
 	{
@@ -107,7 +107,7 @@ string Eth::eth_getBalance(string const& _address, string const& _blockNumber)
 	}
 }
 
-string Eth::eth_getStorageAt(string const& _address, string const& _position, string const& _blockNumber)
+string Eth::aqua_getStorageAt(string const& _address, string const& _position, string const& _blockNumber)
 {
 	try
 	{
@@ -119,7 +119,7 @@ string Eth::eth_getStorageAt(string const& _address, string const& _position, st
 	}
 }
 
-string Eth::eth_getStorageRoot(string const& _address, string const& _blockNumber)
+string Eth::aqua_getStorageRoot(string const& _address, string const& _blockNumber)
 {
 	try
 	{
@@ -131,13 +131,13 @@ string Eth::eth_getStorageRoot(string const& _address, string const& _blockNumbe
 	}
 }
 
-string Eth::eth_pendingTransactions()
+string Eth::aqua_pendingTransactions()
 {
 	//Return list of transaction that being sent by local accounts
 	Transactions ours;
 	for (Transaction const& pending:client()->pending())
 	{
-		for (Address const& account:m_ethAccounts.allAccounts())
+		for (Address const& account:m_aquaAccounts.allAccounts())
 		{
 			if (pending.sender() == account)
 			{
@@ -150,7 +150,7 @@ string Eth::eth_pendingTransactions()
 	return toJS(ours);
 }
 
-string Eth::eth_getTransactionCount(string const& _address, string const& _blockNumber)
+string Eth::aqua_getTransactionCount(string const& _address, string const& _blockNumber)
 {
 	try
 	{
@@ -162,7 +162,7 @@ string Eth::eth_getTransactionCount(string const& _address, string const& _block
 	}
 }
 
-Json::Value Eth::eth_getBlockTransactionCountByHash(string const& _blockHash)
+Json::Value Eth::aqua_getBlockTransactionCountByHash(string const& _blockHash)
 {
 	try
 	{
@@ -178,7 +178,7 @@ Json::Value Eth::eth_getBlockTransactionCountByHash(string const& _blockHash)
 	}
 }
 
-Json::Value Eth::eth_getBlockTransactionCountByNumber(string const& _blockNumber)
+Json::Value Eth::aqua_getBlockTransactionCountByNumber(string const& _blockNumber)
 {
 	try
 	{
@@ -194,7 +194,7 @@ Json::Value Eth::eth_getBlockTransactionCountByNumber(string const& _blockNumber
 	}
 }
 
-Json::Value Eth::eth_getUncleCountByBlockHash(string const& _blockHash)
+Json::Value Eth::aqua_getUncleCountByBlockHash(string const& _blockHash)
 {
 	try
 	{
@@ -210,7 +210,7 @@ Json::Value Eth::eth_getUncleCountByBlockHash(string const& _blockHash)
 	}
 }
 
-Json::Value Eth::eth_getUncleCountByBlockNumber(string const& _blockNumber)
+Json::Value Eth::aqua_getUncleCountByBlockNumber(string const& _blockNumber)
 {
 	try
 	{
@@ -226,7 +226,7 @@ Json::Value Eth::eth_getUncleCountByBlockNumber(string const& _blockNumber)
 	}
 }
 
-string Eth::eth_getCode(string const& _address, string const& _blockNumber)
+string Eth::aqua_getCode(string const& _address, string const& _blockNumber)
 {
 	try
 	{
@@ -241,22 +241,22 @@ string Eth::eth_getCode(string const& _address, string const& _blockNumber)
 void Eth::setTransactionDefaults(TransactionSkeleton& _t)
 {
 	if (!_t.from)
-		_t.from = m_ethAccounts.defaultTransactAccount();
+		_t.from = m_aquaAccounts.defaultTransactAccount();
 }
 
-string Eth::eth_sendTransaction(Json::Value const& _json)
+string Eth::aqua_sendTransaction(Json::Value const& _json)
 {
 	try
 	{
 		TransactionSkeleton t = toTransactionSkeleton(_json);
 		setTransactionDefaults(t);
-		TransactionNotification n = m_ethAccounts.authenticate(t);
+		TransactionNotification n = m_aquaAccounts.authenticate(t);
 		switch (n.r)
 		{
 		case TransactionRepercussion::Success:
 			return toJS(n.hash);
 		case TransactionRepercussion::ProxySuccess:
-			return toJS(n.hash);// TODO: give back something more useful than an empty hash.
+			return toJS(n.hash);// TODO: give back somaquaing more useful than an empty hash.
 		case TransactionRepercussion::UnknownAccount:
 			BOOST_THROW_EXCEPTION(JsonRpcException("Account unknown."));
 		case TransactionRepercussion::Locked:
@@ -279,19 +279,19 @@ string Eth::eth_sendTransaction(Json::Value const& _json)
 	return string();
 }
 
-string Eth::eth_signTransaction(Json::Value const& _json)
+string Eth::aqua_signTransaction(Json::Value const& _json)
 {
 	try
 	{
 		TransactionSkeleton t = toTransactionSkeleton(_json);
 		setTransactionDefaults(t);
-		TransactionNotification n = m_ethAccounts.authenticate(t);
+		TransactionNotification n = m_aquaAccounts.authenticate(t);
 		switch (n.r)
 		{
 		case TransactionRepercussion::Success:
 			return toJS(n.hash);
 		case TransactionRepercussion::ProxySuccess:
-			return toJS(n.hash);// TODO: give back something more useful than an empty hash.
+			return toJS(n.hash);// TODO: give back somaquaing more useful than an empty hash.
 		default:
 			// TODO: provide more useful information in the exception.
 			BOOST_THROW_EXCEPTION(JsonRpcException(Errors::ERROR_RPC_INVALID_PARAMS));
@@ -303,7 +303,7 @@ string Eth::eth_signTransaction(Json::Value const& _json)
 	}
 }
 
-Json::Value Eth::eth_inspectTransaction(std::string const& _rlp)
+Json::Value Eth::aqua_inspectTransaction(std::string const& _rlp)
 {
 	try
 	{
@@ -315,7 +315,7 @@ Json::Value Eth::eth_inspectTransaction(std::string const& _rlp)
 	}
 }
 
-string Eth::eth_sendRawTransaction(std::string const& _rlp)
+string Eth::aqua_sendRawTransaction(std::string const& _rlp)
 {
 	try
 	{
@@ -333,7 +333,7 @@ string Eth::eth_sendRawTransaction(std::string const& _rlp)
 	}
 }
 
-string Eth::eth_call(Json::Value const& _json, string const& _blockNumber)
+string Eth::aqua_call(Json::Value const& _json, string const& _blockNumber)
 {
 	try
 	{
@@ -348,7 +348,7 @@ string Eth::eth_call(Json::Value const& _json, string const& _blockNumber)
 	}
 }
 
-string Eth::eth_estimateGas(Json::Value const& _json)
+string Eth::aqua_estimateGas(Json::Value const& _json)
 {
 	try
 	{
@@ -363,13 +363,13 @@ string Eth::eth_estimateGas(Json::Value const& _json)
 	}
 }
 
-bool Eth::eth_flush()
+bool Eth::aqua_flush()
 {
 	client()->flushTransactions();
 	return true;
 }
 
-Json::Value Eth::eth_getBlockByHash(string const& _blockHash, bool _includeTransactions)
+Json::Value Eth::aqua_getBlockByHash(string const& _blockHash, bool _includeTransactions)
 {
 	try
 	{
@@ -388,7 +388,7 @@ Json::Value Eth::eth_getBlockByHash(string const& _blockHash, bool _includeTrans
 	}
 }
 
-Json::Value Eth::eth_getBlockByNumber(string const& _blockNumber, bool _includeTransactions)
+Json::Value Eth::aqua_getBlockByNumber(string const& _blockNumber, bool _includeTransactions)
 {
 	try
 	{
@@ -407,7 +407,7 @@ Json::Value Eth::eth_getBlockByNumber(string const& _blockNumber, bool _includeT
 	}
 }
 
-Json::Value Eth::eth_getTransactionByHash(string const& _transactionHash)
+Json::Value Eth::aqua_getTransactionByHash(string const& _transactionHash)
 {
 	try
 	{
@@ -423,7 +423,7 @@ Json::Value Eth::eth_getTransactionByHash(string const& _transactionHash)
 	}
 }
 
-Json::Value Eth::eth_getTransactionByBlockHashAndIndex(string const& _blockHash, string const& _transactionIndex)
+Json::Value Eth::aqua_getTransactionByBlockHashAndIndex(string const& _blockHash, string const& _transactionIndex)
 {
 	try
 	{
@@ -440,7 +440,7 @@ Json::Value Eth::eth_getTransactionByBlockHashAndIndex(string const& _blockHash,
 	}
 }
 
-Json::Value Eth::eth_getTransactionByBlockNumberAndIndex(string const& _blockNumber, string const& _transactionIndex)
+Json::Value Eth::aqua_getTransactionByBlockNumberAndIndex(string const& _blockNumber, string const& _transactionIndex)
 {
 	try
 	{
@@ -458,7 +458,7 @@ Json::Value Eth::eth_getTransactionByBlockNumberAndIndex(string const& _blockNum
 	}
 }
 
-Json::Value Eth::eth_getTransactionReceipt(string const& _transactionHash)
+Json::Value Eth::aqua_getTransactionReceipt(string const& _transactionHash)
 {
 	try
 	{
@@ -474,7 +474,7 @@ Json::Value Eth::eth_getTransactionReceipt(string const& _transactionHash)
 	}
 }
 
-Json::Value Eth::eth_getUncleByBlockHashAndIndex(string const& _blockHash, string const& _uncleIndex)
+Json::Value Eth::aqua_getUncleByBlockHashAndIndex(string const& _blockHash, string const& _uncleIndex)
 {
 	try
 	{
@@ -486,7 +486,7 @@ Json::Value Eth::eth_getUncleByBlockHashAndIndex(string const& _blockHash, strin
 	}
 }
 
-Json::Value Eth::eth_getUncleByBlockNumberAndIndex(string const& _blockNumber, string const& _uncleIndex)
+Json::Value Eth::aqua_getUncleByBlockNumberAndIndex(string const& _blockNumber, string const& _uncleIndex)
 {
 	try
 	{
@@ -498,7 +498,7 @@ Json::Value Eth::eth_getUncleByBlockNumberAndIndex(string const& _blockNumber, s
 	}
 }
 
-string Eth::eth_newFilter(Json::Value const& _json)
+string Eth::aqua_newFilter(Json::Value const& _json)
 {
 	try
 	{
@@ -510,7 +510,7 @@ string Eth::eth_newFilter(Json::Value const& _json)
 	}
 }
 
-string Eth::eth_newFilterEx(Json::Value const& _json)
+string Eth::aqua_newFilterEx(Json::Value const& _json)
 {
 	try
 	{
@@ -522,19 +522,19 @@ string Eth::eth_newFilterEx(Json::Value const& _json)
 	}
 }
 
-string Eth::eth_newBlockFilter()
+string Eth::aqua_newBlockFilter()
 {
-	h256 filter = dev::eth::ChainChangedFilter;
+	h256 filter = dev::aqua::ChainChangedFilter;
 	return toJS(client()->installWatch(filter));
 }
 
-string Eth::eth_newPendingTransactionFilter()
+string Eth::aqua_newPendingTransactionFilter()
 {
-	h256 filter = dev::eth::PendingChangedFilter;
+	h256 filter = dev::aqua::PendingChangedFilter;
 	return toJS(client()->installWatch(filter));
 }
 
-bool Eth::eth_uninstallFilter(string const& _filterId)
+bool Eth::aqua_uninstallFilter(string const& _filterId)
 {
 	try
 	{
@@ -546,7 +546,7 @@ bool Eth::eth_uninstallFilter(string const& _filterId)
 	}
 }
 
-Json::Value Eth::eth_getFilterChanges(string const& _filterId)
+Json::Value Eth::aqua_getFilterChanges(string const& _filterId)
 {
 	try
 	{
@@ -562,7 +562,7 @@ Json::Value Eth::eth_getFilterChanges(string const& _filterId)
 	}
 }
 
-Json::Value Eth::eth_getFilterChangesEx(string const& _filterId)
+Json::Value Eth::aqua_getFilterChangesEx(string const& _filterId)
 {
 	try
 	{
@@ -578,7 +578,7 @@ Json::Value Eth::eth_getFilterChangesEx(string const& _filterId)
 	}
 }
 
-Json::Value Eth::eth_getFilterLogs(string const& _filterId)
+Json::Value Eth::aqua_getFilterLogs(string const& _filterId)
 {
 	try
 	{
@@ -590,7 +590,7 @@ Json::Value Eth::eth_getFilterLogs(string const& _filterId)
 	}
 }
 
-Json::Value Eth::eth_getFilterLogsEx(string const& _filterId)
+Json::Value Eth::aqua_getFilterLogsEx(string const& _filterId)
 {
 	try
 	{
@@ -602,7 +602,7 @@ Json::Value Eth::eth_getFilterLogsEx(string const& _filterId)
 	}
 }
 
-Json::Value Eth::eth_getLogs(Json::Value const& _json)
+Json::Value Eth::aqua_getLogs(Json::Value const& _json)
 {
 	try
 	{
@@ -614,7 +614,7 @@ Json::Value Eth::eth_getLogs(Json::Value const& _json)
 	}
 }
 
-Json::Value Eth::eth_getLogsEx(Json::Value const& _json)
+Json::Value Eth::aqua_getLogsEx(Json::Value const& _json)
 {
 	try
 	{
@@ -626,7 +626,7 @@ Json::Value Eth::eth_getLogsEx(Json::Value const& _json)
 	}
 }
 
-Json::Value Eth::eth_getWork()
+Json::Value Eth::aqua_getWork()
 {
 	try
 	{
@@ -643,9 +643,9 @@ Json::Value Eth::eth_getWork()
 	}
 }
 
-Json::Value Eth::eth_syncing()
+Json::Value Eth::aqua_syncing()
 {
-	dev::eth::SyncStatus sync = client()->syncStatus();
+	dev::aqua::SyncStatus sync = client()->syncStatus();
 	if (sync.state == SyncState::Idle || !sync.majorSyncing)
 		return Json::Value(false);
 
@@ -656,7 +656,7 @@ Json::Value Eth::eth_syncing()
 	return info;
 }
 
-bool Eth::eth_submitWork(string const& _nonce, string const&, string const& _mixHash)
+bool Eth::aqua_submitWork(string const& _nonce, string const&, string const& _mixHash)
 {
 	try
 	{
@@ -668,7 +668,7 @@ bool Eth::eth_submitWork(string const& _nonce, string const&, string const& _mix
 	}
 }
 
-bool Eth::eth_submitHashrate(string const& _hashes, string const& _id)
+bool Eth::aqua_submitHashrate(string const& _hashes, string const& _id)
 {
 	try
 	{
@@ -681,11 +681,11 @@ bool Eth::eth_submitHashrate(string const& _hashes, string const& _id)
 	}
 }
 
-string Eth::eth_register(string const& _address)
+string Eth::aqua_register(string const& _address)
 {
 	try
 	{
-		return toJS(m_ethAccounts.addProxyAccount(jsToAddress(_address)));
+		return toJS(m_aquaAccounts.addProxyAccount(jsToAddress(_address)));
 	}
 	catch (...)
 	{
@@ -693,11 +693,11 @@ string Eth::eth_register(string const& _address)
 	}
 }
 
-bool Eth::eth_unregister(string const& _accountId)
+bool Eth::aqua_unregister(string const& _accountId)
 {
 	try
 	{
-		return m_ethAccounts.removeProxyAccount(jsToInt(_accountId));
+		return m_aquaAccounts.removeProxyAccount(jsToInt(_accountId));
 	}
 	catch (...)
 	{
@@ -705,16 +705,16 @@ bool Eth::eth_unregister(string const& _accountId)
 	}
 }
 
-Json::Value Eth::eth_fetchQueuedTransactions(string const& _accountId)
+Json::Value Eth::aqua_fetchQueuedTransactions(string const& _accountId)
 {
 	try
 	{
 		auto id = jsToInt(_accountId);
 		Json::Value ret(Json::arrayValue);
 		// TODO: throw an error on no account with given id
-		for (TransactionSkeleton const& t: m_ethAccounts.queuedTransactions(id))
+		for (TransactionSkeleton const& t: m_aquaAccounts.queuedTransactions(id))
 			ret.append(toJson(t));
-		m_ethAccounts.clearQueue(id);
+		m_aquaAccounts.clearQueue(id);
 		return ret;
 	}
 	catch (...)

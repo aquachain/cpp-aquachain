@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 
 #------------------------------------------------------------------------------
-# Bash script for installing pre-requisite packages for cpp-ethereum on a
+# Bash script for installing pre-requisite packages for cpp-aquachain on a
 # variety of Linux and other UNIX-derived platforms.
 #
 # This is an "infrastucture-as-code" alternative to the manual build
 # instructions pages which we previously maintained, first as Wiki pages
-# and later as readthedocs pages at http://ethdocs.org.
+# and later as readthedocs pages at http://aquadocs.org.
 #
 # The aim of this script is to simplify things down to the following basic
 # flow for all supported operating systems:
@@ -25,35 +25,35 @@
 #
 # TODO - There is no support here yet for cross-builds in any form, only
 # native builds.  Expanding the functionality here to cover the mobile,
-# wearable and SBC platforms covered by doublethink and EthEmbedded would
+# wearable and SBC platforms covered by doublaquaink and EthEmbedded would
 # also bring in support for Android, iOS, watchOS, tvOS, Tizen, Sailfish,
 # Maemo, MeeGo and Yocto.
 #
-# The documentation for cpp-ethereum is hosted at http://cpp-ethereum.org
+# The documentation for cpp-aquachain is hosted at http://cpp-aquachain.org
 #
 # ------------------------------------------------------------------------------
-# This file is part of cpp-ethereum.
+# This file is part of cpp-aquachain.
 #
-# cpp-ethereum is free software: you can redistribute it and/or modify
+# cpp-aquachain is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# cpp-ethereum is distributed in the hope that it will be useful,
+# cpp-aquachain is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>
+# along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>
 #
-# (c) 2016 cpp-ethereum contributors.
+# (c) 2016 cpp-aquachain contributors.
 #------------------------------------------------------------------------------
 
 set -e
 
 # Check for 'uname' and abort if it is not available.
-uname -v > /dev/null 2>&1 || { echo >&2 "ERROR - cpp-ethereum requires 'uname' to identify the platform."; exit 1; }
+uname -v > /dev/null 2>&1 || { echo >&2 "ERROR - cpp-aquachain requires 'uname' to identify the platform."; exit 1; }
 
 case $(uname -s) in
 
@@ -64,19 +64,19 @@ case $(uname -s) in
 Darwin)
     case $(sw_vers -productVersion | awk -F . '{print $1"."$2}') in
         10.9)
-            echo "Installing cpp-ethereum dependencies on OS X 10.9 Mavericks."
+            echo "Installing cpp-aquachain dependencies on OS X 10.9 Mavericks."
             ;;
         10.10)
-            echo "Installing cpp-ethereum dependencies on OS X 10.10 Yosemite."
+            echo "Installing cpp-aquachain dependencies on OS X 10.10 Yosemite."
             ;;
         10.11)
-            echo "Installing cpp-ethereum dependencies on OS X 10.11 El Capitan."
+            echo "Installing cpp-aquachain dependencies on OS X 10.11 El Capitan."
             ;;
         10.12)
-            echo "Installing cpp-ethereum dependencies on macOS 10.12 Sierra."
+            echo "Installing cpp-aquachain dependencies on macOS 10.12 Sierra."
             ;;
         10.13)
-            echo "Installing cpp-ethereum dependencies on macOS 10.13 High Sierra."
+            echo "Installing cpp-aquachain dependencies on macOS 10.13 High Sierra."
             ;;
         *)
             echo "Unsupported macOS version."
@@ -90,7 +90,7 @@ Darwin)
     fi
 
     # Check for Homebrew install and abort if it is not installed.
-    brew -v > /dev/null 2>&1 || { echo >&2 "ERROR - cpp-ethereum requires a Homebrew install.  See http://brew.sh."; exit 1; }
+    brew -v > /dev/null 2>&1 || { echo >&2 "ERROR - cpp-aquachain requires a Homebrew install.  See http://brew.sh."; exit 1; }
 
     # And finally install all the external dependencies.
     brew install \
@@ -103,10 +103,10 @@ Darwin)
 # FreeBSD
 #------------------------------------------------------------------------------
 FreeBSD)
-    echo "Installing cpp-ethereum dependencies on FreeBSD."
+    echo "Installing cpp-aquachain dependencies on FreeBSD."
     echo "ERROR - 'install_deps.sh' doesn't have FreeBSD support yet."
     echo "Please let us know if you see this error message, and we can work out what is missing."
-    echo "At https://gitter.im/ethereum/cpp-ethereum-development."
+    echo "At https://gitter.im/aquachain/cpp-aquachain-development."
     exit 1
     ;;
 
@@ -126,7 +126,7 @@ Linux)
 
     if [ -f "/etc/arch-release" ]; then
 
-        echo "Installing cpp-ethereum dependencies on Arch Linux."
+        echo "Installing cpp-aquachain dependencies on Arch Linux."
 
         # The majority of our dependencies can be found in the
         # Arch Linux official repositories.
@@ -144,7 +144,7 @@ Linux)
         case $DISTRO_NAME in
 
         Debian*)
-            echo "Installing cpp-ethereum dependencies on Debian Linux."
+            echo "Installing cpp-aquachain dependencies on Debian Linux."
 
             $SUDO apt-get -q update
             $SUDO apt-get -qy install \
@@ -154,7 +154,7 @@ Linux)
             ;;
 
         Fedora)
-            echo "Installing cpp-ethereum dependencies on Fedora Linux."
+            echo "Installing cpp-aquachain dependencies on Fedora Linux."
             $SUDO dnf -qy install \
                 gcc-c++ \
                 leveldb-devel \
@@ -164,7 +164,7 @@ Linux)
 #------------------------------------------------------------------------------
 # Ubuntu
 #
-# TODO - I wonder whether all of the Ubuntu-variants need some special
+# TODO - I wonder whaquaer all of the Ubuntu-variants need some special
 # treatment?
 #
 # TODO - We should also test this code on Ubuntu Server, Ubuntu Snappy Core
@@ -172,10 +172,10 @@ Linux)
 #
 # TODO - Our Ubuntu build is only working for amd64 and i386 processors.
 # It would be good to add armel, armhf and arm64.
-# See https://github.com/ethereum/webthree-umbrella/issues/228.
+# See https://github.com/aquachain/webthree-umbrella/issues/228.
 #------------------------------------------------------------------------------
         Ubuntu|"Linux Mint")
-            echo "Installing cpp-ethereum dependencies on Ubuntu."
+            echo "Installing cpp-aquachain dependencies on Ubuntu."
             $SUDO apt-get -q update
             $SUDO apt-get install -qy --no-install-recommends --allow-unauthenticated \
                 build-essential \
@@ -186,7 +186,7 @@ Linux)
 
 
         CentOS*|Oracle*|"Red Hat Enterprise Linux"*)
-            echo "Installing cpp-ethereum dependencies on CentOS."
+            echo "Installing cpp-aquachain dependencies on CentOS."
             # Enable EPEL repo that contains leveldb-devel
             $SUDO yum -y -q install epel-release
             $SUDO yum -y -q install \
@@ -206,7 +206,7 @@ Linux)
     elif [ -f "/etc/alpine-release" ]; then
 
         # Alpine Linux
-        echo "Installing cpp-ethereum dependencies on Alpine Linux."
+        echo "Installing cpp-aquachain dependencies on Alpine Linux."
         $SUDO apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
             g++ \
             make \
@@ -221,11 +221,11 @@ Linux)
 #------------------------------------------------------------------------------
         openSUSE*)
             #openSUSE
-            echo "Installing cpp-ethereum dependencies on openSUSE."
+            echo "Installing cpp-aquachain dependencies on openSUSE."
             echo "ERROR - 'install_deps.sh' doesn't have openSUSE support yet."
-            echo "See http://cpp-ethereum.org/building-from-source/linux.html for manual instructions."
+            echo "See http://cpp-aquachain.org/building-from-source/linux.html for manual instructions."
             echo "If you would like to get 'install_deps.sh' working for openSUSE, that would be fantastic."
-            echo "See https://github.com/ethereum/webthree-umbrella/issues/552."
+            echo "See https://github.com/aquachain/webthree-umbrella/issues/552."
             exit 1
             ;;
 
@@ -237,9 +237,9 @@ Linux)
         *)
             #other Linux
             echo "ERROR - Unsupported or unidentified Linux distro."
-            echo "See http://cpp-ethereum.org/building-from-source/linux.html for manual instructions."
+            echo "See http://cpp-aquachain.org/building-from-source/linux.html for manual instructions."
             echo "If you would like to get your distro working, that would be fantastic."
-            echo "Drop us a message at https://gitter.im/ethereum/cpp-ethereum-development."
+            echo "Drop us a message at https://gitter.im/aquachain/cpp-aquachain-development."
             exit 1
             ;;
         esac
@@ -254,8 +254,8 @@ Linux)
 *)
     #other
     echo "ERROR - Unsupported or unidentified operating system."
-    echo "See http://cpp-ethereum.org/building-from-source/ for manual instructions."
+    echo "See http://cpp-aquachain.org/building-from-source/ for manual instructions."
     echo "If you would like to get your operating system working, that would be fantastic."
-    echo "Drop us a message at https://gitter.im/ethereum/cpp-ethereum-development."
+    echo "Drop us a message at https://gitter.im/aquachain/cpp-aquachain-development."
     ;;
 esac

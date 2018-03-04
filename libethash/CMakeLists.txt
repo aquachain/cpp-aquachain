@@ -2,7 +2,7 @@ set(FILES
     util.h
     io.c
     internal.c
-    ethash.h
+    aquahash.h
     endian.h
     compiler.h
     fnv.h
@@ -16,5 +16,5 @@ else()
     list(APPEND FILES io_posix.c)
 endif()
 
-add_library(ethash ${FILES})
-set_target_properties(ethash PROPERTIES C_STANDARD 99)
+add_library(aquahash ${FILES})
+set_target_properties(aquahash PROPERTIES C_STANDARD 99)

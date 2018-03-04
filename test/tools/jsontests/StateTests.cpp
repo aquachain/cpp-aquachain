@@ -1,21 +1,21 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file StateTests.cpp
- * @author Dimitry Khokhlov <dimitry@ethereum.org>
+ * @author Dimitry Khokhlov <dimitry@aquachain.org>
  * @date 2016
  * General State Tests parser.
  */
@@ -25,19 +25,19 @@
 
 #include <json_spirit/JsonSpiritHeaders.h>
 #include <libdevcore/CommonIO.h>
-#include <libethereum/BlockChain.h>
-#include <libethereum/State.h>
-#include <libethereum/ExtVM.h>
-#include <libethereum/Defaults.h>
+#include <libaquachain/BlockChain.h>
+#include <libaquachain/State.h>
+#include <libaquachain/ExtVM.h>
+#include <libaquachain/Defaults.h>
 #include <libevm/VM.h>
-#include <test/tools/libtesteth/TestHelper.h>
-#include <test/tools/libtesteth/TestSuite.h>
+#include <test/tools/libtestaqua/TestHelper.h>
+#include <test/tools/libtestaqua/TestSuite.h>
 #include <test/tools/jsontests/StateTests.h>
 
 using namespace std;
 using namespace json_spirit;
 using namespace dev;
-using namespace dev::eth;
+using namespace dev::aqua;
 namespace fs = boost::filesystem;
 
 namespace dev {  namespace test {

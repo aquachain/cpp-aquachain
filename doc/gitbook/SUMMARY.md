@@ -6,7 +6,7 @@
    * [Getting started](getting_started.md)
    * [Interactive Console](interactive_console.md)
    * [Mining](mining.md)
-   * [ethkey](ethkey.md)
+   * [aquakey](aquakey.md)
 * [Whisper](whisper.md)
 * Recipes and How-tos
    * [Cold Wallet Storage Device](cold_wallet_storage_device.md)

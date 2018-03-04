@@ -1,18 +1,18 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /// @file
 /// UPnP port forwarding support.
@@ -126,7 +126,7 @@ int UPnP::addRedirect(char const* _addr, int _port)
 	char port_str[16];
 	char ext_port_str[16];
 	sprintf(port_str, "%d", _port);
-	if (!UPNP_AddPortMapping(m_urls->controlURL, m_data->first.servicetype, port_str, port_str, _addr, "ethereum", "TCP", NULL, NULL))
+	if (!UPNP_AddPortMapping(m_urls->controlURL, m_data->first.servicetype, port_str, port_str, _addr, "aquachain", "TCP", NULL, NULL))
 		return _port;
 
 	// Failed - now try (random external, port internal) and cycle up to 10 times.
@@ -135,12 +135,12 @@ int UPnP::addRedirect(char const* _addr, int _port)
 	{
 		_port = rand() % (32768 - 1024) + 1024;
 		sprintf(ext_port_str, "%d", _port);
-		if (!UPNP_AddPortMapping(m_urls->controlURL, m_data->first.servicetype, ext_port_str, port_str, _addr, "ethereum", "TCP", NULL, NULL))
+		if (!UPNP_AddPortMapping(m_urls->controlURL, m_data->first.servicetype, ext_port_str, port_str, _addr, "aquachain", "TCP", NULL, NULL))
 			return _port;
 	}
 
 	// Failed. Try asking the router to give us a free external port.
-	if (UPNP_AddPortMapping(m_urls->controlURL, m_data->first.servicetype, port_str, NULL, _addr, "ethereum", "TCP", NULL, NULL))
+	if (UPNP_AddPortMapping(m_urls->controlURL, m_data->first.servicetype, port_str, NULL, _addr, "aquachain", "TCP", NULL, NULL))
 		// Failed. Exit.
 		return 0;
 
@@ -158,7 +158,7 @@ int UPnP::addRedirect(char const* _addr, int _port)
 		char rHost[64];
 		char duration[16];
 		UPNP_GetGenericPortMappingEntry(m_urls->controlURL, m_data->first.servicetype, toString(i).c_str(), extPort, intClient, intPort, protocol, desc, enabled, rHost, duration);
-		if (string("ethereum") == desc)
+		if (string("aquachain") == desc)
 		{
 			m_reg.insert(atoi(extPort));
 			return atoi(extPort);

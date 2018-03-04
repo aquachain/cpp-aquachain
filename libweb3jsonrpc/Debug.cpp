@@ -1,21 +1,21 @@
 #include <jsonrpccpp/common/exception.h>
 #include <libdevcore/CommonIO.h>
 #include <libdevcore/CommonJS.h>
-#include <libethcore/CommonJS.h>
-#include <libethereum/Client.h>
-#include <libethereum/Executive.h>
+#include <libaquacore/CommonJS.h>
+#include <libaquachain/Client.h>
+#include <libaquachain/Executive.h>
 #include "Debug.h"
 #include "JsonHelper.h"
 using namespace std;
 using namespace dev;
 using namespace dev::rpc;
-using namespace dev::eth;
+using namespace dev::aqua;
 
-Debug::Debug(eth::Client const& _eth):
-	m_eth(_eth)
+Debug::Debug(aqua::Client const& _aqua):
+	m_aqua(_aqua)
 {}
 
-StandardTrace::DebugOptions dev::eth::debugOptions(Json::Value const& _json)
+StandardTrace::DebugOptions dev::aqua::debugOptions(Json::Value const& _json)
 {
 	StandardTrace::DebugOptions op;
 	if (!_json.isObject() || _json.empty())
@@ -37,7 +37,7 @@ h256 Debug::blockHash(string const& _blockNumberOrHash) const
 		return h256(_blockNumberOrHash.substr(_blockNumberOrHash.size() - 64, 64));
 	try
 	{
-		return m_eth.blockChain().numberHash(stoul(_blockNumberOrHash));
+		return m_aqua.blockChain().numberHash(stoul(_blockNumberOrHash));
 	}
 	catch (...)
 	{
@@ -70,10 +70,10 @@ Json::Value Debug::traceBlock(Block const& _block, Json::Value const& _json)
 		Transaction t = _block.pending()[k];
 
 		u256 const gasUsed = k ? _block.receipt(k - 1).gasUsed() : 0;
-		EnvInfo envInfo(_block.info(), m_eth.blockChain().lastBlockHashes(), gasUsed);
-		Executive e(s, envInfo, *m_eth.blockChain().sealEngine());
+		EnvInfo envInfo(_block.info(), m_aqua.blockChain().lastBlockHashes(), gasUsed);
+		Executive e(s, envInfo, *m_aqua.blockChain().sealEngine());
 
-		eth::ExecutionResult er;
+		aqua::ExecutionResult er;
 		e.setResultRecipient(er);
 		traces.append(traceTransaction(e, t, _json));
 	}
@@ -85,11 +85,11 @@ Json::Value Debug::debug_traceTransaction(string const& _txHash, Json::Value con
 	Json::Value ret;
 	try
 	{
-		LocalisedTransaction t = m_eth.localisedTransaction(h256(_txHash));
-		Block block = m_eth.block(t.blockHash());
+		LocalisedTransaction t = m_aqua.localisedTransaction(h256(_txHash));
+		Block block = m_aqua.block(t.blockHash());
 		State s(State::Null);
-		eth::ExecutionResult er;
-		Executive e(s, block, t.transactionIndex(), m_eth.blockChain());
+		aqua::ExecutionResult er;
+		Executive e(s, block, t.transactionIndex(), m_aqua.blockChain());
 		e.setResultRecipient(er);
 		Json::Value trace = traceTransaction(e, t, _json);
 		ret["gas"] = toJS(t.gas());
@@ -113,7 +113,7 @@ Json::Value Debug::debug_traceBlock(string const& _blockRLP, Json::Value const& 
 Json::Value Debug::debug_traceBlockByHash(string const& _blockHash, Json::Value const& _json)
 {
 	Json::Value ret;
-	Block block = m_eth.block(h256(_blockHash));
+	Block block = m_aqua.block(h256(_blockHash));
 	ret["structLogs"] = traceBlock(block, _json);
 	return ret;
 }
@@ -121,7 +121,7 @@ Json::Value Debug::debug_traceBlockByHash(string const& _blockHash, Json::Value 
 Json::Value Debug::debug_traceBlockByNumber(int _blockNumber, Json::Value const& _json)
 {
 	Json::Value ret;
-	Block block = m_eth.block(blockHash(std::to_string(_blockNumber)));
+	Block block = m_aqua.block(blockHash(std::to_string(_blockNumber)));
 	ret["structLogs"] = traceBlock(block, _json);
 	return ret;
 }
@@ -139,11 +139,11 @@ Json::Value Debug::debug_storageRangeAt(string const& _blockHashOrNumber, int _t
 
 	try
 	{
-		Block block = m_eth.block(blockHash(_blockHashOrNumber));
+		Block block = m_aqua.block(blockHash(_blockHashOrNumber));
 
 		unsigned const i = ((unsigned)_txIndex < block.pending().size()) ? (unsigned)_txIndex : block.pending().size();
 		State state(State::Null);
-		createIntermediateState(state, block, i, m_eth.blockChain());
+		createIntermediateState(state, block, i, m_aqua.blockChain());
 
 		map<h256, pair<u256, u256>> const storage(state.storage(Address(_address)));
 
@@ -177,7 +177,7 @@ Json::Value Debug::debug_storageRangeAt(string const& _blockHashOrNumber, int _t
 std::string Debug::debug_preimage(std::string const& _hashedKey)
 {
 	h256 const hashedKey(h256fromHex(_hashedKey));
-	bytes const key = m_eth.stateDB().lookupAux(hashedKey);
+	bytes const key = m_aqua.stateDB().lookupAux(hashedKey);
 
 	return key.empty() ? std::string() : toHexPrefixed(key);
 }
@@ -187,19 +187,19 @@ Json::Value Debug::debug_traceCall(Json::Value const& _call, std::string const& 
 	Json::Value ret;
 	try
 	{
-		Block temp = m_eth.block(jsToBlockNumber(_blockNumber));
+		Block temp = m_aqua.block(jsToBlockNumber(_blockNumber));
 		TransactionSkeleton ts = toTransactionSkeleton(_call);
 		if (!ts.from) {
 			ts.from = Address();
 		}
 		u256 nonce = temp.transactionsFrom(ts.from);
-		u256 gas = ts.gas == Invalid256 ? m_eth.gasLimitRemaining() : ts.gas;
-		u256 gasPrice = ts.gasPrice == Invalid256 ? m_eth.gasBidPrice() : ts.gasPrice;
+		u256 gas = ts.gas == Invalid256 ? m_aqua.gasLimitRemaining() : ts.gas;
+		u256 gasPrice = ts.gasPrice == Invalid256 ? m_aqua.gasBidPrice() : ts.gasPrice;
 		temp.mutableState().addBalance(ts.from, gas * gasPrice + ts.value);
 		Transaction transaction(ts.value, gasPrice, gas, ts.to, ts.data, nonce);
 		transaction.forceSender(ts.from);
-		eth::ExecutionResult er;
-		Executive e(temp, m_eth.blockChain().lastBlockHashes());
+		aqua::ExecutionResult er;
+		Executive e(temp, m_aqua.blockChain().lastBlockHashes());
 		e.setResultRecipient(er);
 		Json::Value trace = traceTransaction(e, transaction, _options);
 		ret["gas"] = toJS(transaction.gas());

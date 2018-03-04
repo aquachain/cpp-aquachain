@@ -1,18 +1,18 @@
 /*
-    This file is part of cpp-ethereum.
+    This file is part of cpp-aquachain.
 
-    cpp-ethereum is free software: you can redistribute it and/or modify
+    cpp-aquachain is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    cpp-ethereum is distributed in the hope that it will be useful,
+    cpp-aquachain is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+    along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file vm.cpp
  * @author Gav Wood <i@gavwood.com>
@@ -22,16 +22,16 @@
 
 #include "vm.h"
 #include <test/tools/libtestutils/TestLastBlockHashes.h>
-#include <libethereum/ChainParams.h>
-#include <libethereum/Executive.h>
+#include <libaquachain/ChainParams.h>
+#include <libaquachain/Executive.h>
 #include <libevm/VMFactory.h>
 #include <boost/filesystem.hpp>
-#include <test/tools/libtesteth/TestSuite.h>
+#include <test/tools/libtestaqua/TestSuite.h>
 
 using namespace std;
 using namespace json_spirit;
 using namespace dev;
-using namespace dev::eth;
+using namespace dev::aqua;
 using namespace dev::test;
 namespace fs = boost::filesystem;
 
@@ -39,19 +39,19 @@ FakeExtVM::FakeExtVM(EnvInfo const& _envInfo, unsigned _depth):			/// TODO: XXX:
     ExtVMFace(_envInfo, Address(), Address(), Address(), 0, 1, bytesConstRef(), bytes(), EmptySHA3, false, _depth)
 {}
 
-std::pair<h160, eth::owning_bytes_ref> FakeExtVM::create(u256 _endowment, u256& io_gas, bytesConstRef _init, Instruction , u256, OnOpFunc const&)
+std::pair<h160, aqua::owning_bytes_ref> FakeExtVM::create(u256 _endowment, u256& io_gas, bytesConstRef _init, Instruction , u256, OnOpFunc const&)
 {
     Address na = right160(sha3(rlpList(myAddress, get<1>(addresses[myAddress]))));
     Transaction t(_endowment, gasPrice, io_gas, _init.toBytes());
     callcreates.push_back(t);
-    return {na, eth::owning_bytes_ref{}};
+    return {na, aqua::owning_bytes_ref{}};
 }
 
-std::pair<bool, eth::owning_bytes_ref> FakeExtVM::call(CallParameters& _p)
+std::pair<bool, aqua::owning_bytes_ref> FakeExtVM::call(CallParameters& _p)
 {
     Transaction t(_p.valueTransfer, gasPrice, _p.gas, _p.receiveAddress, _p.data.toVector());
     callcreates.push_back(t);
-    return {true, eth::owning_bytes_ref{}};  // Return empty output.
+    return {true, aqua::owning_bytes_ref{}};  // Return empty output.
 }
 
 h256 FakeExtVM::blockHash(u256 _number)
@@ -229,13 +229,13 @@ void FakeExtVM::importCallCreates(mArray const& _callcreates)
     }
 }
 
-eth::OnOpFunc FakeExtVM::simpleTrace() const
+aqua::OnOpFunc FakeExtVM::simpleTrace() const
 {
 
-    return [](uint64_t steps, uint64_t pc, eth::Instruction inst, bigint newMemSize, bigint gasCost, bigint gas, dev::eth::VM* voidVM, dev::eth::ExtVMFace const* voidExt)
+    return [](uint64_t steps, uint64_t pc, aqua::Instruction inst, bigint newMemSize, bigint gasCost, bigint gas, dev::aqua::VM* voidVM, dev::aqua::ExtVMFace const* voidExt)
     {
         FakeExtVM const& ext = *static_cast<FakeExtVM const*>(voidExt);
-        eth::VM& vm = *voidVM;
+        aqua::VM& vm = *voidVM;
 
         std::ostringstream o;
         o << "\n    STACK\n";
@@ -247,11 +247,11 @@ eth::OnOpFunc FakeExtVM::simpleTrace() const
         for (auto const& i: std::get<2>(ext.addresses.find(ext.myAddress)->second))
             o << std::showbase << std::hex << i.first << ": " << i.second << "\n";
 
-        dev::LogOutputStream<eth::VMTraceChannel, false>() << o.str();
-        dev::LogOutputStream<eth::VMTraceChannel, false>() << " | " << std::dec << ext.depth << " | " << ext.myAddress << " | #" << steps << " | " << std::hex << std::setw(4) << std::setfill('0') << pc << " : " << instructionInfo(inst).name << " | " << std::dec << gas << " | -" << std::dec << gasCost << " | " << newMemSize << "x32" << " ]";
+        dev::LogOutputStream<aqua::VMTraceChannel, false>() << o.str();
+        dev::LogOutputStream<aqua::VMTraceChannel, false>() << " | " << std::dec << ext.depth << " | " << ext.myAddress << " | #" << steps << " | " << std::hex << std::setw(4) << std::setfill('0') << pc << " : " << instructionInfo(inst).name << " | " << std::dec << gas << " | -" << std::dec << gasCost << " | " << newMemSize << "x32" << " ]";
 
         /*creates json stack trace*/
-        if (eth::VMTraceChannel::verbosity <= g_logVerbosity)
+        if (aqua::VMTraceChannel::verbosity <= g_logVerbosity)
         {
             Object o_step;
 
@@ -316,7 +316,7 @@ json_spirit::mValue VmTestSuite::doTests(json_spirit::mValue const& _input, bool
             BOOST_REQUIRE_MESSAGE(testInput.count("expect") == 0, testname + " expect set!");
 
         TestLastBlockHashes lastBlockHashes(h256s(256, h256()));
-        eth::EnvInfo env = FakeExtVM::importEnv(testInput.at("env").get_obj(), lastBlockHashes);
+        aqua::EnvInfo env = FakeExtVM::importEnv(testInput.at("env").get_obj(), lastBlockHashes);
         FakeExtVM fev(env);
         fev.importState(testInput.at("pre").get_obj());
 
@@ -339,7 +339,7 @@ json_spirit::mValue VmTestSuite::doTests(json_spirit::mValue const& _input, bool
         bool vmExceptionOccured = false;
         try
         {
-            auto vm = eth::VMFactory::create();
+            auto vm = aqua::VMFactory::create();
             auto vmtrace = Options::get().vmtrace ? fev.simpleTrace() : OnOpFunc{};
             {
                 Listener::ExecTimeGuard guard{i.first};
@@ -392,7 +392,7 @@ json_spirit::mValue VmTestSuite::doTests(json_spirit::mValue const& _input, bool
             else
             {
                 testOutput["post"] = mValue(fev.exportState());
-                BOOST_REQUIRE_MESSAGE(testOutput.at("post").type() == obj_type, testname + "fev.exportState returned something not an object.");
+                BOOST_REQUIRE_MESSAGE(testOutput.at("post").type() == obj_type, testname + "fev.exportState returned somaquaing not an object.");
 
                 if (testInput.count("expect") > 0)
                 {
@@ -437,7 +437,7 @@ json_spirit::mValue VmTestSuite::doTests(json_spirit::mValue const& _input, bool
                 BOOST_REQUIRE_MESSAGE(testInput.count("logs") > 0, testname + " logs field is missing.");
                 BOOST_REQUIRE_MESSAGE(testInput.at("logs").type() == str_type, testname + " logs field is not a string.");
 
-                dev::test::FakeExtVM test(eth::EnvInfo{BlockHeader{}, lastBlockHashes, 0});
+                dev::test::FakeExtVM test(aqua::EnvInfo{BlockHeader{}, lastBlockHashes, 0});
                 test.importState(testInput.at("post").get_obj());
                 test.importCallCreates(testInput.at("callcreates").get_array());
 

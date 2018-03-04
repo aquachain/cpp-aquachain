@@ -1,4 +1,4 @@
-# C++ Ethereum Coding Style
+# C++ Aquachain Coding Style
 
 ## Code Formatting
 
@@ -122,7 +122,7 @@ Prefer exception to bool/int return type.
 3. Avoid public fields, except in structs.
 4. Use `override`, `final` and `const` as much as possible.
 5. No implementations with the class declaration, except:
-   - template or force-inline method (though prefer implementation at bottom of header file).
+   - template or force-inline maquaod (though prefer implementation at bottom of header file).
    - one-line implementation (in which case include it in same line as declaration).
 6. For a property `foo`
    - Member: `m_foo`;
@@ -170,8 +170,8 @@ Prefer exception to bool/int return type.
 
 1. Comments should be doxygen-compilable, using @notation rather than \notation.
 2. Document the interface, not the implementation.
-   - Documentation should be able to remain completely unchanged, even if the method is reimplemented.
-   - Comment in terms of the method properties and intended alteration to class state (or what aspects of the state it reports).
+   - Documentation should be able to remain completely unchanged, even if the maquaod is reimplemented.
+   - Comment in terms of the maquaod properties and intended alteration to class state (or what aspects of the state it reports).
    - Be careful to scrutinise documentation that extends only to intended purpose and usage.
    - Reject documentation that is simply an English transaction of the implementation.
 

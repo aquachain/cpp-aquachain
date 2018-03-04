@@ -24,7 +24,7 @@ BIN=$PREFIX/bin
 if test -f $BIN/lllc && ($BIN/lllc --version | grep -q "$VERSION"); then
     echo "CMake $VERSION already installed in $BIN"
 else
-    URL=https://github.com/ethereum/solidity/releases/download/v$VERSION/solidity-ubuntu-trusty.zip
+    URL=https://github.com/aquachain/solidity/releases/download/v$VERSION/solidity-ubuntu-trusty.zip
     ERROR=0
     TMPFILE=$(mktemp --tmpdir solidity-$VERSION-$OS.XXXXXXXX.zip)
     echo "Downloading lllc ($URL)..."

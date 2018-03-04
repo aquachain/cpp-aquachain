@@ -1,18 +1,18 @@
 /*
-    This file is part of cpp-ethereum.
+    This file is part of cpp-aquachain.
 
-    cpp-ethereum is free software: you can redistribute it and/or modify
+    cpp-aquachain is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    cpp-ethereum is distributed in the hope that it will be useful,
+    cpp-aquachain is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+    along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file WebThree.cpp
  * @author Gav Wood <i@gavwood.com>
@@ -22,39 +22,39 @@
 #include "WebThree.h"
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
-#include <libethereum/Defaults.h>
-#include <libethereum/EthereumHost.h>
-#include <libethereum/ClientTest.h>
-#include <libethashseal/EthashClient.h>
+#include <libaquachain/Defaults.h>
+#include <libaquachain/AquachainHost.h>
+#include <libaquachain/ClientTest.h>
+#include <libaquahashseal/EthashClient.h>
 #include "BuildInfo.h"
-#include <libethashseal/Ethash.h>
+#include <libaquahashseal/Ethash.h>
 using namespace std;
 using namespace dev;
 using namespace dev::p2p;
-using namespace dev::eth;
+using namespace dev::aqua;
 using namespace dev::shh;
 
 static_assert(BOOST_VERSION >= 106400, "Wrong boost headers version");
 
 WebThreeDirect::WebThreeDirect(std::string const& _clientVersion,
     boost::filesystem::path const& _dbPath, boost::filesystem::path const& _snapshotPath,
-    eth::ChainParams const& _params, WithExisting _we, std::set<std::string> const& _interfaces,
+    aqua::ChainParams const& _params, WithExisting _we, std::set<std::string> const& _interfaces,
     NetworkPreferences const& _n, bytesConstRef _network, bool _testing)
   : m_clientVersion(_clientVersion), m_net(_clientVersion, _n, _network)
 {
     if (_dbPath.size())
         Defaults::setDBPath(_dbPath);
-    if (_interfaces.count("eth"))
+    if (_interfaces.count("aqua"))
     {
         Ethash::init();
         NoProof::init();
         if (_params.sealEngineName == "Ethash")
-            m_ethereum.reset(new eth::EthashClient(_params, (int)_params.networkID, &m_net, shared_ptr<GasPricer>(), _dbPath, _snapshotPath, _we));
+            m_aquachain.reset(new aqua::EthashClient(_params, (int)_params.networkID, &m_net, shared_ptr<GasPricer>(), _dbPath, _snapshotPath, _we));
         else if (_params.sealEngineName == "NoProof" && _testing)
-            m_ethereum.reset(new eth::ClientTest(_params, (int)_params.networkID, &m_net, shared_ptr<GasPricer>(), _dbPath, _we));
+            m_aquachain.reset(new aqua::ClientTest(_params, (int)_params.networkID, &m_net, shared_ptr<GasPricer>(), _dbPath, _we));
         else
-            m_ethereum.reset(new eth::Client(_params, (int)_params.networkID, &m_net, shared_ptr<GasPricer>(), _dbPath, _snapshotPath, _we));
-        m_ethereum->startWorking();
+            m_aquachain.reset(new aqua::Client(_params, (int)_params.networkID, &m_net, shared_ptr<GasPricer>(), _dbPath, _snapshotPath, _we));
+        m_aquachain->startWorking();
 
         string bp = DEV_QUOTED(ETH_BUILD_PLATFORM);
         vector<string> bps;
@@ -62,24 +62,24 @@ WebThreeDirect::WebThreeDirect(std::string const& _clientVersion,
         bps[0] = bps[0].substr(0, 5);
         bps[1] = bps[1].substr(0, 3);
         bps.back() = bps.back().substr(0, 3);
-        m_ethereum->setExtraData(rlpList(0, string(dev::Version) + "++" + string(DEV_QUOTED(ETH_COMMIT_HASH)).substr(0, 4) + (ETH_CLEAN_REPO ? "-" : "*") + string(DEV_QUOTED(ETH_BUILD_TYPE)).substr(0, 1) + boost::join(bps, "/")));
+        m_aquachain->setExtraData(rlpList(0, string(dev::Version) + "++" + string(DEV_QUOTED(ETH_COMMIT_HASH)).substr(0, 4) + (ETH_CLEAN_REPO ? "-" : "*") + string(DEV_QUOTED(ETH_BUILD_TYPE)).substr(0, 1) + boost::join(bps, "/")));
     }
 }
 
 WebThreeDirect::~WebThreeDirect()
 {
     // Utterly horrible right now - WebThree owns everything (good), but:
-    // m_net (Host) owns the eth::EthereumHost via a shared_ptr.
-    // The eth::EthereumHost depends on eth::Client (it maintains a reference to the BlockChain field of Client).
-    // eth::Client (owned by us via a unique_ptr) uses eth::EthereumHost (via a weak_ptr).
+    // m_net (Host) owns the aqua::AquachainHost via a shared_ptr.
+    // The aqua::AquachainHost depends on aqua::Client (it maintains a reference to the BlockChain field of Client).
+    // aqua::Client (owned by us via a unique_ptr) uses aqua::AquachainHost (via a weak_ptr).
     // Really need to work out a clean way of organising ownership and guaranteeing startup/shutdown is perfect.
 
     // Have to call stop here to get the Host to kill its io_service otherwise we end up with left-over reads,
-    // still referencing Sessions getting deleted *after* m_ethereum is reset, causing bad things to happen, since
-    // the guarantee is that m_ethereum is only reset *after* all sessions have ended (sessions are allowed to
-    // use bits of data owned by m_ethereum).
+    // still referencing Sessions getting deleted *after* m_aquachain is reset, causing bad things to happen, since
+    // the guarantee is that m_aquachain is only reset *after* all sessions have ended (sessions are allowed to
+    // use bits of data owned by m_aquachain).
     m_net.stop();
-    m_ethereum.reset();
+    m_aquachain.reset();
 }
 
 std::string WebThreeDirect::composeClientVersion(std::string const& _client)

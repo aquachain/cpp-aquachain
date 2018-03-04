@@ -1,30 +1,30 @@
 #!/usr/bin/env bash
 
 #------------------------------------------------------------------------------
-# Bash script implementing release flow for cpp-ethereum for Linux and macOS.
+# Bash script implementing release flow for cpp-aquachain for Linux and macOS.
 #
 # TODO - At the time of writing, we only have ZIPs working.  Need to hook up
 # support for Homebrew and PPAs.
 #
-# The documentation for cpp-ethereum is hosted at http://cpp-ethereum.org
+# The documentation for cpp-aquachain is hosted at http://cpp-aquachain.org
 #
 # ------------------------------------------------------------------------------
-# This file is part of cpp-ethereum.
+# This file is part of cpp-aquachain.
 #
-# cpp-ethereum is free software: you can redistribute it and/or modify
+# cpp-aquachain is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# cpp-ethereum is distributed in the hope that it will be useful,
+# cpp-aquachain is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>
+# along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>
 #
-# (c) 2016 cpp-ethereum contributors.
+# (c) 2016 cpp-aquachain contributors.
 #------------------------------------------------------------------------------
 
 set -e
@@ -41,15 +41,15 @@ fi
 
 mkdir -p $ZIP_TEMP_DIR
 
-# Copy all the cpp-ethereum executables into a temporary directory prior to ZIP creation
+# Copy all the cpp-aquachain executables into a temporary directory prior to ZIP creation
 
 cp bench/bench                         $ZIP_TEMP_DIR
-cp eth/eth                             $ZIP_TEMP_DIR
-cp ethkey/ethkey                       $ZIP_TEMP_DIR
-cp ethvm/ethvm                         $ZIP_TEMP_DIR
+cp aqua/aqua                             $ZIP_TEMP_DIR
+cp aquakey/aquakey                       $ZIP_TEMP_DIR
+cp aquavm/aquavm                         $ZIP_TEMP_DIR
 cp rlp/rlp                             $ZIP_TEMP_DIR
 if [[ "$TESTS" == "On" ]]; then
-    cp test/testeth       $ZIP_TEMP_DIR
+    cp test/testaqua       $ZIP_TEMP_DIR
 fi
 
 # Copy all the dynamic libraries into a temporary directory prior to ZIP creation.
@@ -59,15 +59,15 @@ fi
 # linked binaries (ie. executables which make direct system calls to the kernel.
 #
 # See https://developer.apple.com/library/mac/qa/qa1118/_index.html.
-# See https://github.com/ethereum/webthree-umbrella/issues/495.
+# See https://github.com/aquachain/webthree-umbrella/issues/495.
 
 cp libdevcore/*.$DLL_EXT               $ZIP_TEMP_DIR
 cp libdevcrypto/*.$DLL_EXT             $ZIP_TEMP_DIR
-cp libethash/*.$DLL_EXT                $ZIP_TEMP_DIR
-cp libethash-cl/*.$DLL_EXT             $ZIP_TEMP_DIR
-cp libethashseal/*.$DLL_EXT            $ZIP_TEMP_DIR
-cp libethcore/*.$DLL_EXT               $ZIP_TEMP_DIR
-cp libethereum/*.$DLL_EXT              $ZIP_TEMP_DIR
+cp libaquahash/*.$DLL_EXT                $ZIP_TEMP_DIR
+cp libaquahash-cl/*.$DLL_EXT             $ZIP_TEMP_DIR
+cp libaquahashseal/*.$DLL_EXT            $ZIP_TEMP_DIR
+cp libaquacore/*.$DLL_EXT               $ZIP_TEMP_DIR
+cp libaquachain/*.$DLL_EXT              $ZIP_TEMP_DIR
 cp libevm/*.$DLL_EXT                   $ZIP_TEMP_DIR
 cp libevmcore/*.$DLL_EXT               $ZIP_TEMP_DIR
 cp libp2p/*.$DLL_EXT                   $ZIP_TEMP_DIR
@@ -111,4 +111,4 @@ fi
 
 # And ZIP it all up, with a filename suffix passed in on the command-line.
 
-zip -j $(pwd)/../cpp-ethereum-develop-$ZIP_SUFFIX.zip $ZIP_TEMP_DIR/*
+zip -j $(pwd)/../cpp-aquachain-develop-$ZIP_SUFFIX.zip $ZIP_TEMP_DIR/*

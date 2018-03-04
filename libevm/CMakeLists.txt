@@ -20,7 +20,7 @@ endif()
 
 add_library(evm ${sources})
 
-target_link_libraries(evm PUBLIC ethcore devcore PRIVATE jsoncpp_lib_static Boost::program_options)
+target_link_libraries(evm PUBLIC aquacore devcore PRIVATE jsoncpp_lib_static Boost::program_options)
 target_include_directories(evm PUBLIC ${CMAKE_SOURCE_DIR}/evmjit/include)
 target_include_directories(evm PUBLIC ${CMAKE_SOURCE_DIR}/hera/src)
 

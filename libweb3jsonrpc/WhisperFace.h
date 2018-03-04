@@ -14,15 +14,15 @@ namespace dev {
             public:
                 WhisperFace()
                 {
-                    this->bindAndAddMethod(jsonrpc::Procedure("shh_post", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_BOOLEAN, "param1",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::WhisperFace::shh_postI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("shh_newIdentity", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING,  NULL), &dev::rpc::WhisperFace::shh_newIdentityI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("shh_hasIdentity", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_BOOLEAN, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_hasIdentityI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("shh_newGroup", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_newGroupI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("shh_addToGroup", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_addToGroupI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("shh_newFilter", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::WhisperFace::shh_newFilterI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("shh_uninstallFilter", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_BOOLEAN, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_uninstallFilterI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("shh_getFilterChanges", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_ARRAY, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_getFilterChangesI);
-                    this->bindAndAddMethod(jsonrpc::Procedure("shh_getMessages", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_ARRAY, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_getMessagesI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("shh_post", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_BOOLEAN, "param1",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::WhisperFace::shh_postI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("shh_newIdentity", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING,  NULL), &dev::rpc::WhisperFace::shh_newIdentityI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("shh_hasIdentity", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_BOOLEAN, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_hasIdentityI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("shh_newGroup", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_newGroupI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("shh_addToGroup", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_STRING,"param2",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_addToGroupI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("shh_newFilter", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_STRING, "param1",jsonrpc::JSON_OBJECT, NULL), &dev::rpc::WhisperFace::shh_newFilterI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("shh_uninstallFilter", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_BOOLEAN, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_uninstallFilterI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("shh_getFilterChanges", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_ARRAY, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_getFilterChangesI);
+                    this->bindAndAddMaquaod(jsonrpc::Procedure("shh_getMessages", jsonrpc::PARAMS_BY_POSITION, jsonrpc::JSON_ARRAY, "param1",jsonrpc::JSON_STRING, NULL), &dev::rpc::WhisperFace::shh_getMessagesI);
                 }
 
                 inline virtual void shh_postI(const Json::Value &request, Json::Value &response)

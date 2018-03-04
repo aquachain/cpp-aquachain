@@ -1,18 +1,18 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file Guards.h
  * @author Gav Wood <i@gavwood.com>
@@ -130,18 +130,18 @@ private:
  */
 
 #define DEV_GUARDED(MUTEX) \
-	for (GenericGuardBool<Guard, Mutex> __eth_l(MUTEX); __eth_l.b; __eth_l.b = false)
+	for (GenericGuardBool<Guard, Mutex> __aqua_l(MUTEX); __aqua_l.b; __aqua_l.b = false)
 #define DEV_READ_GUARDED(MUTEX) \
-	for (GenericGuardBool<ReadGuard, SharedMutex> __eth_l(MUTEX); __eth_l.b; __eth_l.b = false)
+	for (GenericGuardBool<ReadGuard, SharedMutex> __aqua_l(MUTEX); __aqua_l.b; __aqua_l.b = false)
 #define DEV_WRITE_GUARDED(MUTEX) \
-	for (GenericGuardBool<WriteGuard, SharedMutex> __eth_l(MUTEX); __eth_l.b; __eth_l.b = false)
+	for (GenericGuardBool<WriteGuard, SharedMutex> __aqua_l(MUTEX); __aqua_l.b; __aqua_l.b = false)
 #define DEV_RECURSIVE_GUARDED(MUTEX) \
-	for (GenericGuardBool<RecursiveGuard, RecursiveMutex> __eth_l(MUTEX); __eth_l.b; __eth_l.b = false)
+	for (GenericGuardBool<RecursiveGuard, RecursiveMutex> __aqua_l(MUTEX); __aqua_l.b; __aqua_l.b = false)
 #define DEV_UNGUARDED(MUTEX) \
-	for (GenericUnguardBool<Mutex> __eth_l(MUTEX); __eth_l.b; __eth_l.b = false)
+	for (GenericUnguardBool<Mutex> __aqua_l(MUTEX); __aqua_l.b; __aqua_l.b = false)
 #define DEV_READ_UNGUARDED(MUTEX) \
-	for (GenericUnguardSharedBool<SharedMutex> __eth_l(MUTEX); __eth_l.b; __eth_l.b = false)
+	for (GenericUnguardSharedBool<SharedMutex> __aqua_l(MUTEX); __aqua_l.b; __aqua_l.b = false)
 #define DEV_WRITE_UNGUARDED(MUTEX) \
-	for (GenericUnguardBool<SharedMutex> __eth_l(MUTEX); __eth_l.b; __eth_l.b = false)
+	for (GenericUnguardBool<SharedMutex> __aqua_l(MUTEX); __aqua_l.b; __aqua_l.b = false)
 
 }

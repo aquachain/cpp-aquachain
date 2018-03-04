@@ -1,25 +1,25 @@
 #------------------------------------------------------------------------------
-# Top-level CMake file for cpp-ethereum.
+# Top-level CMake file for cpp-aquachain.
 #
-# The documentation for cpp-ethereum is hosted at http://cpp-ethereum.org
+# The documentation for cpp-aquachain is hosted at http://cpp-aquachain.org
 #
 # ------------------------------------------------------------------------------
-# This file is part of cpp-ethereum.
+# This file is part of cpp-aquachain.
 #
-# cpp-ethereum is free software: you can redistribute it and/or modify
+# cpp-aquachain is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# cpp-ethereum is distributed in the hope that it will be useful,
+# cpp-aquachain is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>
+# along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>
 #
-# (c) 2014-2016 cpp-ethereum contributors.
+# (c) 2014-2016 cpp-aquachain contributors.
 #------------------------------------------------------------------------------
 
 cmake_minimum_required(VERSION 3.5.1)
@@ -34,11 +34,11 @@ endif()
 set(ETH_CMAKE_DIR "${CMAKE_CURRENT_LIST_DIR}/cmake" CACHE PATH "The path to the cmake directory")
 list(APPEND CMAKE_MODULE_PATH ${ETH_CMAKE_DIR})
 
-set(CPP_ETHEREUM_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE PATH "Path to the root directory for cpp-ethereum")
+set(CPP_ETHEREUM_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE PATH "Path to the root directory for cpp-aquachain")
 
 # set cmake_policies
 include(EthPolicy)
-eth_policy()
+aqua_policy()
 
 if(CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo" CACHE STRING "" FORCE)
@@ -50,7 +50,7 @@ set(CMAKE_MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release)
 
 set(HUNTER_CONFIGURATION_TYPES Release)
 set(HUNTER_JOBS_NUMBER 4)
-set(HUNTER_CACHE_SERVERS "https://github.com/ethereum/hunter-cache")
+set(HUNTER_CACHE_SERVERS "https://github.com/aquachain/hunter-cache")
 include(HunterGate)
 HunterGate(
     URL "https://github.com/ruslo/hunter/archive/v0.19.232.tar.gz"
@@ -77,7 +77,7 @@ if(HUNTER_ENABLED)
             hunter_upload_cache
             ${PYTHON_EXECUTABLE} ${hunter_upload_script}
             --username hunter-cache-bot
-            --repo-owner ethereum
+            --repo-owner aquachain
             --repo hunter-cache
             --cache-dir ${hunter_cache_dir}
             --temp-dir ${hunter_tmp_dir}
@@ -86,7 +86,7 @@ if(HUNTER_ENABLED)
 endif()
 
 # project name and version should be set after cmake_policy CMP0048
-project(cpp-ethereum VERSION "1.3.0")
+project(cpp-aquachain VERSION "1.3.0")
 
 if (NOT EXISTS ${CMAKE_SOURCE_DIR}/evmjit/.git)
     message(FATAL_ERROR "Git submodules not initialized, execute:\n  git submodule update --init")
@@ -121,7 +121,7 @@ find_package(libjson-rpc-cpp CONFIG REQUIRED)
 include(ProjectSecp256k1)
 include(ProjectLibFF)
 
-# Import binaryen library before hera to make it available also to testeth.
+# Import binaryen library before hera to make it available also to testaqua.
 include(hera/cmake/ProjectBinaryen.cmake)
 
 find_package(Threads)
@@ -145,12 +145,12 @@ add_subdirectory(libdevcore)
 add_subdirectory(libdevcrypto)
 add_subdirectory(libp2p)
 
-add_subdirectory(libethash)
+add_subdirectory(libaquahash)
 
-add_subdirectory(libethcore)
+add_subdirectory(libaquacore)
 add_subdirectory(libevm)
-add_subdirectory(libethereum)
-add_subdirectory(libethashseal)
+add_subdirectory(libaquachain)
+add_subdirectory(libaquahashseal)
 
 add_subdirectory(libwebthree)
 add_subdirectory(libweb3jsonrpc)
@@ -159,11 +159,11 @@ if (EVMJIT)
     add_subdirectory(evmjit)
 endif()
 
-add_subdirectory(eth)
+add_subdirectory(aqua)
 
 if (TOOLS)
-    add_subdirectory(ethkey)
-    add_subdirectory(ethvm)
+    add_subdirectory(aquakey)
+    add_subdirectory(aquavm)
     add_subdirectory(rlp)
 endif()
 

@@ -1,18 +1,18 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file discovery.cpp
  * @author Felix Lange <fjl@twurst.com>
@@ -25,7 +25,7 @@
 #include <libp2p/Host.h>
 #include <libp2p/RLPXSocket.h>
 #include <libp2p/RLPxHandshake.h>
-#include <test/tools/libtesteth/TestOutputHelper.h>
+#include <test/tools/libtestaqua/TestOutputHelper.h>
 
 using namespace std;
 using namespace dev;
@@ -137,13 +137,13 @@ public:
 	/// transition is overridden to stop after key establishment.
  	virtual void transition(boost::system::error_code _ec);
 
-	/// Reports whether we made it through the key establishment without error.
+	/// Reports whaquaer we made it through the key establishment without error.
 	bool completedKeyEstablishment() { return m_nextState == ReadHello; }
 
-	/// Checks whether Auth-related members match the values in the EIP-8 test vectors.
+	/// Checks whaquaer Auth-related members match the values in the EIP-8 test vectors.
 	void checkAuthValuesEIP8(uint64_t _expectedRemoteVersion);
 
-	/// Checks whether Ack-related members match the values in the EIP-8 test vectors.
+	/// Checks whaquaer Ack-related members match the values in the EIP-8 test vectors.
 	void checkAckValuesEIP8(uint64_t _expectedRemoteVersion);
 };
 
@@ -154,7 +154,7 @@ public:
 // With any tests in a broken state, the automation is not useful, because
 // we do not see the working -> broken transition occur.
 //
-// See https://github.com/ethereum/cpp-ethereum/issues/3273 
+// See https://github.com/aquachain/cpp-aquachain/issues/3273 
 
 #if !defined(_WIN32)
 BOOST_AUTO_TEST_CASE(test_handshake_plain_auth)
@@ -181,7 +181,7 @@ BOOST_AUTO_TEST_CASE(test_handshake_plain_auth)
 // With any tests in a broken state, the automation is not useful, because
 // we do not see the working -> broken transition occur.
 //
-// See https://github.com/ethereum/cpp-ethereum/issues/3273 
+// See https://github.com/aquachain/cpp-aquachain/issues/3273 
 
 #if !defined(_WIN32)
 BOOST_AUTO_TEST_CASE(test_handshake_eip8_auth1)
@@ -211,7 +211,7 @@ BOOST_AUTO_TEST_CASE(test_handshake_eip8_auth1)
 // With any tests in a broken state, the automation is not useful, because
 // we do not see the working -> broken transition occur.
 //
-// See https://github.com/ethereum/cpp-ethereum/issues/3273 
+// See https://github.com/aquachain/cpp-aquachain/issues/3273 
 
 #if !defined(_WIN32)
 BOOST_AUTO_TEST_CASE(test_handshake_eip8_auth2)
@@ -242,7 +242,7 @@ BOOST_AUTO_TEST_CASE(test_handshake_eip8_auth2)
 // With any tests in a broken state, the automation is not useful, because
 // we do not see the working -> broken transition occur.
 //
-// See https://github.com/ethereum/cpp-ethereum/issues/3273 
+// See https://github.com/aquachain/cpp-aquachain/issues/3273 
 
 #if !defined(_WIN32)
 BOOST_AUTO_TEST_CASE(test_handshake_eip8_ack_plain)
@@ -268,7 +268,7 @@ BOOST_AUTO_TEST_CASE(test_handshake_eip8_ack_plain)
 // With any tests in a broken state, the automation is not useful, because
 // we do not see the working -> broken transition occur.
 //
-// See https://github.com/ethereum/cpp-ethereum/issues/3273 
+// See https://github.com/aquachain/cpp-aquachain/issues/3273 
 
 #if !defined(_WIN32)
 BOOST_AUTO_TEST_CASE(test_handshake_eip8_ack1)
@@ -301,7 +301,7 @@ BOOST_AUTO_TEST_CASE(test_handshake_eip8_ack1)
 // With any tests in a broken state, the automation is not useful, because
 // we do not see the working -> broken transition occur.
 //
-// See https://github.com/ethereum/cpp-ethereum/issues/3273 
+// See https://github.com/aquachain/cpp-aquachain/issues/3273 
 
 #if !defined(_WIN32)
 BOOST_AUTO_TEST_CASE(test_handshake_eip8_ack2)

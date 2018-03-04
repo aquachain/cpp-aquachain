@@ -1,21 +1,21 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file blockchain.cpp
- * @author Christoph Jentzsch <cj@ethdev.com>, Dimitry Khokhlov <dimitry@ethdev.com>
+ * @author Christoph Jentzsch <cj@aquadev.com>, Dimitry Khokhlov <dimitry@aquadev.com>
  * @date 2015
  * Generation of a blockchain tests. Parse blockchain test fillers.
  * Simulating block import checking the post state.
@@ -25,21 +25,21 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem.hpp>
 #include <libdevcore/FileSystem.h>
-#include <test/tools/libtesteth/TestHelper.h>
+#include <test/tools/libtestaqua/TestHelper.h>
 #include <test/tools/fuzzTesting/fuzzHelper.h>
 #include <test/tools/jsontests/BlockChainTests.h>
 using namespace std;
 using namespace json_spirit;
 using namespace dev;
-using namespace dev::eth;
+using namespace dev::aqua;
 namespace fs = boost::filesystem;
 
 namespace dev {
 
 namespace test {
 
-eth::Network ChainBranch::s_tempBlockchainNetwork = eth::Network::MainNetwork;
-eth::Network TestBlockChain::s_sealEngineNetwork = eth::Network::FrontierTest;
+aqua::Network ChainBranch::s_tempBlockchainNetwork = aqua::Network::MainNetwork;
+aqua::Network TestBlockChain::s_sealEngineNetwork = aqua::Network::FrontierTest;
 json_spirit::mValue BlockchainTestSuite::doTests(json_spirit::mValue const& _input, bool _fillin) const
 {
 	json_spirit::mObject tests;
@@ -70,7 +70,7 @@ json_spirit::mValue BlockchainTestSuite::doTests(json_spirit::mValue const& _inp
 		if (_fillin)
 		{
             BOOST_REQUIRE(inputTest.count("expect") > 0);
-            set<eth::Network> allnetworks = ImportTest::getAllNetworksFromExpectSections(
+            set<aqua::Network> allnetworks = ImportTest::getAllNetworksFromExpectSections(
                 inputTest.at("expect").get_array(), ImportTest::testType::BlockchainTest);
 
             //create a blockchain test for each network
@@ -648,7 +648,7 @@ void overwriteBlockHeaderForTest(mObject const& _blObj, TestBlock& _block, Chain
 		}
 
 		Ethash::setMixHash(tmp, ho.count("mixHash") ? h256(ho["mixHash"].get_str()) : Ethash::mixHash(header));
-		Ethash::setNonce(tmp, ho.count("nonce") ? eth::Nonce(ho["nonce"].get_str()) : Ethash::nonce(header));
+		Ethash::setNonce(tmp, ho.count("nonce") ? aqua::Nonce(ho["nonce"].get_str()) : Ethash::nonce(header));
 		tmp.noteDirty();
 	}
 	else
@@ -798,7 +798,7 @@ void overwriteUncleHeaderForTest(mObject& uncleHeaderObj, TestBlock& uncle, std:
 	if (overwrite == "nonce" || overwrite == "mixHash")
 	{
 		if (overwrite == "nonce")
-			Ethash::setNonce(uncleHeader, eth::Nonce(uncleHeaderObj["nonce"].get_str()));
+			Ethash::setNonce(uncleHeader, aqua::Nonce(uncleHeaderObj["nonce"].get_str()));
 		if (overwrite == "mixHash")
 			Ethash::setMixHash(uncleHeader, h256(uncleHeaderObj["mixHash"].get_str()));
 

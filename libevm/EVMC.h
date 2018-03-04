@@ -1,4 +1,4 @@
-// Copyright 2018 cpp-ethereum Authors.
+// Copyright 2018 cpp-aquachain Authors.
 // Licensed under the GNU General Public License v3. See the LICENSE file.
 
 #pragma once
@@ -8,7 +8,7 @@
 
 namespace dev
 {
-namespace eth
+namespace aqua
 {
 /// Translate the EVMSchedule to EVM-C revision.
 evm_revision toRevision(EVMSchedule const& _schedule);

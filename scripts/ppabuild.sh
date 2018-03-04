@@ -3,16 +3,16 @@
 ## This is used to package .deb packages and upload them to the launchpad
 ## ppa servers for building. It requires one argument (passed via env):
 ##
-## ethbranch:   the branch to use for webthree-umbrella, either develop or
+## aquabranch:   the branch to use for webthree-umbrella, either develop or
 ##              release
 ## debplatform: target ubuntu "release", i.e. trusty, vivid, wily or xenial
 ##              (we should switch to numbered releases at some point)
 ##
-## The "debian" directories can be found in github.com/ethereum/ethereum-ppa
+## The "debian" directories can be found in github.com/aquachain/aquachain-ppa
 ## The develop branch will be used for anything before wily, while wily and
 ## xenial have their own branches.
 ##
-## The gnupg key for "build@ethdev.com" has to be present in order to sign
+## The gnupg key for "build@aquadev.com" has to be present in order to sign
 ## the package.
 ##
 ## Caveats: A package with the same version number should not be uploaded
@@ -34,33 +34,33 @@ fi
 arch=amd64
 mainrepo=webthree-umbrella
 now=$(date +"%Y%m%d")
-project="cpp-ethereum"
+project="cpp-aquachain"
 ppabranch=develop
 if [ "${distribution}" = "wily" ]; then
 	ppabranch=wily
 elif [ "${distribution}" = "xenial" ]; then
 	ppabranch=xenial
 fi
-codebranch=${ethbranch}
-pparepo=ethereum/ethereum
+codebranch=${aquabranch}
+pparepo=aquachain/aquachain
 if [ -z "$codebranch" ]
 then
 	codebranch=develop
 fi
 if [ "$codebranch" = "develop" ]
 then
-    pparepo=ethereum/ethereum-dev
+    pparepo=aquachain/aquachain-dev
 fi
 echo codebranch=${codebranch}
 echo pparepo=${pparepo}
 
 keyid=703F83D0
-email=builds@ethereum.org
-mainppa="http://ppa.launchpad.net/ethereum/ethereum/ubuntu"
-devppa="http://ppa.launchpad.net/ethereum/ethereum-dev/ubuntu"
+email=builds@aquachain.org
+mainppa="http://ppa.launchpad.net/aquachain/aquachain/ubuntu"
+devppa="http://ppa.launchpad.net/aquachain/aquachain-dev/ubuntu"
 
 # clone source repo
-git clone https://github.com/ethereum/${mainrepo}.git -b ${codebranch} --recursive
+git clone https://github.com/aquachain/${mainrepo}.git -b ${codebranch} --recursive
 
 # create source tarball"
 cd ${mainrepo}
@@ -79,7 +79,7 @@ echo debversion=${debversion}
 tar --exclude .git -czf ../${project}_${debversion}.orig.tar.gz .
 
 # get debian/ direcotry
-wget https://github.com/ethereum/ethereum-ppa/archive/${ppabranch}.tar.gz -O- |
+wget https://github.com/aquachain/aquachain-ppa/archive/${ppabranch}.tar.gz -O- |
 tar -zx --exclude package.sh --exclude README.md --strip-components=1
 
 # bump version
@@ -94,7 +94,7 @@ debuild -S -sa -us -uc
 echo "OTHERMIRROR=\"deb [trusted=yes] ${mainppa} ${distribution} main|deb-src [trusted=yes] ${mainppa} ${distribution} main|deb [trusted=yes] ${devppa} ${distribution} main|deb-src [trusted=yes] ${devppa} ${distribution} main|deb [trusted=yes]\"" > ~/.pbuilderrc
 
 # do the build
-#pdebuild --buildresult . --pbuilder /usr/sbin/cowbuilder --architecture amd64 -- --buildresult . --basepath /var/cache/pbuilder/${distribution}-${arch}-ethereum.cow
+#pdebuild --buildresult . --pbuilder /usr/sbin/cowbuilder --architecture amd64 -- --buildresult . --basepath /var/cache/pbuilder/${distribution}-${arch}-aquachain.cow
 
 # prepare .changes file for Launchpad
 sed -i -e s/UNRELEASED/${distribution}/ -e s/urgency=medium/urgency=low/ ../*.changes

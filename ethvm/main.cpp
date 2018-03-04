@@ -1,18 +1,18 @@
 /*
-    This file is part of cpp-ethereum.
+    This file is part of cpp-aquachain.
 
-    cpp-ethereum is free software: you can redistribute it and/or modify
+    cpp-aquachain is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    cpp-ethereum is distributed in the hope that it will be useful,
+    cpp-aquachain is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+    along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file main.cpp
  * @author Gav Wood <i@gavwood.com>
@@ -22,13 +22,13 @@
 
 #include <libdevcore/CommonIO.h>
 #include <libdevcore/SHA3.h>
-#include <libethcore/SealEngine.h>
-#include <libethereum/Block.h>
-#include <libethereum/Executive.h>
-#include <libethereum/ChainParams.h>
-#include <libethereum/LastBlockHashesFace.h>
-#include <libethashseal/GenesisInfo.h>
-#include <libethashseal/Ethash.h>
+#include <libaquacore/SealEngine.h>
+#include <libaquachain/Block.h>
+#include <libaquachain/Executive.h>
+#include <libaquachain/ChainParams.h>
+#include <libaquachain/LastBlockHashesFace.h>
+#include <libaquahashseal/GenesisInfo.h>
+#include <libaquahashseal/Ethash.h>
 #include <libevm/VM.h>
 #include <libevm/VMFactory.h>
 #include <boost/algorithm/string.hpp>
@@ -39,7 +39,7 @@
 #include <ctime>
 using namespace std;
 using namespace dev;
-using namespace eth;
+using namespace aqua;
 namespace po = boost::program_options;
 
 namespace
@@ -55,7 +55,7 @@ int64_t maxBlockGasLimit()
 
 void version()
 {
-    cout << "ethvm version " << dev::Version << "\n";
+    cout << "aquavm version " << dev::Version << "\n";
     cout << "By Gav Wood, 2015.\n";
     cout << "Build: " << DEV_QUOTED(ETH_BUILD_PLATFORM) << "/" << DEV_QUOTED(ETH_BUILD_TYPE) << "\n";
     exit(0);
@@ -66,7 +66,7 @@ The equivalent of setlocale(LC_ALL, “C”) is called before any user code is r
 If the user has an invalid environment setting then it is possible for the call
 to set locale to fail, so there are only two possible actions, the first is to
 throw a runtime exception and cause the program to quit (default behaviour),
-or the second is to modify the environment to something sensible (least
+or the second is to modify the environment to somaquaing sensible (least
 surprising behaviour).
 
 The follow code produces the least surprising behaviour. It will use the user
@@ -98,7 +98,7 @@ enum class Mode
 
 }
 
-class LastBlockHashes: public eth::LastBlockHashesFace
+class LastBlockHashes: public aqua::LastBlockHashesFace
 {
 public:
     h256s precedingHashes(h256 const& /* _mostRecentHash */) const override { return h256s(256, h256()); }
@@ -175,7 +175,7 @@ int main(int argc, char** argv)
         "<n> Set timestamp");
 
     po::options_description allowedOptions(
-        "Usage ethvm <options> [trace|stats|output|test] (<file>|-)");
+        "Usage aquavm <options> [trace|stats|output|test] (<file>|-)");
     allowedOptions.add(vmProgramOptions(c_lineWidth))
         .add(networkOptions)
         .add(optionsForTrace)

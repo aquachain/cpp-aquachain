@@ -1,31 +1,31 @@
 /*
-	This file is part of cpp-ethereum.
+	This file is part of cpp-aquachain.
 
-	cpp-ethereum is free software: you can redistribute it and/or modify
+	cpp-aquachain is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
 
-	cpp-ethereum is distributed in the hope that it will be useful,
+	cpp-aquachain is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	You should have received a copy of the GNU General Public License
-	along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+	along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * @author Christian R <c@ethdev.com>
+ * @author Christian R <c@aquadev.com>
  * @date 2015
  */
 
 #include <boost/test/unit_test.hpp>
 #include <libweb3jsonrpc/AccountHolder.h>
-#include <test/tools/libtesteth/TestOutputHelper.h>
+#include <test/tools/libtestaqua/TestOutputHelper.h>
 
 using namespace std;
 using namespace dev;
-using namespace eth;
+using namespace aqua;
 
 namespace dev
 {
@@ -48,8 +48,8 @@ BOOST_AUTO_TEST_CASE(ProxyAccountUseCase)
 	int secondID = h.addProxyAccount(addr);
 	BOOST_CHECK(h.queuedTransactions(secondID).empty());
 
-	eth::TransactionSkeleton t1;
-	eth::TransactionSkeleton t2;
+	aqua::TransactionSkeleton t1;
+	aqua::TransactionSkeleton t2;
 	t1.from = addr;
 	t1.data = fromHex("12345678");
 	t2.from = addr;

@@ -1,18 +1,18 @@
 /*
-    This file is part of cpp-ethereum.
+    This file is part of cpp-aquachain.
 
-    cpp-ethereum is free software: you can redistribute it and/or modify
+    cpp-aquachain is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    cpp-ethereum is distributed in the hope that it will be useful,
+    cpp-aquachain is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with cpp-ethereum.  If not, see <http://www.gnu.org/licenses/>.
+    along with cpp-aquachain.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file Log.h
  * @author Gav Wood <i@gavwood.com>
@@ -70,7 +70,7 @@ struct VerbosityHolder
     int oldLogVerbosity;
 };
 
-#define ETH_THREAD_CONTEXT(name) for (std::pair<dev::ThreadContext, bool> __eth_thread_context(name, true); p.second; p.second = false)
+#define ETH_THREAD_CONTEXT(name) for (std::pair<dev::ThreadContext, bool> __aqua_thread_context(name, true); p.second; p.second = false)
 
 class ThreadContext
 {
@@ -264,7 +264,7 @@ public:
 /// A "hacky" way to execute the next statement on COND.
 /// We need such a thing due to the dangling else problem and the need
 /// for the logging macros to end with the stream object and not a closing brace '}'
-#define DEV_STATEMENT_IF(COND) for (bool i_eth_if_ = (COND); i_eth_if_; i_eth_if_ = false)
+#define DEV_STATEMENT_IF(COND) for (bool i_aqua_if_ = (COND); i_aqua_if_; i_aqua_if_ = false)
 /// A "hacky" way to skip the next statement.
 /// We need such a thing due to the dangling else problem and the need
 /// for the logging macros to end with the stream object and not a closing brace '}'

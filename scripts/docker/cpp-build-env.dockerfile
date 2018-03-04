@@ -1,9 +1,9 @@
 FROM debian:stretch
 
-LABEL maintainer="C++ Ethereum team"
-LABEL repo="https://github.com/ethereum/cpp-ethereum"
+LABEL maintainer="C++ Aquachain team"
+LABEL repo="https://github.com/aquachain/cpp-aquachain"
 LABEL version="3"
-LABEL description="Build environment for C++ Ethereum projects"
+LABEL description="Build environment for C++ Aquachain projects"
 
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get install -yq --no-install-recommends \

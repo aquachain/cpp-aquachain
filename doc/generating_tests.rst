@@ -7,17 +7,17 @@ Generating Consensus Tests
 Consensus Tests
 ===============
 
-This article is for testing with the C++ Ethereum client. For non-client specific
-Ethereum testing, refer to http://ethereum-tests.readthedocs.io/. Consensus tests 
-are test cases for all Ethereum implementations. The test cases are distributed 
+This article is for testing with the C++ Aquachain client. For non-client specific
+Aquachain testing, refer to http://aquachain-tests.readthedocs.io/. Consensus tests 
+are test cases for all Aquachain implementations. The test cases are distributed 
 in the "filled" form, which contains, for example, the expected state root hash after transactions.
 The filled test cases are usually not written by hand, but generated from "test filler" files.
-``testeth`` executable in cpp-ethereum can convert test fillers into test cases.
+``testaqua`` executable in cpp-aquachain can convert test fillers into test cases.
 
 When you add a test case in the consensus test suite, you are supposed to push both 
 the filler and the filled test cases into the `tests repository`_.
 
-.. _`tests repository`: https://github.com/ethereum/tests
+.. _`tests repository`: https://github.com/aquachain/tests
 
 Checking Out the tests Repository
 =================================
@@ -26,18 +26,18 @@ The consensus tests are stored in the tests repository. The command
 
 ::
 
-  git clone https://github.com/ethereum/tests.git
+  git clone https://github.com/aquachain/tests.git
 
 should create a local copy of the ``develop`` branch of the tests repository. 
 From here on, ``<LOCAL_PATH_TO_ETH_TESTS>`` points to this local copy.
 
-Preparing testeth and LLL
+Preparing testaqua and LLL
 =========================
 
-For generating consensus tests, an executable ``testeth`` is necessary.  Moreover, 
-``testeth`` uses the LLL compiler when it generates consensus tests. The easier way is 
-to use the `docker image <https://hub.docker.com/r/holiman/testeth/>`_ provided by 
-holiman_ (another `image <https://hub.docker.com/r/winsvega/testeth/>`_ is provided by winsvega_).
+For generating consensus tests, an executable ``testaqua`` is necessary.  Moreover, 
+``testaqua`` uses the LLL compiler when it generates consensus tests. The easier way is 
+to use the `docker image <https://hub.docker.com/r/holiman/testaqua/>`_ provided by 
+holiman_ (another `image <https://hub.docker.com/r/winsvega/testaqua/>`_ is provided by winsvega_).
 
 .. _holiman: https://github.com/holiman
 .. _winsvega: https://github.com/winsvega
@@ -46,8 +46,8 @@ Option 1: Using a docker image
 ------------------------------
 
 * `Install Docker`_
-* Pull the ``testeth`` repository with ``docker pull holiman/testeth``
-* ``docker run -v <LOCAL_PATH_TO_ETH_TESTS>:/foobar holiman/testeth -t GeneralStateTests/stCallCodes -- --singletest callcall_00 --singlenet EIP150 -d 0 -g 0 -v 0 --statediff --verbosity 5 --testpath /foobar`` should show something like
+* Pull the ``testaqua`` repository with ``docker pull holiman/testaqua``
+* ``docker run -v <LOCAL_PATH_TO_ETH_TESTS>:/foobar holiman/testaqua -t GeneralStateTests/stCallCodes -- --singletest callcall_00 --singlenet EIP150 -d 0 -g 0 -v 0 --statediff --verbosity 5 --testpath /foobar`` should show somaquaing like
 
 .. code::
 
@@ -67,7 +67,7 @@ Option 1: Using a docker image
    but there due to slightly different naming in ``c++ client`` implementation (might be fixed in the future). 
 
 .. note::
-   Some problems with running the ``testeth`` command can be fixed by adding the ``--all`` option
+   Some problems with running the ``testaqua`` command can be fixed by adding the ``--all`` option
    at the end.
 
 .. _`install Docker`: https://www.docker.com/community-edition
@@ -76,13 +76,13 @@ Option 1: Using a docker image
 Option 2: Building locally
 --------------------------
 
-Sometimes, you need a tweaked version of ``testeth`` or ``lllc`` when your tests are about very new features not available in the docker image.
+Sometimes, you need a tweaked version of ``testaqua`` or ``lllc`` when your tests are about very new features not available in the docker image.
 
-``testeth`` is distributed in cpp-ethereum_ and ``lllc`` is distributed in solidity_.  These executable needs to be installed.
+``testaqua`` is distributed in cpp-aquachain_ and ``lllc`` is distributed in solidity_.  These executable needs to be installed.
 
-.. _cpp-ethereum: https://github.com/ethereum/cpp-ethereum
+.. _cpp-aquachain: https://github.com/aquachain/cpp-aquachain
 
-.. _solidity: https://github.com/ethereum/solidity
+.. _solidity: https://github.com/aquachain/solidity
 
 Generating a GeneralStateTest Case
 ==================================
@@ -99,7 +99,7 @@ For creating a new GeneralStateTest case, you need:
 
 For an idea, peek into `an existing test filler`_ under ``src/GeneralStateFiller`` in the tests repository.
 
-.. _`an existing test filler`: https://github.com/ethereum/tests/blob/develop/src/GeneralStateTestsFiller/stExample/add11Filler.json
+.. _`an existing test filler`: https://github.com/aquachain/tests/blob/develop/src/GeneralStateTestsFiller/stExample/add11Filler.json
 
 Usually, when a test is about an instruction, the pre-state contains a contract with
 a code containing the instruction.  Typically, the contract stores a value in the storage,
@@ -107,19 +107,19 @@ so that the instruction's behavior is visible in the storage in the expectation.
 
 The code can be written in EVM bytecode or in LLL [#]_.
 
-.. [#] ``testeth`` cannot understand LLL if the system does not have the LLL compiler installed.  The LLL compiler is currently distributed as part of `the Solidity compiler`_.
+.. [#] ``testaqua`` cannot understand LLL if the system does not have the LLL compiler installed.  The LLL compiler is currently distributed as part of `the Solidity compiler`_.
 
-.. _`the Solidity compiler`: https://github.com/ethereum/solidity
+.. _`the Solidity compiler`: https://github.com/aquachain/solidity
 
 Writing a Test Filler
 ---------------------
 
-A new test filler needs to be alone in a new test filler file.  A single GeneralStateTest filler file is not supposed to contain multiple tests.  ``testeth`` tool still accepts multiple GeneralStateTest fillers in a single test filler file, but this might change.
+A new test filler needs to be alone in a new test filler file.  A single GeneralStateTest filler file is not supposed to contain multiple tests.  ``testaqua`` tool still accepts multiple GeneralStateTest fillers in a single test filler file, but this might change.
 
 In the ``tests`` repository, the test filler files for GeneralStateTests live under ``src/GeneralStateTestsFiller`` directory.
 The directory has many subdirectories.  You need to choose one of the subdirectories or create one.  The name of the filler file needs to end with ``Filler.json``.  For example, we might want to create a new directory ``src/GeneralStateTestsFiller/stExample2`` [#]_ with a new filler file ``returndatacopy_initialFiller.json``.
 
-.. [#] If you create a new directory here, you need to add `one line`__ in ``cpp-ethereum`` and file that change in a pull-request to ``cpp-ethereum``.
+.. [#] If you create a new directory here, you need to add `one line`__ in ``cpp-aquachain`` and file that change in a pull-request to ``cpp-aquachain``.
 
 __ editcpp_
 
@@ -138,7 +138,7 @@ The easiest way to start is to copy an existing filler file.  The first thing to
 
 where ``...`` indicates omissions.
 
-.. [#] The file name and the name written in JSON should match because ``testeth`` prints the name written in JSON, but the user needs to find a file.
+.. [#] The file name and the name written in JSON should match because ``testaqua`` prints the name written in JSON, but the user needs to find a file.
 
 ``env`` field contains some parameters in a straightforward way.
 
@@ -241,28 +241,28 @@ Moreover, these transactions are tested under different versions of the protocol
 Filling the Test
 ----------------
 
-The test filler file is not for consumption.  The filler file needs to be filled into a test.  ``testeth`` has the ability to compute the post-state from the test filler, and produce the test.  The advantage of the filled test is that it can catch any post-state difference between clients.
+The test filler file is not for consumption.  The filler file needs to be filled into a test.  ``testaqua`` has the ability to compute the post-state from the test filler, and produce the test.  The advantage of the filled test is that it can catch any post-state difference between clients.
 
 .. _editcpp:
 
-First, if you created a new subdirectory for the filler, you need to edit the source of ``cpp-ethereum`` so that ``testeth`` recognizes the new subdirectory.  The file to edit is `cpp-ethereum/blob/develop/test/tools/jsontests/StateTests.cpp`_, which lists the names of the subdirectories scanned for GeneralStateTest filters.
+First, if you created a new subdirectory for the filler, you need to edit the source of ``cpp-aquachain`` so that ``testaqua`` recognizes the new subdirectory.  The file to edit is `cpp-aquachain/blob/develop/test/tools/jsontests/StateTests.cpp`_, which lists the names of the subdirectories scanned for GeneralStateTest filters.
 
-.. _`cpp-ethereum/blob/develop/test/tools/jsontests/StateTests.cpp`: https://github.com/ethereum/cpp-ethereum/blob/develop/test/tools/jsontests/StateTests.cpp
+.. _`cpp-aquachain/blob/develop/test/tools/jsontests/StateTests.cpp`: https://github.com/aquachain/cpp-aquachain/blob/develop/test/tools/jsontests/StateTests.cpp
 
-After building ``testeth``, you are ready to fill the test.
+After building ``testaqua``, you are ready to fill the test.
 
 .. code:: bash
 
-   ETHEREUM_TEST_PATH="<LOCAL_PATH_TO_ETH_TESTS>" test/testeth -t GeneralStateTests/stExample2 -- --filltests --checkstate
+   ETHEREUM_TEST_PATH="<LOCAL_PATH_TO_ETH_TESTS>" test/testaqua -t GeneralStateTests/stExample2 -- --filltests --checkstate
 
-where the environmental variable ``ETHEREUM_TEST_PATH`` should point to the directory where ``tests`` repository is checked out.  ``stExample2`` should be replaced with the name of the subdirectory you are working on.  ``--filltests`` option tells ``testeth`` to fill tests.  ``--checkstate`` tells ``testeth`` to check the final states against the ``expect`` fields.
+where the environmental variable ``ETHEREUM_TEST_PATH`` should point to the directory where ``tests`` repository is checked out.  ``stExample2`` should be replaced with the name of the subdirectory you are working on.  ``--filltests`` option tells ``testaqua`` to fill tests.  ``--checkstate`` tells ``testaqua`` to check the final states against the ``expect`` fields.
 
 Depending on your shell, there are various ways to set up ``ETHEREUM_TEST_PATH`` environment variable.  For example, adding ``export ETHEREUM_TEST_PATH=/path/to/tests`` to ``~/.bashrc`` might work for ``bash`` users.
 
-``testeth`` with ``--filltests`` fills every test filler it finds. The command might modify existing test cases. After running ``testeth`` with ``--filltests``, try running ``git status`` in the ``tests`` directory. If ``git status`` indicates changes in unexpected files, that is an indication that the behavior of ``cpp-ethereum`` changed unexpectedly.
+``testaqua`` with ``--filltests`` fills every test filler it finds. The command might modify existing test cases. After running ``testaqua`` with ``--filltests``, try running ``git status`` in the ``tests`` directory. If ``git status`` indicates changes in unexpected files, that is an indication that the behavior of ``cpp-aquachain`` changed unexpectedly.
 
 .. note::
-   If ``testeth`` is looking for tests in the ``../../test/jsontests`` directory, 
+   If ``testaqua`` is looking for tests in the ``../../test/jsontests`` directory, 
    you have probably not specified the ``--testpath`` option.
 
 Trying the Filled Test
@@ -271,20 +271,20 @@ Trying the Filled Test
 Trying the Filled Test Locally
 ++++++++++++++++++++++++++++++
 
-For trying the filled test, in ``cpp-ethereum/build`` directory, run
+For trying the filled test, in ``cpp-aquachain/build`` directory, run
 
 .. code:: bash
 
-   ETHEREUM_TEST_PATH="../../tests" test/testeth -t GeneralStateTests/stExample2
+   ETHEREUM_TEST_PATH="../../tests" test/testaqua -t GeneralStateTests/stExample2
 
 Trying the Filled Test in Travis CI
 +++++++++++++++++++++++++++++++++++
 
-Moreover, for trying the filled test in ``Travis CI`` for ``ethereum/cpp-ethereum``, the new test cases need to exist in a branch in ``ethereum/tests``.   For this, ask somebody with a push permission to ``ethereum/tests``.
+Moreover, for trying the filled test in ``Travis CI`` for ``aquachain/cpp-aquachain``, the new test cases need to exist in a branch in ``aquachain/tests``.   For this, ask somebody with a push permission to ``aquachain/tests``.
 
-After that, enter ``cpp-ethereum/test/jsontests`` directory, and checkout the branch in ``ethereum/tests``.  Then go back to ``cpp-ethereum`` directory and perform ``git add test/jsontests`` followed by ``git commit``.
+After that, enter ``cpp-aquachain/test/jsontests`` directory, and checkout the branch in ``aquachain/tests``.  Then go back to ``cpp-aquachain`` directory and perform ``git add test/jsontests`` followed by ``git commit``.
 
-When you file this commit as a pull-request_ to ``ethereum/cpp-ethereum``, Travis CI should try the newly filled tests.
+When you file this commit as a pull-request_ to ``aquachain/cpp-aquachain``, Travis CI should try the newly filled tests.
 
 .. pull-request_: https://help.github.com/articles/creating-a-pull-request-from-a-fork/
 
@@ -303,13 +303,13 @@ In the tests repository, each GeneralStateTest is eventually translated into a B
 
 .. code::
 
-  ETHEREUM_TEST_PATH="../../tests" test/testeth -t GeneralStateTests/stExample2 -- --filltests --fillchain --checkstate
+  ETHEREUM_TEST_PATH="../../tests" test/testaqua -t GeneralStateTests/stExample2 -- --filltests --fillchain --checkstate
 
 followed by
 
 .. code::
 
-  ETHEREUM_TEST_PATH="../../tests" test/testeth -t GeneralStateTests/stExample2 -- --filltests --checkstate
+  ETHEREUM_TEST_PATH="../../tests" test/testaqua -t GeneralStateTests/stExample2 -- --filltests --checkstate
 
 The second command is necessary because the first command modifies the GeneralStateTests in an undesired way.
 
@@ -317,10 +317,10 @@ After these two commands,
 * ``git status`` to check if any GeneralStateTest has changed.  If yes, revert the changes, and follow section _`Trying the Filled Test Locally`.  That will probably reveail an error that you need to debug.
 * ``git add`` to add only the desired BlockchainTests.  Not all modified BlockchainTests are valuable because, when you run ``--fillchain`` twice, the two invocations always produce different BlockchainTests even there are no changes in the source.
 
-Advanced: When testeth Takes Too Much Time
+Advanced: When testaqua Takes Too Much Time
 ==========================================
 
-Sometimes, especially when you are running BlockchainTests, ``testeth`` takes a lot of time.
+Sometimes, especially when you are running BlockchainTests, ``testaqua`` takes a lot of time.
 
 This happens when the GeneralTest fillers contain wrong parameters.  The ``"env"`` field should contain:
 
@@ -332,7 +332,7 @@ This happens when the GeneralTest fillers contain wrong parameters.  The ``"env"
      "currentNumber" : "1",
      "currentTimestamp" : "1000",
 
-``testeth`` has options to run tests selectively:
+``testaqua`` has options to run tests selectively:
 
 * ``--singletest callcall_00`` runs only one test of the name ``callcall_00``.
 * ``--singlenet EIP150`` runs tests only using one version of the protocol.
@@ -340,7 +340,7 @@ This happens when the GeneralTest fillers contain wrong parameters.  The ``"env"
 * ``-g 0`` runs tests only on the first element in the ``gas`` array of GeneralStateTest.
 * ``-v 0`` runs tests only on the first element in the ``value`` array of GeneralStateTest.
 
-``--singletest`` option removes skipped tests from the final test file, when ``testeth`` is filling a BlockchainTest.
+``--singletest`` option removes skipped tests from the final test file, when ``testaqua`` is filling a BlockchainTest.
 
 Advanced: Generating a BlockchainTest Case
 ==========================================
