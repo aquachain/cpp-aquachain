@@ -42,14 +42,14 @@ PrecompiledContract::PrecompiledContract(
 {}
 
 ChainOperationParams::ChainOperationParams():
-	m_blockReward("0x4563918244F40000"),
-	minGasLimit(0x1388),
+	m_blockReward("0xDE0B6B3A7640000"), // 1
+	minGasLimit(0x280DE80),
 	maxGasLimit("0x7fffffffffffffff"),
 	gasLimitBoundDivisor(0x0400),
 	networkID(0x0),
-	minimumDifficulty(0x020000),
+	minimumDifficulty(0x5F5E0FF),
 	difficultyBoundDivisor(0x0800),
-	durationLimit(0x0d)
+	durationLimit(0x258)
 {
 }
 
